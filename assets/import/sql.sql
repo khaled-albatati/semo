@@ -1,0 +1,12 @@
+-- CREATE TABLE orders_new (
+--   orders_id INT(11) NOT NULL AUTO_INCREMENT,
+--   orders_restaurants_id INT(11) NOT NULL,
+--   customer_name VARCHAR(50) NOT NULL,
+--   order_date DATE NOT NULL,
+--   PRIMARY KEY (orders_id),
+--   KEY fk_orders_restaurants_idx (orders_restaurants_id),
+--   CONSTRAINT fk_orders_restaurants
+--     FOREIGN KEY (orders_restaurants_id)
+--     REFERENCES restaurants (restaurants_id)
+--     ON UPDATE CASCADE
+-- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;

@@ -1,0 +1,197 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
+import 'package:semo/controller/familyproducer_controller.dart';
+import '../const/colors.dart';
+import '../data/model/foodrestaurants_model.dart';
+import '../linkapi.dart';
+
+class ProducerFamily extends StatefulWidget {
+  const ProducerFamily({Key? key}) : super(key: key);
+
+  @override
+  State<ProducerFamily> createState() => _ProducerFamilyState();
+}
+
+class _ProducerFamilyState extends State<ProducerFamily> {
+  @override
+  void initState() {
+    super.initState();
+    Get.put(FamilyProducerController());
+  }
+
+  FamilyProducerController controller = Get.put(FamilyProducerController());
+  @override
+  Widget build(BuildContext context) {
+    // Set the system UI overlay style
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+      systemNavigationBarColor:
+          Colors.transparent, // Set navigation bar color to transparent
+      statusBarColor: Colors.transparent, // Set status bar color to transparent
+    ));
+
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("الاسر المنتجة"),
+        centerTitle: true,
+      ),
+      body: controller.family.isEmpty
+          ? const Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "لاتوجد اسر منتجة الان",
+                      style: TextStyle(fontSize: 24),
+                    ),
+                  ],
+                )
+              ],
+            )
+          : Container(
+              decoration: const BoxDecoration(
+                color: Colors.white, // Set the background color of the window
+              ),
+              child: GridView.builder(
+                itemCount: controller.family.length,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2, // Display 2 items in each row
+                  childAspectRatio: 3 / 4, // Square shape for each item
+                  crossAxisSpacing: 1, // Spacing between items horizontally
+                  mainAxisSpacing: 0, // Spacing between items vertically
+                ),
+                itemBuilder: (BuildContext context, int index) {
+                  return Padding(
+                    padding: const EdgeInsetsDirectional.fromSTEB(7, 10, 7, 18),
+                    child: Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        boxShadow: const [
+                          BoxShadow(
+                              blurRadius: 4,
+                              color: Color(0x32000000),
+                              offset: Offset(0, 2),
+                              blurStyle: BlurStyle.solid)
+                        ],
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Family(
+                        foodRestaurantsModel: FoodRestaurantsModel.fromJson(
+                            controller.family[index]),
+                        i: index,
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+    );
+  }
+}
+
+class Family extends GetView<FamilyProducerController> {
+  final FoodRestaurantsModel foodRestaurantsModel;
+  final int? i;
+  // final String mealType;
+  const Family({
+    super.key,
+    required this.foodRestaurantsModel,
+    this.i,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    // return InkWell(
+    //   onTap: () =>controller.goToMenu(controller.family,foodRestaurantsModel.restaurantsId, foodRestaurantsModel.restaurantsName,foodRestaurantsModel),
+    //   child: Container(
+    //     decoration: BoxDecoration(
+    //       border: Border.all(
+    //         color: Colors.black, // Border color
+    //         width: 1.0, // Border width
+    //       ),
+    //     ),
+    //     child: // Generated code for this Column Widget...
+
+    return InkWell(
+      splashColor: Colors.transparent,
+      focusColor: Colors.transparent,
+      hoverColor: Colors.transparent,
+      highlightColor: Colors.transparent,
+      onTap: () => controller.goToMenu(
+          controller.family,
+          foodRestaurantsModel.restaurantsId,
+          foodRestaurantsModel.restaurantsName,
+          foodRestaurantsModel),
+      child: Column(
+        mainAxisSize: MainAxisSize.max,
+        children: [
+          ClipRRect(
+            borderRadius: const BorderRadius.only(
+              bottomLeft: Radius.circular(0),
+              bottomRight: Radius.circular(0),
+              topLeft: Radius.circular(8),
+              topRight: Radius.circular(8),
+            ),
+            child: CachedNetworkImage(
+              imageUrl:
+                  "${AppLink.restaurantImage}/${foodRestaurantsModel.restaurantsImg}",
+              placeholder: (context, url) =>
+                  Lottie.asset('assets/images/lottile/loadin_data.json'),
+              errorWidget: (context, url, error) =>
+                  Image.asset('assets/images/nofood.png'),
+              width: double.infinity,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsetsDirectional.fromSTEB(16, 8, 16, 8),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Text('${foodRestaurantsModel.restaurantsName}',
+                        style: const TextStyle(
+                            color: AppColor.orange,
+                            fontWeight: FontWeight.bold)),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          // Padding(
+          //   padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
+          //   child: Row(
+          //     mainAxisSize: MainAxisSize.max,
+          //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //     children: [
+          //       Expanded(
+          //         child: Padding(
+          //           padding: EdgeInsetsDirectional.fromSTEB(0, 0, 12, 0),
+          //           child: Text(
+          //           '  colu,'
+
+          //           ),
+          //         ),
+          //       ),
+          //       Text(
+          //        'sdfsdfsd'
+          //       ),
+          //     ],
+          //   ),
+          // ),
+        ],
+      ),
+    );
+  }
+}

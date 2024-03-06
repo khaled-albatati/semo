@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "769107259423",
+    "project_id": "semo-efca0",
+    "storage_bucket": "semo-efca0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:769107259423:android:9d586a22562983c7c6652a",
+        "android_client_info": {
+          "package_name": "com.semodelivery.semo.semo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCXxBzpR-3KBbn-LoP0WV9xs1RCBV0d0G4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
