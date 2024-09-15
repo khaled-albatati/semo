@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="gcm_defaultSenderId" translatable="false">769107259423</string>
+    <string name="google_api_key" translatable="false">AIzaSyCXxBzpR-3KBbn-LoP0WV9xs1RCBV0d0G4</string>
+    <string name="google_app_id" translatable="false">1:769107259423:android:9d586a22562983c7c6652a</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyCXxBzpR-3KBbn-LoP0WV9xs1RCBV0d0G4</string>
+    <string name="google_storage_bucket" translatable="false">semo-efca0.appspot.com</string>
+    <string name="project_id" translatable="false">semo-efca0</string>
+</resources>

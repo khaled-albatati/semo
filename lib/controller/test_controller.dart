@@ -57,8 +57,9 @@ bool isLoading = true;
       statusRequiest = handlingData(response);
 
       if (StatusRequiest.success == statusRequiest) {
-        categories.addAll(response['data']);
-    
+        categories.addAll(response['categories']['data']);
+        print('here ========================:');
+    print(categories);
   }
     update();
     }
@@ -66,7 +67,7 @@ bool isLoading = true;
     topFood() async {
     statusRequiest = StatusRequiest.loading;
     var response = await homedata
-        .topFood(); //getData from "Data folder" not "controller folder"
+        .foodLast(); //getData from "Data folder" not "controller folder"
     statusRequiest = handlingData(response);
     if (StatusRequiest.success == statusRequiest) {
       foodLast.addAll(response['data']);
@@ -74,16 +75,16 @@ bool isLoading = true;
     update();
   }
 
-   getFood() async {
-    statusRequiest = StatusRequiest.loading;
-    var response = await homedata
-        .topFood(); //getData from "Data folder" not "controller folder"
-    statusRequiest = handlingData(response);
-    if (StatusRequiest.success == statusRequiest) {
-      foodHome.addAll(response['data']);
-    }
-    update();
-  }
+  //  getFood() async {
+  //   statusRequiest = StatusRequiest.loading;
+  //   var response = await homedata
+  //       .topFood(); //getData from "Data folder" not "controller folder"
+  //   statusRequiest = handlingData(response);
+  //   if (StatusRequiest.success == statusRequiest) {
+  //     foodHome.addAll(response['data']);
+  //   }
+  //   update();
+  // }
 
   Future getRestaurant() async{
     statusRequiest = StatusRequiest.loading;

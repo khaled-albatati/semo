@@ -47,6 +47,7 @@ class LoginControllerImp extends LoginController {
           if (status == 'success') {
             myServices.sharedPreferences
                 .setString('id', responseBody['data']['user_id']);
+                print('object');
             String userid = myServices.sharedPreferences.getString("id")!;
             myServices.sharedPreferences
                 .setString("username", responseBody['data']['user_name']);
@@ -55,10 +56,10 @@ class LoginControllerImp extends LoginController {
             myServices.sharedPreferences
                 .setString("userphone", responseBody['data']['user_phone']);
             myServices.sharedPreferences
-                .setString("user_wallet", responseBody['data']['user_wallet']);
+                .setInt("user_wallet", responseBody['data']['user_wallet']);
 
-            FirebaseMessaging.instance.subscribeToTopic("users");
-            FirebaseMessaging.instance.subscribeToTopic("users$userid");
+            // FirebaseMessaging.instance.subscribeToTopic("users");
+            // FirebaseMessaging.instance.subscribeToTopic("users$userid");
             Get.offAllNamed(AppRoutes.navbar);
           } else if (status == 'failure') {
             // Display error dialog for invalid credentials

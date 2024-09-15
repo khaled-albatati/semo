@@ -1,15 +1,15 @@
 class AppLink {
   // static const String server ="localhost:8000/Haz4u";
-  static const String server = "https://semodelivery.000webhostapp.com/"; //for emulator
+  static const String server = "https://semodelivery.com/"; //for emulator
   // static const String server ="http://127.0.0.1/semoo"; //for emulator
-  static const String imagesstatic = "https://semodelivery.000webhostapp.com/images"; //for emulator
+  static const String imagesstatic = "https://semodelivery.com/images"; //for emulator
 
 
   static const String test = "$server/test.php";
   //================== Images ==================\\
 
 
-  static const String restaurantImage = "$imagesstatic/restaurant"; //for emulator
+  static const String restaurantImage = "$imagesstatic/restaurants"; //for emulator
   static const String categoriesImage = "$imagesstatic/categories";
   static const String foodImage = "$imagesstatic/food";
 
@@ -19,40 +19,7 @@ class AppLink {
   /// ITEMS \\\
   static const String itemsImage = "$imagesstatic/";
 
-  static const String electronicitemsImage = "$imagesstatic/items";
-  static const String womenitemsImage = "$imagesstatic/items";
-  static const String menitemsImage = "$imagesstatic/items";
-  static const String kidsitemsImage = "$imagesstatic/items";
-  static const String homeitemsImage = "$imagesstatic/items";
-  static const String beautyitemsImage = "$imagesstatic/items";
-  static const String ihomeitemsImage = "$imagesstatic/items";
-  static const String productsimage = "$imagesstatic/items";
 
-  /// offer   \\\
-  static const String offerelectronicImage = "$imagesstatic/offer";
-  static const String offerwomenImage = "$imagesstatic/offer";
-  static const String offermenImage = "$imagesstatic/offer";
-  static const String offerkidsImage = "$imagesstatic/offer";
-  static const String offerhomeandgardenImage = "$imagesstatic/offer";
-  static const String offerbeautyImage = "$imagesstatic/offer";
-  static const String offerihomeImage = "$imagesstatic/offer";
-
-  /// categories \\\
-  static const String home = "$imagesstatic/categories";
-
-  /// 
-  static const String imagescategories = "$imagesstatic/categories";
-  static const String womenimagescategories = "$imagesstatic/categories";
-  static const String menimagescategories = "$imagesstatic/categories";
-  static const String homeimagescategories = "$imagesstatic/categories";
-  static const String electronicimagescategories = "$imagesstatic/categories";
-  static const String kidsimagescategories = "$imagesstatic/categories";
-  static const String beautyimagescategories = "$imagesstatic/categories";
-  static const String homeandgardenimagescategories =
-      "$imagesstatic/categories";
-  static const String ihomeimagescategories = "$imagesstatic/categories";
-
-//=================================================================================================================\\
 
   //================|| PHP ||================\\
 
@@ -67,9 +34,11 @@ class AppLink {
   static const String profile = "$server/auth/profile.php";
 
   //================== Display ==================\\
-  static const String restaurantHome = "$server/restaurant/restaurantHome.php";
-  static const String restaurantLast = "$server/restaurant/restaurantLast.php";
-  static const String menu= "$server/restaurant/menu.php";
+  static const String restaurantHome = "$server/restaurants/restaurantsListAll.php";
+  static const String restaurantLast = "$server/restaurants/restaurantsList.php";
+  static const String foodsLast = "$server/foods/foodsLast.php";
+  static const String foodsList = "$server/foods/foodsList.php";
+  static const String menu= "$server/restaurants/menu.php";
   static const String menufamily= "$server/restaurant/menufamily.php";
   static const String menurestaurant= "$server/restaurant/menurestaurant.php";
   static const String menucat= "$server/restaurant/menucat.php";
@@ -86,23 +55,9 @@ class AppLink {
 
   static const String homePage = "$server/home.php";
   static const String womenhomePage = "$server/categories/view.php";
-  static const String menhomePage = "$server/categories/menhome.php";
-  static const String offer = "$server/categories/offer.php";
-  static const String kidshomePage = "$server/categories/kidshome.php";
-  static const String beautyPage = "$server/categories/beauty.php";
-  static const String ihome = "$server/categories/ihome.php";
   static const String homehomePage = "$server/categories/homehome.php";
-  static const String electronichomePage =
-      "$server/categories/electronichome.php";
 
   //================== Offer =====================\\
-  static const String offerelectronic = "$server/items/offerelectronic.php";
-  static const String offerkids = "$server/items/offerkids.php";
-  static const String offerwomen = "$server/items/offerwomen.php";
-  static const String offerihome = "$server/items/offerihome.php";
-  static const String offermen = "$server/items/offermen.php";
-  static const String offerhomeandgarden = "$server/items/offerhome&garden.php";
-  static const String offerbeauty = "$server/items/beauty.php";
 
   // static const String categories ="$server/categories/view.php";
   static const String items = "$server/items/items.php";

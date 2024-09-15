@@ -28,7 +28,7 @@ class FoodMenuController extends GetxController {
 // FoodRestaurantsModel foodRestaurantsModel = FoodRestaurantsModel();
  CountController cartController = Get.put(CountController());
   late StatusRequiest statusRequiest;
-  String? catid;
+  int? catid;
   int? selectedCat  ;
   MyServices myServices = Get.find();
   // int? selectedCat;
@@ -36,9 +36,9 @@ class FoodMenuController extends GetxController {
   @override
   void onInit()async {
        onBackInit();
-
     statusRequiest = StatusRequiest.loading;
     catid = Get.arguments['catid'];
+    print('===========================$catid');
     // foodRestaurantsModel = FoodRestaurantsModel();
     categories = Get.arguments['categories'];
     categoriess = Get.arguments['categories'];
@@ -59,6 +59,58 @@ class FoodMenuController extends GetxController {
     super.onInit();
   }
 
+
+// Future menu() async {
+//   statusRequiest = StatusRequiest.loading;
+//   try {
+//     var response = await http.post(Uri.parse(AppLink.menu), body: {
+//       'restaurants_id': catid.toString(),
+//     });
+
+//     print('Response status: ${response.statusCode}');
+//     print('Response body: ${response.body}');
+
+//     statusRequiest = handlingData(response);
+
+//     if (response.statusCode == 200) {
+//       final jsondata = jsonDecode(response.body);
+//       print('JSON data: $jsondata'); // Debug: Check JSON structure
+
+//       // Clear the existing data
+//       foodMenu.clear();
+//       mealType.clear();
+
+//       // Iterate over each category in the 'data' map
+//       jsondata['data'].forEach((category, items) {
+//         if (items is List) {
+//           for (var item in items) {
+//             // Check if the item is a valid map and contains required fields
+//             if (item is Map<String, dynamic> &&
+//                 item.containsKey('food_id') &&
+//                 item.containsKey('food_image') &&
+//                 item.containsKey('food_name') &&
+//                 item.containsKey('food_description')) {
+              
+//               // Add the item to the lists
+//               foodMenu.add(item);
+//               mealType.add(item);
+//             } else {
+//               print('Invalid item encountered: $item');
+//             }
+//           }
+//         }
+//       });
+
+//       statusRequiest = StatusRequiest.success;
+//     } else {
+//       statusRequiest = StatusRequiest.faliure;
+//     }
+//   } catch (e) {
+//     print('Exception: $e');
+//     statusRequiest = StatusRequiest.serverException;
+//   }
+//   update();
+// }
    
 
   Future menu() async {
@@ -232,7 +284,7 @@ Future<void> meall(foodkind) async {
 
   add() {
     additems(
-      foodRestaurantsModel.foodId!,
+      foodRestaurantsModel.foodId!.toString(),
     );
     countitems++;
     update();
@@ -240,7 +292,7 @@ Future<void> meall(foodkind) async {
 
   onRemove() {
     if (countitems > 0) {
-      deleteitems(foodRestaurantsModel.foodId!);
+      deleteitems(foodRestaurantsModel.foodId!.toString());
       countitems--;
     }
       update();

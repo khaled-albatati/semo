@@ -30,7 +30,7 @@ class FoodHomeController extends GetxController {
   topFood() async {
     statusRequiest = StatusRequiest.loading;
     var response = await homedata
-        .topFood(); //getData from "Data folder" not "controller folder"
+        .foodLast(); //getData from "Data folder" not "controller folder"
     statusRequiest = handlingData(response);
     if (StatusRequiest.success == statusRequiest) {
       foodLast.addAll(response['data']);
@@ -41,7 +41,7 @@ class FoodHomeController extends GetxController {
    getFood() async {
     statusRequiest = StatusRequiest.loading;
     var response = await homedata
-        .topFood(); //getData from "Data folder" not "controller folder"
+        .foodLast(); //getData from "Data folder" not "controller folder"
     statusRequiest = handlingData(response);
     if (StatusRequiest.success == statusRequiest) {
       foodHome.addAll(response['data']);

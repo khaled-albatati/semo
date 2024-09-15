@@ -39,7 +39,7 @@ class NavBarControllerImp extends NavBarController {
   getdata() async {
     statusRequiest = StatusRequiest.loading;
     var response = await http.post(Uri.parse(AppLink.users), body: {
-      "userid": myServices.sharedPreferences.getString('id')
+      "userid": myServices.sharedPreferences.getInt('id').toString()
     }); //getData from "Data folder" not "controller folder"
     statusRequiest = handlingData(response);
     Map<String, dynamic> responseBody = json.decode(response.body);

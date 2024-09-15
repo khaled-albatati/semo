@@ -1,12 +1,12 @@
 class FoodRestaurantsModel {
-  String? foodId;
-  String? foodRestaurantId;
+  int? foodId;
+  int? foodRestaurantId;
   String? foodName;
   String? foodKind;
   String? foodDescription;
-  String? foodPrice;
+  int? foodPrice;
   String? foodImage;
-  String? restaurantsId;
+  int? restaurantsId;
   String? restaurantsName;
   String? restaurantsPhone;
   String? restaurantsCity;

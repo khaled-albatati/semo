@@ -40,7 +40,7 @@ class LocaleController extends GetxController {
     // requestPerLocation();
     requestPermissionNotification();
     // FirebaseMessaging.onBackgroundMessage(backgroundHandler);
-    fcmconfig();
+    // fcmconfig();
     String? sharedPreferences =
         myServices.sharedPreferences.getString("language");
     if (sharedPreferences == "ar") {

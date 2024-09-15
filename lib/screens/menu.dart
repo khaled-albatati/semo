@@ -125,14 +125,14 @@ class _FoodMenuState extends State<FoodMenu> {
                       PriceAndCountItems(
                           onAdd: () {
                             controller
-                                .additems(widget.foodRestaurantsModel.foodId!);
+                                .additems(widget.foodRestaurantsModel.foodId!.toString());
                             setState(() {
                               countItems++;
                             });
                           },
                           onRemove: () {
                             controller.deleteitems(
-                                widget.foodRestaurantsModel.foodId!);
+                                widget.foodRestaurantsModel.foodId!.toString());
                                  setState(() {
                               countItems--;
                             });

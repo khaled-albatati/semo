@@ -10,8 +10,8 @@ class HomeData {
     return response.fold((l) => l, (r) => r);
   }
 
-  topFood() async {
-    var response = await crud.postData(AppLink.restaurantLast, {});
+  foodLast() async {
+    var response = await crud.postData(AppLink.foodsLast, {});
     return response.fold((l) => l, (r) => r);
   }
 
