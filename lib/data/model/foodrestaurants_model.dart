@@ -14,7 +14,7 @@ class FoodRestaurantsModel {
   String? restaurantsCreate;
   String? restaurantsImg;
   String? restaurantsCategoriesName;
-  String? categoriesId;
+  int? categoriesId;
   String? categoriesName;
   String? parentCategoriesId;
   String? categoriesImage;
