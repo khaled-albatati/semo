@@ -158,27 +158,35 @@ class FoodMenuController extends GetxController {
   Future menu() async {
     statusRequiest = StatusRequiest.loading;
     try {
-      var response = await http.post(Uri.parse(AppLink.menu), body: {
-        // 'restaurants_id': catid.toString()
-        'restaurants_id': foodRestaurantsModel.restaurantsId
-      }); //getData from "Data folder" not "controller folder"
-      
-      statusRequiest = handlingData(response);
-      // if(StatusRequiest.success== statusRequiest){
-      if (response.statusCode == 200) {
-        final jsondata = jsonDecode(response.body);
-        foodMenu.addAll(jsondata['data']);
-        mealType.addAll(jsondata['data']);
-        statusRequiest = StatusRequiest.success;
-      } else {
-        statusRequiest = StatusRequiest.faliure;
-      }
+        var response = await http.post(Uri.parse(AppLink.menu), body: {
+            'restaurants_id': foodRestaurantsModel.restaurantsId.toString(),
+        });
+
+        if (response.statusCode == 200) {
+            final jsondata = jsonDecode(response.body);
+            if (jsondata['status'] == 'success') {
+                // Clear previous data
+                foodMenu.clear();
+                // Iterate over the categories
+                jsondata['data'].forEach((key, value) {
+                    foodMenu.add({
+                        'category': key,
+                        'items': value,
+                    });
+                });
+                statusRequiest = StatusRequiest.success;
+            } else {
+                statusRequiest = StatusRequiest.faliure;
+            }
+        } else {
+            statusRequiest = StatusRequiest.faliure;
+        }
     } catch (e) {
-      statusRequiest = StatusRequiest.serverException;
+        statusRequiest = StatusRequiest.serverException;
+        print("Error: $e");
     }
     update();
-  }
-
+}
 
 
   meal(foodkind) async {

@@ -1,189 +1,369 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:semo/const/colors.dart';
-import 'package:semo/core/constant/imageassets.dart';
-import 'package:semo/screens/menu.dart';
-import '../controller/foodmenu_controller.dart';
-import '../core/class/handling_dataview.dart';
+import 'package:semo/controller/foodmenu_controller.dart';
+import 'package:semo/widgets/menu/priceand_count.dart';
 import '../data/model/foodrestaurants_model.dart';
-import '../widgets/menu_page/title.dart';
+import '../linkapi.dart';
 
 class MenuPage extends StatefulWidget {
   const MenuPage({super.key});
+
   @override
-  State<MenuPage> createState() => _MenuPageState();
+  _MenuPageState createState() => _MenuPageState();
 }
 
-class _MenuPageState extends State<MenuPage> {
-  bool isLoading = true;
+class _MenuPageState extends State<MenuPage> with SingleTickerProviderStateMixin {
+  late TabController _tabController;
+  late FoodMenuController _controller;
+  late Map<String, dynamic> _foodMenuMap={};
+    // late Map<String, List<Map<String, dynamic>>> _foodMenuMap;
+
+  Map<String, Map<String, dynamic>> itemDetails = {}; // Map to hold food details
+  int totalItems = 0;Map<String, int> itemQuantities = {}; // Map to hold quantities per food item
+
+
   @override
   void initState() {
     super.initState();
-    // Simulating async loading process
-    Future.delayed(const Duration(seconds: 5), () {
+    _controller = Get.put(FoodMenuController());
+    _controller.menu().then((_) {
       setState(() {
-        isLoading = false;
+        _foodMenuMap = _transformFoodMenu(_controller.foodMenu);
+        _tabController = TabController(
+          length: _foodMenuMap.keys.length,
+          vsync: this,
+        );
       });
+    });
+  }
+ void showOrderSummary() {
+  TextEditingController notesController = TextEditingController(); // Controller for notes input
+
+  List<Widget> orderItems = itemDetails.entries
+      .where((entry) => entry.value['quantity'] > 0)
+      .map((entry) {
+        return Text('الوجبة: ${entry.value['name']}, الكمية: ${entry.value['quantity']}');
+      }).toList();
+
+  showDialog(
+    context: context,
+    builder: (context) {
+      return AlertDialog(
+        title: const Text('مراجعة الطلب'),
+        content: SingleChildScrollView(
+          child: SizedBox(
+            width: double.maxFinite, // Makes the dialog wider
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                  constraints: BoxConstraints(
+                    maxHeight: MediaQuery.of(context).size.height * 0.4, // Set max height for orders
+                  ),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: orderItems,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 16), // Space between items and notes
+                Container(
+                  padding: const EdgeInsets.all(8.0), // Padding around the notes container
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.grey), // Border for the notes container
+                    borderRadius: BorderRadius.circular(8), // Rounded corners
+                  ),
+                  child: TextField(
+                    controller: notesController,
+                    decoration: const InputDecoration(
+                      labelText: 'ملاحظات الطلب ',
+                      border: InputBorder.none, // No border for the TextField
+                    ),
+                    maxLines: 3, // Allow for multiple lines
+                    keyboardType: TextInputType.multiline, // Allow multiline input
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop(); // Close the dialog
+            },
+            child: const Text('اغلاق'), // "Close" in Arabic
+          ),
+          TextButton(
+            onPressed: () {
+              // Handle order confirmation logic here
+              String notes = notesController.text;
+
+              // Print the selected food items and their quantities
+              itemDetails.forEach((foodId, details) {
+                int quantity = details['quantity'];
+
+                if (quantity > 0) {
+                  print('Food ID: $foodId, Food Name: ${details['name']}, Quantity: $quantity');
+                }
+              });
+
+              // Print the notes as well
+              print('Order confirmed with notes: $notes');
+
+              // Show confirmation message
+              // Get.snackbar('Order Confirmed', 'You have ordered $totalItems items.');
+
+              Navigator.of(context).pop(); // Close the dialog after confirmation
+            },
+            child: const Text('تاكيد الطلب'), // "Confirm Order" in Arabic
+          ),
+        ],
+      );
+    },
+  );
+}
+
+
+  Map<String, List<Map<String, dynamic>>> _transformFoodMenu(List<dynamic> foodMenuList) {
+    final Map<String, List<Map<String, dynamic>>> map = {};
+    for (var item in foodMenuList) {
+      if (item is Map<String, dynamic>) {
+        String category = item['category'] as String;
+        List<dynamic> items = item['items'] as List<dynamic>;
+        List<Map<String, dynamic>> itemsList = items.whereType<Map<String, dynamic>>().map((e) => e).toList();
+        if (map.containsKey(category)) {
+          map[category]!.addAll(itemsList);
+        } else {
+          map[category] = itemsList;
+        }
+      }
+    }
+    return map;
+  }
+
+  void updateTotalItems(String foodId, int count) {
+    setState(() {
+      if (itemQuantities.containsKey(foodId)) {
+        itemQuantities[foodId] = (itemQuantities[foodId]! + count).clamp(0, double.infinity).toInt();
+      } else {
+        itemQuantities[foodId] = count;
+      }
+
+      totalItems = itemQuantities.values.reduce((a, b) => a + b);
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    FoodMenuController controller = Get.put(FoodMenuController());
-
     return Scaffold(
-        appBar: AppBar(title: const Text("القائمة"),centerTitle: true),
-        bottomNavigationBar: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ElevatedButton(
-              onPressed: () {
-                controller.goToCheckOut();
-              },
-              child: const Text('اتمام الطلب'),
-            )
-          ],
-        ),
-        body: WillPopScope(
-            child: Container(
-              color: Colors.white,
-              child: SafeArea(
-                child: GetBuilder<FoodMenuController>(
-                    builder: (controller) => isLoading
-                        ? Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              LottieBuilder.asset(AppImageAssets.loading),
-                            ],
-                          )
-                        : ListView(children: [
-                            const TitleMenuPage(),
-                            GetBuilder<FoodMenuController>(
-                              builder: (controller) =>
-                                   HandlingDataView(
-                                    statusRequiest: controller.statusRequiest,
-                                    widget:
-                                  ListView.builder(
-                                physics: const NeverScrollableScrollPhysics(),
-                                shrinkWrap: true,
-                                scrollDirection: Axis.vertical,
-                                itemCount: controller.categoriesmenu.length,
-                                itemBuilder: (context, index) {
-                                  return SingleChildScrollView(
-                                    padding: const EdgeInsets.only(bottom: 6),
-                                    physics:
-                                        const NeverScrollableScrollPhysics(),
-                                    child: FoodMenu(
-                                        i: index,
-                                        mealType:
-                                            controller.categories.toString(),
-                                        foodRestaurantsModel:
-                                            FoodRestaurantsModel.fromJson(
-                                                controller
-                                                    .categoriesmenu[index])),
-                                  );
-                                },
-                              ),
-                            ),
-                            ),
-                          ])),
-              ),
+      appBar: AppBar(
+        title: const Text("القائمة"),
+        centerTitle: true,
+        bottom: _foodMenuMap.isNotEmpty
+            ? TabBar(
+                controller: _tabController,
+                isScrollable: true,
+                tabs: _foodMenuMap.keys.map((category) => Tab(text: category)).toList(),
+              )
+            : null,
+      ),
+      body: Column(
+        children: [
+          Expanded(
+            child: _foodMenuMap.isNotEmpty
+                ? TabBarView(
+                    controller: _tabController,
+                    children: _foodMenuMap.entries.map((entry) {
+                      return ListView.builder(
+                        itemCount: entry.value.length,
+                        itemBuilder: (context, index) {
+                          var item = entry.value[index];
+                          String foodId = item['food_id'].toString(); // Ensure food_id is a string
+                          int initialQuantity = itemDetails[foodId]?['quantity'] ?? 0; // Get initial quantity
+
+                          return FoodMenu(
+                            foodRestaurantsModel: FoodRestaurantsModel.fromJson(item),
+                            mealType: entry.key,
+                            onUpdate: (count) {
+                              updateTotalItems(foodId, count);
+                            },
+                            onQuantityChange: (quantity) {
+                              itemDetails[foodId] = {
+                                'name': item['food_name'], // Assuming food_name is in the item
+                                'quantity': quantity,
+                              }; // Update the item details
+                            },
+                            initialQuantity: initialQuantity,
+                          );
+                        },
+                      );
+                    }).toList(),
+                  )
+                : const Center(child: CircularProgressIndicator()), // Loader
+          ),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: ElevatedButton(
+              onPressed: totalItems > 0 ? () {
+                showOrderSummary();
+                // Print the selected food items and their quantities
+                itemDetails.forEach((foodId, details) {
+                  int quantity = details['quantity'];  
+
+                  if (quantity > 0) {
+                    print('Food ID: $foodId, Food Name: ${details['name']}, Quantity: $quantity');
+                  }
+                });
+
+                Get.snackbar('Order Confirmed', 'You have ordered $totalItems items.');
+              } : null,
+              child: Text('تاكيد ($totalItems)'),
             ),
-            onWillPop: () {
-              Get.defaultDialog(
-                  title: "ملاحظة",
-                  middleText: "سيتم حذف الطلبات الحالية عند الرجوع",
-                  textCancel: "الرجوع",
-                  cancelTextColor: AppColor.firstColor,
-                  textConfirm: "موافق",
-                  confirmTextColor: Colors.white,
-                  buttonColor: AppColor.orange,
-                  onCancel: () {},
-                  onConfirm: () {
-                    controller.onBack();
-                    Get.back();
-                  });
-              return Future.value(false);
-            }
-            ));
+          ),
+        ],
+      ),
+    );
   }
 }
 
-// import 'package:flutter/material.dart';
-// import 'package:get/get.dart';
-// import 'package:semo/const/colors.dart';
-// import 'package:semo/controller/foodmenu_controller.dart';
-// import 'package:semo/data/model/foodModel.dart';
-// import 'package:semo/screens/menu.dart';
 
-// class MenuPage extends StatelessWidget {
-//   const MenuPage({Key? key}) : super(key: key);
+class FoodMenu extends StatefulWidget {
+  final FoodRestaurantsModel foodRestaurantsModel;
+  final String mealType;
+  final Function(int) onUpdate; // Add callback for total items
+  final Function(int) onQuantityChange; // Add callback for individual quantity
+  final int initialQuantity; // Add initial quantity
 
-//   @override
-//   Widget build(BuildContext context) {
-//     FoodMenuController controller = Get.put(FoodMenuController());
+  const FoodMenu({
+    super.key,
+    required this.foodRestaurantsModel,
+    required this.mealType,
+    required this.onUpdate,
+    required this.onQuantityChange,
+    required this.initialQuantity,
+  });
 
-//     return Scaffold(
-//       body: SafeArea(
-//         child: GetBuilder<FoodMenuController>(
-//           builder: (controller) {
-//             return DefaultTabController(
-//               length: controller.foodMenu.length,
-//               child: Column(
-//                 children: [
-//                   TabBar(
-//                     indicatorColor: AppColor.black,
-//                     labelColor: AppColor.black,
-//                     // tabs: _buildTabs(controller.foodMenu),
-//                     tabs: [Tab(child: Text('1'),),Tab(child: Text('data'),)]
-//                   ),
-//                   const Expanded(
-//                     child: TabBarView(
-//                       children: [
-//                        Text('1'),
-//                         Text('222'),
+  @override
+  _FoodMenuState createState() => _FoodMenuState();
+}
 
-//                       ],
-//                       // children: _buildTabViews(controller.foodMenu),
-//                     ),
-//                   ),
-//                 ],
-//               ),
-//             );
-//           },
-//         ),
-//       ),
-//     );
-//   }
+class _FoodMenuState extends State<FoodMenu> {
+  FoodMenuController controller = Get.find();
+  late int countItems;
 
-//   // List<Widget> _buildTabs(List<dynamic> foodMenu) {
-//   //   return foodMenu.map((item) {
-//   //     return Tab(
-//   //       text: item['mealType'],
-//   //     );
-//   //   }).toList();
-//   // }
+  @override
+  void initState() {
+    super.initState();
+    countItems = widget.initialQuantity; // Use initial quantity from parent widget
+  }
 
-//   // List<Widget> _buildTabViews(List<dynamic> foodMenu) {
-//   //   return foodMenu.map((item) {
-//   //     return Menu(
-//   //       mealType: item['mealType'],
-//   //     );
-//   //   }).toList();
-//   // }
-//   List<Widget> _buildTabs(List<FoodModel> foodMenu) {
-//   return foodMenu.map((item) {
-//     return Tab(
-//       child: Text(item.foodId!),
-//     );
-//   }).toList();
-// }
+  void incrementCountItems() {
+    setState(() {
+      countItems++;
+      widget.onUpdate(1); // Update total items
+      widget.onQuantityChange(countItems); // Update individual item quantity
+    });
+  }
 
-// List<Widget> _buildTabViews(List<FoodModel> foodMenu) {
-//   return foodMenu.map((item) {
-//     return Menu(mealType: item.foodRestaurantId!);
-//   }).toList();
-// }
-// }
+  void decrementCountItems() {
+    if (countItems > 0) {
+      setState(() {
+        countItems--;
+        widget.onUpdate(-1); // Update total items
+        widget.onQuantityChange(countItems); // Update individual item quantity
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: MediaQuery.sizeOf(context).width * 0.96,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        boxShadow: const [
+          BoxShadow(
+            blurRadius: 4,
+            color: Color(0x33000000),
+            offset: Offset(0, 2),
+          )
+        ],
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: SafeArea(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 1),
+              child: SizedBox(
+                width: double.infinity,
+                height: 100,
+                child: Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(0, 8, 18, 8),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Container(
+                        width: 90,
+                        height: 90,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(5, 2, 2, 2),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(6),
+                            child: CachedNetworkImage(
+                              imageUrl: "${AppLink.foodImage}/${widget.foodRestaurantsModel.foodImage}",
+                              placeholder: (context, url) => Lottie.asset('assets/images/lottile/loadin_data.json'),
+                              errorWidget: (context, url, error) => Image.asset('assets/images/nofood.png'),
+                              width: 90,
+                              height: 90,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              "${widget.foodRestaurantsModel.foodName}",
+                            ),
+                            Text(
+                              '${widget.foodRestaurantsModel.foodPrice} ريال',
+                              style: const TextStyle(color: AppColor.orange),
+                            ),
+                          ],
+                        ),
+                      ),
+                      PriceAndCountItems(
+                        onAdd: () {
+                          controller.additems(widget.foodRestaurantsModel.foodId!.toString());
+                          incrementCountItems();
+                        },
+                        onRemove: () {
+                          controller.deleteitems(widget.foodRestaurantsModel.foodId!.toString());
+                          decrementCountItems();
+                        },
+                        count: countItems.toString(),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 1),
+          ],
+        ),
+      ),
+    );
+  }
+}

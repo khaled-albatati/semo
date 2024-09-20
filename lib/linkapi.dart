@@ -39,15 +39,15 @@ class AppLink {
   static const String foodsLast = "$server/foods/foodsLast.php";
   static const String foodsList = "$server/foods/foodsList.php";
   static const String menu= "$server/restaurants/menu.php";
-  static const String menufamily= "$server/restaurant/menufamily.php";
-  static const String menurestaurant= "$server/restaurant/menurestaurant.php";
-  static const String menucat= "$server/restaurant/menucat.php";
-  static const String menucatlist= "$server/restaurant/menucatlist.php";
-  static const String menucatlist3= "$server/restaurant/menucatlist3.php";
-  static const String menucatlistcount= "$server/restaurant/menucatlistcount.php";
+  static const String menufamily= "$server/restaurants/menufamily.php";
+  static const String menurestaurant= "$server/restaurants/menurestaurant.php";
+  static const String menucat= "$server/restaurants/menucat.php";
+  static const String menucatlist= "$server/restaurants/menucatlist.php";
+  static const String menucatlist3= "$server/restaurants/menucatlist3.php";
+  static const String menucatlistcount= "$server/restaurants/menucatlistcount.php";
 
-  static const String restaurantCategories = "$server/restaurant/restaurantsCategories.php";
-  static const String restaurantsHomeMenu = "$server/restaurant/restaurantsHomeMenu.php";
+  static const String restaurantCategories = "$server/restaurants/restaurantsCategories.php";
+  static const String restaurantsHomeMenu = "$server/restaurants/restaurantsHomeMenu.php";
 
 
   static const String categoriesHome= "$server/categories/categoriesHome.php";
