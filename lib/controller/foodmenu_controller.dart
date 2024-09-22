@@ -17,25 +17,137 @@ class FoodMenuController extends GetxController {
   List foodMenu = []; //متغير لتخزين البيانات بعد جلبها من ال backend .
   List categories = [];
   List categoriesmenua = [];
-  List categoriess= [];
+  List categoriess = [];
   List categoriesmenu = [];
-  int convertedValue=0;
+  int convertedValue = 0;
   String? categoriesName;
   List<String> foodMenuTypes = [];
-  List mealType=[];
-   int countitems=0;
+  List mealType = [];
+  int countitems = 0;
   late FoodRestaurantsModel foodRestaurantsModel;
-// FoodRestaurantsModel foodRestaurantsModel = FoodRestaurantsModel();
- CountController cartController = Get.put(CountController());
+  CountController cartController = Get.put(CountController());
   late StatusRequiest statusRequiest;
   int? catid;
-  int? selectedCat  ;
+  int? selectedCat;
   MyServices myServices = Get.find();
-  // int? selectedCat;
+
+  late TabController tabController;
+  late FoodMenuController food;
+  late Map<String, dynamic> foodMenuMap = {};
+  // late Map<String, List<Map<String, dynamic>>> _foodMenuMap;
+  Map<String, Map<String, dynamic>> itemDetails =
+      {}; // Map to hold food details
+  int totalItems = 0;
+  Map<String, int> itemQuantities = {}; // Map to hold quantities per food item
+
+  double calculateTotalPrice() {
+    double totalPrice = 0.0;
+
+    itemDetails.forEach((foodId, details) {
+      int quantity = details['quantity'];
+      double price = details['price']; // Use food_price here
+      totalPrice += quantity * price; // Calculate total price
+    });
+
+    return totalPrice;
+  }
+
+  void showOrderSummary(BuildContext context) {
+    TextEditingController notesController =
+        TextEditingController(); // Controller for notes input
+
+    List<Widget> orderItems = itemDetails.entries
+        .where((entry) => entry.value['quantity'] > 0)
+        .map((entry) {
+      return Text(
+          'الوجبة: ${entry.value['name']}, الكمية: ${entry.value['quantity']}');
+    }).toList();
+
+    double totalPrice = calculateTotalPrice(); // Calculate total price
+
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('مراجعة الطلب'),
+          content: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                ...orderItems,
+                const SizedBox(height: 16),
+                Text(
+                  'إجمالي السعر: ${totalPrice.toStringAsFixed(2)} ريال',
+                ), // Display total price
+                const SizedBox(height: 16),
+                Container(
+                  padding: const EdgeInsets.all(8.0),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.grey),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: TextField(
+                    controller: notesController,
+                    decoration: const InputDecoration(
+                      labelText: 'ملاحظات الطلب',
+                      border: InputBorder.none,
+                    ),
+                    maxLines: 3,
+                    keyboardType: TextInputType.multiline,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(); // Close the dialog
+              },
+              child: const Text('اغلاق'), // "Close" in Arabic
+            ),
+            TextButton(
+              onPressed: () {
+                // Handle order confirmation logic here
+                String notes = notesController.text;
+                print('طباعة الطلب: $notes');
+
+                // Print the selected food items and their quantities
+                double totalPrice =
+                    calculateTotalPrice(); // Recalculate total price for confirmation
+                itemDetails.forEach((foodId, details) {
+                  int quantity = details['quantity'];
+                  if (quantity > 0) {
+                    print(
+                        'Food ID: $foodId, Food Name: ${details['name']}, Quantity: $quantity');
+                  }
+                });
+
+                // Print total price
+                print(
+                    'الإجمالي: ريال${totalPrice.toStringAsFixed(2)}'); // Print total price in Arabic
+
+                Navigator.of(context)
+                    .pop(); // Close the dialog after confirmation
+              },
+child: TextButton(
+  onPressed: () {
+    Get.toNamed(
+      AppRoutes.payment,
+      arguments: {'order_price': totalPrice}, // Use a map to pass the arguments
+    );
+  },
+  child: const Text('تاكيد الطلب'), // "Confirm Order" in Arabic
+),            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
-  void onInit()async {
-       onBackInit();
+  void onInit() async {
+    onBackInit();
     statusRequiest = StatusRequiest.loading;
     catid = Get.arguments['catid'];
     print('===========================$catid');
@@ -51,7 +163,7 @@ class FoodMenuController extends GetxController {
     // print('selected cat = ${selectedCat}'); //null
     // print('categoriesName = ${categoriesName}');//categories_name
     // print(' hhhhhhhhhhhere = ${foodRestaurantsModel.restaurantsName}');
-     
+
     menu();
     meal(categories);
     meall(categories);
@@ -59,229 +171,90 @@ class FoodMenuController extends GetxController {
     super.onInit();
   }
 
-
-// Future menu() async {
-//   statusRequiest = StatusRequiest.loading;
-//   try {
-//     var response = await http.post(Uri.parse(AppLink.menu), body: {
-//       'restaurants_id': catid.toString(),
-//     });
-
-//     print('Response status: ${response.statusCode}');
-//     print('Response body: ${response.body}');
-
-//     statusRequiest = handlingData(response);
-
-//     if (response.statusCode == 200) {
-//       final jsondata = jsonDecode(response.body);
-//       print('JSON data: $jsondata'); // Debug: Check JSON structure
-
-//       // Clear the existing data
-//       foodMenu.clear();
-//       mealType.clear();
-
-//       // Iterate over each category in the 'data' map
-//       jsondata['data'].forEach((category, items) {
-//         if (items is List) {
-//           for (var item in items) {
-//             // Check if the item is a valid map and contains required fields
-//             if (item is Map<String, dynamic> &&
-//                 item.containsKey('food_id') &&
-//                 item.containsKey('food_image') &&
-//                 item.containsKey('food_name') &&
-//                 item.containsKey('food_description')) {
-              
-//               // Add the item to the lists
-//               foodMenu.add(item);
-//               mealType.add(item);
-//             } else {
-//               print('Invalid item encountered: $item');
-//             }
-//           }
-//         }
-//       });
-
-//       statusRequiest = StatusRequiest.success;
-//     } else {
-//       statusRequiest = StatusRequiest.faliure;
-//     }
-//   } catch (e) {
-//     print('Exception: $e');
-//     statusRequiest = StatusRequiest.serverException;
-//   }
-//   update();
-// }
-   
-
-//   Future menu() async {
-//   statusRequiest = StatusRequiest.loading;
-//   try {
-//     var response = await http.post(Uri.parse(AppLink.menu), body: {
-//       'restaurants_id': catid.toString(),
-//     });
-
-//     // Log the response for debugging
-//     print('Response status: ${response.statusCode}');
-//     print('Response body: ${response.body}');
-
-//     statusRequiest = handlingData(response);
-
-//     if (response.statusCode == 200) {
-//       final jsonData = jsonDecode(response.body);
-
-//       if (jsonData['status'] == 'success') {
-//         // Clear previous data
-//         foodMenu.clear();
-//         mealType.clear();
-
-//         // Iterate over the map and add each group to your list
-//         jsonData['data'].forEach((foodKind, foods) {
-//           mealType.add(foodKind); // Add unique food kinds
-//           foodMenu.addAll(foods); // Add all foods under this kind
-//         });
-
-//         statusRequiest = StatusRequiest.success;
-//       } else {
-//         statusRequiest = StatusRequiest.faliure;
-//       }
-//     } else {
-//       statusRequiest = StatusRequiest.faliure;
-//     }
-//   } catch (e) {
-//     print('Error: $e');
-//     statusRequiest = StatusRequiest.serverException;
-//   }
-//   update();
-// }
-
-
   Future menu() async {
     statusRequiest = StatusRequiest.loading;
     try {
-        var response = await http.post(Uri.parse(AppLink.menu), body: {
-            'restaurants_id': foodRestaurantsModel.restaurantsId.toString(),
-        });
+      var response = await http.post(Uri.parse(AppLink.menu), body: {
+        'restaurants_id': foodRestaurantsModel.restaurantsId.toString(),
+      });
 
-        if (response.statusCode == 200) {
-            final jsondata = jsonDecode(response.body);
-            if (jsondata['status'] == 'success') {
-                // Clear previous data
-                foodMenu.clear();
-                // Iterate over the categories
-                jsondata['data'].forEach((key, value) {
-                    foodMenu.add({
-                        'category': key,
-                        'items': value,
-                    });
-                });
-                statusRequiest = StatusRequiest.success;
-            } else {
-                statusRequiest = StatusRequiest.faliure;
-            }
+      if (response.statusCode == 200) {
+        final jsondata = jsonDecode(response.body);
+        if (jsondata['status'] == 'success') {
+          // Clear previous data
+          foodMenu.clear();
+          // Iterate over the categories
+          jsondata['data'].forEach((key, value) {
+            foodMenu.add({
+              'category': key,
+              'items': value,
+            });
+          });
+          statusRequiest = StatusRequiest.success;
         } else {
-            statusRequiest = StatusRequiest.faliure;
+          statusRequiest = StatusRequiest.faliure;
         }
+      } else {
+        statusRequiest = StatusRequiest.faliure;
+      }
     } catch (e) {
-        statusRequiest = StatusRequiest.serverException;
-        print("Error: $e");
+      statusRequiest = StatusRequiest.serverException;
+      print("Error: $e");
     }
     update();
-}
-
+  }
 
   meal(foodkind) async {
     categoriesmenu.clear();
-  statusRequiest = StatusRequiest.loading;
-  try {
-    var response = await http.post(Uri.parse(AppLink.menucatlist), body: {
-      'restaurants_name': foodRestaurantsModel.restaurantsName,
-      'food_kind': foodkind ,// Pass the mealType parameter to the API
-      'userid':myServices.sharedPreferences.getString('id'),
-    });
+    statusRequiest = StatusRequiest.loading;
+    try {
+      var response = await http.post(Uri.parse(AppLink.menucatlist), body: {
+        'restaurants_name': foodRestaurantsModel.restaurantsName,
+        'food_kind': foodkind, // Pass the mealType parameter to the API
+        'userid': myServices.sharedPreferences.getString('id'),
+      });
 
-    statusRequiest = handlingData(response);
+      statusRequiest = handlingData(response);
 
-    if (response.statusCode == 200) {
-      final jsondata = jsonDecode(response.body);
-      categoriesmenu.addAll(jsondata['data']);
-      statusRequiest = StatusRequiest.success;
-    } else {
-      statusRequiest = StatusRequiest.faliure;
+      if (response.statusCode == 200) {
+        final jsondata = jsonDecode(response.body);
+        categoriesmenu.addAll(jsondata['data']);
+        statusRequiest = StatusRequiest.success;
+      } else {
+        statusRequiest = StatusRequiest.faliure;
+      }
+    } catch (e) {
+      statusRequiest = StatusRequiest.serverException;
     }
-  } catch (e) {
-    statusRequiest = StatusRequiest.serverException;
+    update();
   }
-  update();
-}
-Future<void> meall(foodkind) async {
-  update();
+
+  Future<void> meall(foodkind) async {
+    update();
     categoriesmenu.clear();
-  statusRequiest = StatusRequiest.loading;
-  try {
-    var response = await http.post(Uri.parse(AppLink.menucatlistcount), body: {
-      'restaurants_name': foodRestaurantsModel.restaurantsName,
-      'food_kind': foodkind ,// Pass the mealType parameter to the API
-      'userid':myServices.sharedPreferences.getString('id'),
-    });
+    statusRequiest = StatusRequiest.loading;
+    try {
+      var response =
+          await http.post(Uri.parse(AppLink.menucatlistcount), body: {
+        'restaurants_name': foodRestaurantsModel.restaurantsName,
+        'food_kind': foodkind, // Pass the mealType parameter to the API
+        'userid': myServices.sharedPreferences.getString('id'),
+      });
 
-    statusRequiest = handlingData(response);
+      statusRequiest = handlingData(response);
 
-    if (response.statusCode == 200) {
-      final jsondata = jsonDecode(response.body);
-      categoriesmenua.addAll(jsondata['data']);
-      statusRequiest = StatusRequiest.success;
-    } else {
-      statusRequiest = StatusRequiest.faliure;
+      if (response.statusCode == 200) {
+        final jsondata = jsonDecode(response.body);
+        categoriesmenua.addAll(jsondata['data']);
+        statusRequiest = StatusRequiest.success;
+      } else {
+        statusRequiest = StatusRequiest.faliure;
+      }
+    } catch (e) {
+      statusRequiest = StatusRequiest.serverException;
     }
-  } catch (e) {
-    statusRequiest = StatusRequiest.serverException;
+    update();
   }
-  update();
-}
-
-// Future<void> fetchFoodMenuTypes() async {
-//     try {
-//       final response = await http.get(Uri.parse('your_api_endpoint_here'));
-//       if (response.statusCode == 200) {
-//         final data = json.decode(response.body);
-//         foodMenuTypes = List<String>.from(data['foodMenuTypes']);
-//       } else {
-//         // Handle error case
-//       }
-//     } catch (e) {
-//       // Handle exception
-//     }
-//     update();
-//   }
-
-//  Future getCountItems(String foodid) async {
-//     statusRequiest = StatusRequiest.loading;
-//     try {
-//       final response = await http.post(Uri.parse(AppLink.cartgetcountitems),
-//           body: {
-//             'foodid': '3',
-//             'usersid': myServices.sharedPreferences.getString('id')!
-//           });
-//     print('object');
-//           print(foodRestaurantsModel.foodId);
-//       if (response.statusCode == 200) {
-//         int countitems = 0;
-//         final jsondata = jsonDecode(response.body);
-//         countitems = int.parse(jsondata['data']);
-//         print('countitems = ${countitems}');
-//         // countitems=jsondata['data'];
-//         statusRequiest = StatusRequiest.success;
-//         return countitems;
-//       } else {
-//         statusRequiest = StatusRequiest.faliure;
-//       }
-//     } catch (e) {
-//       statusRequiest = StatusRequiest.serverException;
-//     }
-//     update();
-//   }
-
-
 
   Future additems(String foodid) async {
     // update();
@@ -295,7 +268,7 @@ Future<void> meall(foodkind) async {
         Get.rawSnackbar(
             title: "اشعار",
             messageText: const Text("تمت اضافة وجبة الى السلة"));
-            statusRequiest = StatusRequiest.success;
+        statusRequiest = StatusRequiest.success;
       } else {
         statusRequiest = StatusRequiest.faliure;
       }
@@ -330,7 +303,9 @@ Future<void> meall(foodkind) async {
   }
 
   goToCheckOut() {
-    Get.toNamed(AppRoutes.cart,);
+    Get.toNamed(
+      AppRoutes.cart,
+    );
   }
 
   add() {
@@ -346,16 +321,15 @@ Future<void> meall(foodkind) async {
       deleteitems(foodRestaurantsModel.foodId!.toString());
       countitems--;
     }
-      update();
+    update();
   }
 
-  onBack()async{
+  onBack() async {
     // statusRequiest = StatusRequiest.loading;
     update();
     try {
-      final response = await http.post(Uri.parse(AppLink.deleteCount), body: {
-        'usersid': myServices.sharedPreferences.getString('id')!
-      });
+      final response = await http.post(Uri.parse(AppLink.deleteCount),
+          body: {'usersid': myServices.sharedPreferences.getString('id')!});
       // statusRequiest = handlingData(response);
       if (response.statusCode == 200) {
         // Get.rawSnackbar(
@@ -371,20 +345,10 @@ Future<void> meall(foodkind) async {
     }
   }
 
-  
-
-  changeCat(val,catval)async{
-    // Get.snackbar("title", "message");
-    // statusRequiest=StatusRequiest.loading;
-    // print('agaaaaaain : ${foodRestaurantsModel.restaurantsName}');848
-    //  await getCountItems('3');
-    // getCountItems('3');
-    // print(getCountItems('${foodRestaurantsModel.foodId}'));
+  changeCat(val, catval) async {
     selectedCat = val;
     catid = catval;
-    // print(selectedCat);
-   meal(catid);
-   
+    meal(catid);
     update();
   }
 }

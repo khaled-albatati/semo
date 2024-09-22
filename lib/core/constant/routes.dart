@@ -59,6 +59,7 @@ class AppRoutes {
   static const String changePassword ="/password";
   static const String changeEmail ="/email";
   static const String changePhone= "/Phone";
+  static const String payment= "/payment";
 
   // static const String menuPage ="/menuPage";
 

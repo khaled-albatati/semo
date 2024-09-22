@@ -22,6 +22,7 @@ import 'package:semo/widgets/change_screen/username.dart';
 import 'card.dart';
 import 'screens/orders/details.dart';
 import 'screens/orders/pending.dart';
+import 'screens/payment.dart';
 import 'screens/restaurants_categories.dart';
 import 'view/tracking.dart';
 import 'widgets/address/adddetails.dart';
@@ -80,6 +81,11 @@ List<GetPage<dynamic>>? routes = [
     name: AppRoutes.changePhone,
     page: () => const ChangePhone(),
   ),
+    GetPage(
+    name: AppRoutes.payment,
+    page: () => const Payment(),
+  ),
+
 
   GetPage(
     name: AppRoutes.signUp,
