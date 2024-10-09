@@ -46,11 +46,11 @@ class LoginControllerImp extends LoginController {
           String status = responseBody['status'];
           if (status == 'success') {
             myServices.sharedPreferences
-                .setString('id', responseBody['data']['user_id']);
-                print('object');
-            String userid = myServices.sharedPreferences.getString("id")!;
+                .setInt('id', responseBody['data']['user_id']);
+            // String userid = myServices.sharedPreferences.getString("id")!;
             myServices.sharedPreferences
                 .setString("username", responseBody['data']['user_name']);
+                print('object');
             myServices.sharedPreferences
                 .setString("email", responseBody['data']['user_email']);
             myServices.sharedPreferences

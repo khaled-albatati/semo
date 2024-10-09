@@ -4,9 +4,9 @@ import '../../const/colors.dart';
 import '../../utils/helper.dart';
 
 class PriceCheckOut extends StatelessWidget {
-  final String subtotal;
-  final String deliveryCost;
-  final String discount ;
+  final double subtotal;
+  final int deliveryCost;
+  final double discount ;
   final String total;
   const PriceCheckOut({super.key, required this.subtotal, required this.deliveryCost, required this.discount, required this.total});
 
@@ -21,7 +21,7 @@ class PriceCheckOut extends StatelessWidget {
             children: [
               const Text("القيمة"),
               Text(
-                subtotal,
+                subtotal.toString(),
                 style: Helper.getTheme(context).displaySmall,
               )
             ],
@@ -34,7 +34,7 @@ class PriceCheckOut extends StatelessWidget {
             children: [
               const Text("سعر التوصيل"),
               Text(
-                deliveryCost,
+                deliveryCost.toString(),
                 style: Helper.getTheme(context).displaySmall,
               )
             ],
@@ -47,7 +47,7 @@ class PriceCheckOut extends StatelessWidget {
             children: [
               const Text("الخصم"),
               Text(
-                discount,
+                discount.toString(),
                 style: Helper.getTheme(context).displaySmall,
               )
             ],
@@ -57,15 +57,18 @@ class PriceCheckOut extends StatelessWidget {
             color: AppColor.placeholder.withOpacity(0.25),
             thickness: 2,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Text("الاجمالي"),
-              Text(
-                total,
-                style: Helper.getTheme(context).displaySmall,
-              )
-            ],
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text("الاجمالي"),
+                Text(
+                  total.toString(),
+                  style: Helper.getTheme(context).displaySmall,
+                )
+              ],
+            ),
           ),
           const SizedBox(
             height: 20,

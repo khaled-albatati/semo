@@ -132,7 +132,7 @@ class CartController extends GetxController {
     update();
     try {
       var response = await http.post(Uri.parse(AppLink.cartview), body: {
-        "usersid": myServices.sharedPreferences.get("id"),
+        "usersid": myServices.sharedPreferences.getInt("id").toString(),
       });
       // print("=============================== Controller $response ");
       if (response.statusCode == 200) {
@@ -154,17 +154,27 @@ class CartController extends GetxController {
   }
 
 ////////////////////////Coupon start///////////////////////////////////
-  getTotalPrice() {
-    final double addressPrice =
-        double.tryParse(addressModelPrice.addresspricePrice ?? '0') ?? 0.0;
-    return (priceorders - priceorders * discountcoupon! / 100) + addressPrice;
-  }
+  // getTotalPrice() {
+  //   final double addressPrice =
+  //       double.tryParse(addressModelPrice.addresspricePrice ?? '0') ?? 0.0;
+  //   return (priceorders - priceorders * discountcoupon! / 100) + addressPrice;
+  // }
+   getTotalPrice() {
+  final int addressPrice = int.tryParse(addressModelPrice.addresspricePrice.toString()) ?? 0;
+  
+  // Ensure discountcoupon is not null and is a valid number
+  final double discount = discountcoupon != null ? discountcoupon! / 100 : 0;
+
+  // Calculate total price
+  return (priceorders - (priceorders * discount)).round() + addressPrice;
+}
 
   getAddress() async {
     // statusRequiest = StatusRequiest.loading;
-
+    String x =  myServices.sharedPreferences.getInt('id').toString();
+    print('=================================$x');
     var response = await http.post(Uri.parse(AppLink.addressViewPrice),
-        body: {"usersid": myServices.sharedPreferences.getString('id')});
+        body: {"usersid":x});
 
     if (kDebugMode) {
       print("=============================== Controller $response ");
@@ -181,7 +191,8 @@ class CartController extends GetxController {
       //   return Get.snackbar("تنبيه", "no data");
       // }
     } else {
-      Get.toNamed(AppRoutes.addressview);
+      print('object');
+      // Get.toNamed(AppRoutes.addressview);
     }
     // End
     update();

@@ -6,8 +6,14 @@ import '../../core/class/handling_dataview.dart';
 import '../../const/colors.dart';
 import '../../data/model/addressmodel.dart';
 
-class AddressView extends StatelessWidget {
+class AddressView extends StatefulWidget {
   const AddressView({Key? key}) : super(key: key);
+
+  @override
+  State<AddressView> createState() => _AddressViewState();
+}
+
+class _AddressViewState extends State<AddressView> {
   @override
   Widget build(BuildContext context) {
     Get.put(AddressViewController());

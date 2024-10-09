@@ -29,7 +29,7 @@ import 'widgets/address/adddetails.dart';
 import 'widgets/address/view.dart';
 
 List<GetPage<dynamic>>? routes = [
-  GetPage(name: "/", page: () => const NavBar()),
+  GetPage(name: "/", page: () => const Payment()),
 // GetPage(name:"/", page:()=> const  SplashScreen(),middlewares: [
 //   MyMiddleWare(),
 // ]),
@@ -145,6 +145,11 @@ List<GetPage<dynamic>>? routes = [
     name: AppRoutes.tracking,
     page: () => const Tracking(),
   ),
+  GetPage(
+    name: AppRoutes.addressadddetails,
+    page: () => const AddressAddDetails(),
+  ),
+ 
   // ========================= Address =========================\\
   GetPage(name: AppRoutes.addressview, page: () => const AddressView()),
 

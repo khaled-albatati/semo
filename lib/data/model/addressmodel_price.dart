@@ -1,14 +1,14 @@
 class AddressModelPrice {
-  String? addressId;
-  String? addressUsersid;
+  int? addressId;
+  int? addressUsersid;
   String? addressName;
   String? addressCity;
   String? addressStreet;
   String? addressLat;
   String? addressLong;
-  String? addresspriceId;
+  int? addresspriceId;
   String? addresspriceAddressname;
-  String? addresspricePrice;
+  int? addresspricePrice;
 
   AddressModelPrice(
       {this.addressId,

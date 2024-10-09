@@ -108,7 +108,7 @@ class Profile extends GetView<ProfileControllerImp> {
                             ),
                       ),
                       Text(
-                        "رصيدك : ${controller.myServices.sharedPreferences.getString('user_wallet')} ريال",
+                        "رصيدك : ${controller.myServices.sharedPreferences.getInt('user_wallet')} ريال",
                         style: Helper.getTheme(context).headlineMedium?.copyWith(
                               color: AppColor.primary,
                             ),

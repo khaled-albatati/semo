@@ -130,19 +130,47 @@ class FoodMenuController extends GetxController {
                 Navigator.of(context)
                     .pop(); // Close the dialog after confirmation
               },
-child: TextButton(
-  onPressed: () {
-    Get.toNamed(
-      AppRoutes.payment,
-      arguments: {'order_price': totalPrice}, // Use a map to pass the arguments
-    );
-  },
-  child: const Text('تاكيد الطلب'), // "Confirm Order" in Arabic
-),            ),
+              child: TextButton(
+                onPressed: () {
+                  // Get.toNamed(
+                  //   AppRoutes.payment,
+                  //   arguments: {'order_price': totalPrice}, // Use a map to pass the arguments
+                  // );
+                },
+                child: const Text('تاكيد الطلب'), // "Confirm Order" in Arabic
+              ),
+            ),
           ],
         );
       },
     );
+  }
+
+  Future send(String foodid) async {
+    statusRequiest = StatusRequiest.loading;
+    final userId = myServices.sharedPreferences.getInt('id');
+    try {
+      var response = await http.post(Uri.parse(AppLink.cartadd), body: {
+        "usersid": userId.toString(),
+        "itemsid": foodid,
+      });
+      // print(response.body);
+      if (response.statusCode == 200) {
+        statusRequiest = StatusRequiest.loading;
+        update();
+
+        // print("=============================== Controller $response ");
+
+        Get.rawSnackbar(
+            title: "اشعار",
+            messageText: const Text("تم اضافة المنتج الى السلة "));
+      } else {
+        statusRequiest = StatusRequiest.faliure;
+      }
+    } catch (e) {
+      statusRequiest = StatusRequiest.serverException;
+    }
+    update();
   }
 
   @override

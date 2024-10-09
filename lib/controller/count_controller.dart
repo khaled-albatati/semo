@@ -151,11 +151,20 @@ class CountController extends GetxController {
   }
 
 ////////////////////////Coupon start///////////////////////////////////
-  getTotalPrice() {
-    final double addressPrice =
-        double.tryParse(addressModelPrice.addresspricePrice ?? '0') ?? 0.0;
-    return (priceorders - priceorders * discountcoupon! / 100) + addressPrice;
-  }
+  // getTotalPrice() {
+  //   final double addressPrice =
+  //       double.tryParse(addressModelPrice.addresspricePrice ?? '0') ?? 0.0;
+  //   return (priceorders - priceorders * discountcoupon! / 100) + addressPrice;
+  // }
+  int getTotalPrice() {
+  final int addressPrice = int.tryParse(addressModelPrice.addresspricePrice.toString()) ?? 0;
+  
+  // Ensure discountcoupon is not null and is a valid number
+  final double discount = discountcoupon != null ? discountcoupon! / 100 : 0;
+
+  // Calculate total price
+  return (priceorders - (priceorders * discount)).round() + addressPrice;
+}
 
   
 

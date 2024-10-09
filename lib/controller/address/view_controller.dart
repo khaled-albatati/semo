@@ -30,8 +30,8 @@ class AddressViewController extends GetxController {
     update();
   }
 
-  deleteAddress(String addressid) {
-    addressData.deleteData(addressid);
+  deleteAddress(int addressid) {
+    addressData.deleteData(addressid.toString());
     data.removeWhere((element) => element.addressId == addressid);
     update();
   }
@@ -40,7 +40,7 @@ class AddressViewController extends GetxController {
     statusRequest = StatusRequiest.loading;
 
     var response = await http.post(Uri.parse(AppLink.addressView),
-        body: {"usersid": myServices.sharedPreferences.getString('id')});
+        body: {"usersid": myServices.sharedPreferences.getInt('id').toString()});
 
     if (kDebugMode) {
       print("=============================== Controller $response ");

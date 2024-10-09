@@ -38,7 +38,7 @@ class AddAddressDetailsController extends GetxController {
     update();
 
     var response = await http.post(Uri.parse(AppLink.addressAdd), body: {
-      "usersid": myServices.sharedPreferences.getString("id")!,
+      "usersid": myServices.sharedPreferences.getInt("id").toString(),
       "name": selectedLocation,
       "city":'المكلا',
       "street": street!.text,

@@ -50,7 +50,7 @@ class NavBarControllerImp extends NavBarController {
         myServices.sharedPreferences
             .setString("email", responseBody['data']['user_email']);
         myServices.sharedPreferences
-            .setString("user_wallet", responseBody['data']['user_wallet']);
+            .setInt("user_wallet", responseBody['data']['user_wallet']);
             myServices.sharedPreferences
             .setString("userphone", responseBody['data']['user_phone']);
         // myServices.sharedPreferences.setString("id",response['data']['user_id']);
