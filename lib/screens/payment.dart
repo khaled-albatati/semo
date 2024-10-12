@@ -29,6 +29,7 @@ class _PaymentState extends State<Payment> {
   AddressViewController address = Get.put(AddressViewController());
   String? selectedLocation;
   int? selectedOption;
+  int? object;
   // Inside your Payment widget
   @override
   Widget build(BuildContext context) {
@@ -48,42 +49,51 @@ class _PaymentState extends State<Payment> {
                   children: [
                     const SizedBox(height: 10),
                     GetBuilder<AddressViewController>(
-  builder: (controllerx) => controller.isLoading
-      ? const Center(child: CircularProgressIndicator())
-      : CheckoutAdress(
-          location: 'مواقعك',
-          widget: DropdownButton<String>(
-            hint: const Text('اختر موقع'),
-            value: controller.selectedLocation,
-            items: colors.map<DropdownMenuItem<String>>(
-              (AddressModel address) {
-                return DropdownMenuItem<String>(
-                  value: address.addressLong,
-                  child: Text(
-                    address.addressLong!,
-                    style: const TextStyle(fontSize: 12.0),
-                  ),
-                );
-              },
-            ).toList(), // No need for a Set if you're using a list directly
-            onChanged: (String? newValue) {
-              setState(() {
-                controller.selectedLocation = newValue;
+                      builder: (controllerx) => controller.isLoading
+                          ? const Center(child: CircularProgressIndicator())
+                          : CheckoutAdress(
+                              location: 'مواقعك',
+                              widget: DropdownButton<String>(
+                                hint: const Text('اختر موقع'),
+                                value: controller.selectedLocation,
+                                items: colors.map<DropdownMenuItem<String>>(
+                                  (AddressModel address) {
+                                    return DropdownMenuItem<String>(
+                                      value: address.addressLong,
+                                      child: Text(
+                                        address.addressLong!,
+                                        style: const TextStyle(fontSize: 12.0),
+                                      ),
+                                    );
+                                  },
+                                ).toList(), // No need for a Set if you're using a list directly
+                                onChanged: (String? newValue) {
+                                  setState(() {
+                                    controller.selectedLocation = newValue;
+                                    // controller.addressModelPrice.addressId=1;
+                                    print(newValue);
 
-                if (newValue != null) {
-                  // Find the selected AddressModelPrice
-                  var selectedAddress = colors.firstWhere(
-                    (address) => address.addressLong == newValue,
-                  );
-                  // Ensure selectedAddress is not null
-                  // Access the price from AddressModelPrice
-                  print("Selected Price: ${selectedAddress.addresspricePrice}");
-                                }
-              });
-            },
-          ),
-        ),
-),
+                                    if (newValue != null) {
+                                      // Find the selected AddressModelPrice
+                                      var selectedAddress = colors.firstWhere(
+                                        (address) =>
+                                            address.addressLong == newValue,
+                                      );
+                                      controller.addressModelPrice.addressId =
+                                          selectedAddress.addressId;
+                                      controller.addressModelPrice
+                                              .addresspricePrice =
+                                          selectedAddress.addresspricePrice;
+                                      // Ensure selectedAddress is not null
+                                      // Access the price from AddressModelPrice
+                                      print(
+                                          "Selected Price: ${selectedAddress.addresspricePrice}");
+                                    }
+                                  });
+                                },
+                              ),
+                            ),
+                    ),
                     const SizedBox(height: 10),
                     Container(
                       height: 10,
@@ -136,8 +146,8 @@ class _PaymentState extends State<Payment> {
                       deliveryCost:
                           controller.addressModelPrice.addresspricePrice ?? 0,
                       discount: controller.priceorders,
-                      subtotal: controller.priceorders,
-                      total: '4',
+                      subtotal: controller.totalPrice,
+                      total: controller.getTotalPrice().toString(),
                     ),
                     Container(
                       height: 10,

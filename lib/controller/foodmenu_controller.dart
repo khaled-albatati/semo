@@ -30,6 +30,7 @@ class FoodMenuController extends GetxController {
   int? catid;
   int? selectedCat;
   MyServices myServices = Get.find();
+    double totalPrice = 0.0;
 
   late TabController tabController;
   late FoodMenuController food;
@@ -41,7 +42,6 @@ class FoodMenuController extends GetxController {
   Map<String, int> itemQuantities = {}; // Map to hold quantities per food item
 
   double calculateTotalPrice() {
-    double totalPrice = 0.0;
 
     itemDetails.forEach((foodId, details) {
       int quantity = details['quantity'];
@@ -132,10 +132,10 @@ class FoodMenuController extends GetxController {
               },
               child: TextButton(
                 onPressed: () {
-                  // Get.toNamed(
-                  //   AppRoutes.payment,
-                  //   arguments: {'order_price': totalPrice}, // Use a map to pass the arguments
-                  // );
+                  Get.toNamed(
+                    AppRoutes.payment,
+                    arguments: {'total_price': totalPrice}, // Use a map to pass the arguments
+                  );
                 },
                 child: const Text('تاكيد الطلب'), // "Confirm Order" in Arabic
               ),
@@ -161,9 +161,9 @@ class FoodMenuController extends GetxController {
 
         // print("=============================== Controller $response ");
 
-        Get.rawSnackbar(
-            title: "اشعار",
-            messageText: const Text("تم اضافة المنتج الى السلة "));
+        // Get.rawSnackbar(
+        //     title: "اشعار",
+        //     messageText: const Text("تم اضافة المنتج الى السلة "));
       } else {
         statusRequiest = StatusRequiest.faliure;
       }

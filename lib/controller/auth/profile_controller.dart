@@ -1,14 +1,8 @@
-import 'dart:convert';
-
-import 'package:flutter/foundation.dart';
-import 'package:http/http.dart'as http;
 import 'package:get/get.dart';
 import 'package:semo/core/constant/routes.dart';
 import 'package:semo/core/services/services.dart';
 import 'package:semo/data/datasource/remote/profile_data.dart';
 import '../../core/class/statusrequiest.dart';
-import '../../core/functions/handlingdata_controller.dart';
-import '../../linkapi.dart';
 
 
 

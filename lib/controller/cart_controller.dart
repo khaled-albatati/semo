@@ -32,7 +32,7 @@ class CartController extends GetxController {
   double priceorders = 0.0;
   // double deliverycost = 0.0;
   int totalcountitems = 0;
-
+  double totalPrice=0;
   bool isLoading = true;
 
   Future<void> loadData() async {
@@ -166,7 +166,7 @@ class CartController extends GetxController {
   final double discount = discountcoupon != null ? discountcoupon! / 100 : 0;
 
   // Calculate total price
-  return (priceorders - (priceorders * discount)).round() + addressPrice;
+  return (totalPrice - (totalPrice * discount)).round() + addressPrice;
 }
 
   getAddress() async {
@@ -214,23 +214,26 @@ class CartController extends GetxController {
   checkOutKind() {}
 
   checkout() async {
-    if (data.isEmpty) return Get.snackbar("تنبيه", "السله فارغه");
+    // if (data.isEmpty) return Get.snackbar("تنبيه", "السله فارغه");
     if (selectedPaymentMethod == null) {
       return Get.snackbar("ملاحظة", "يرجى اختيار طريقة الدفع");
     }
-    if (addressModelPrice.addressId == null) {
-      return Get.snackbar("ملاحظة", "يرجى اختيار موقع استلام الطلب");
-    }
+    // if (addressModelPrice.addressId == null) {
+    //   return Get.snackbar("ملاحظة", "يرجى اختيار موقع استلام الطلب");
+    // }
     statusRequiest = StatusRequiest.loading;
     update();
     try {
       var response = await http.post(Uri.parse(AppLink.wallet), body: {
-        "usersid": myServices.sharedPreferences.getString("id"),
+        "usersid": myServices.sharedPreferences.getInt("id").toString(),
         "addressid": addressModelPrice.addressId.toString(),
         "pricedelivery": addressModelPrice.addresspricePrice.toString(),
-        "ordersprice": priceorders.toString(),
+        "ordersprice": totalPrice.toString(),
         "paymentmethod": "1",
       });
+      print(addressModelPrice.addressId.toString());
+      print(addressModelPrice.addresspricePrice);
+      print('object');
       if (response.statusCode == 200) {
         statusRequiest = StatusRequiest.success;
         // Get.offAllNamed(AppRoutes.navbar);
@@ -261,7 +264,7 @@ class CartController extends GetxController {
       "usersid": myServices.sharedPreferences.getString("id"),
       "addressid": addressModelPrice.addressId.toString(),
       "pricedelivery": addressModelPrice.addresspricePrice.toString(),
-      "ordersprice": priceorders.toString(),
+      "ordersprice": totalPrice.toString(),
       "paymentmethod": '2',
       // "user_referral_for":
       //     myServices.sharedPreferences.getString("user_referral_for"),
@@ -289,6 +292,8 @@ class CartController extends GetxController {
   @override
   void onInit() {
     loadData();
+        totalPrice = Get.arguments['total_price'];
+
     priceorders;
     addressModelPrice = AddressModelPrice();
     controllercoupon = TextEditingController();

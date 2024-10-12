@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import '../constant/routes.dart';
 
 requestPermissionNotification() async {
+  // ignore: unused_local_variable
   NotificationSettings settings =
       await FirebaseMessaging.instance.requestPermission(
     alert: true,
@@ -18,7 +19,8 @@ requestPermissionNotification() async {
 }
 
 fcmconfig() {
-  FirebaseMessaging.onBackgroundMessage((message) => backgroundHandler(message));
+  FirebaseMessaging.onBackgroundMessage(
+      (message) => backgroundHandler(message));
   FirebaseMessaging.onMessage.listen(
     (message) {
       print("you are in the app");
