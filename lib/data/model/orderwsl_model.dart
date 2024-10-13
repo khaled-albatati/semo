@@ -1,23 +1,23 @@
 class OrderWsl {
-  String? addressOrderId;
+  int? addressOrderId;
   String? addressOrderSource;
   String? addressOrderDestination;
-  String? addressOrderPrice;
+  int? addressOrderPrice;
   String? addressOrderDetails;
-  String? addressOrderUserid;
+  int? addressOrderUserid;
   String? addressOrderTime;
-  String? addressOrderStatus;
-  String? userId;
+  int? addressOrderStatus;
+  int? userId;
   String? userName;
   String? userPhone;
   String? userEmail;
   String? userPassword;
   String? userCreate;
-  String? userAprrove;
-  String? userRole;
+  int? userAprrove;
+  int? userRole;
   String? userRoleName;
-  String? userWallet;
-  String? orderStatusId;
+  int? userWallet;
+  int? orderStatusId;
   String? orderStatusName;
 
   OrderWsl(

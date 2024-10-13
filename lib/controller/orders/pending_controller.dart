@@ -81,12 +81,15 @@ class OrdersPendingController extends GetxController {
     update();
     try {
       var response = await http.post(Uri.parse(AppLink.pendingorders),
-          body: {"id": myServices.sharedPreferences.getString('id')});
+          body: {"id": myServices.sharedPreferences.getInt('id').toString()});
       // print("=============================== Controller $response ");
       if (response.statusCode == 200) {
         final jsondata = jsonDecode(response.body);
+        print('==================JsonData  : $jsondata');
         List listdata = jsondata['data'];
+        print('==================ListData  : $listdata');
         data.addAll(listdata.map((e) => OrdersModel.fromJson(e)));
+        print('==================Data   :$data');
         data = data.reversed.toList();
 
         statusRequest = StatusRequiest.success;

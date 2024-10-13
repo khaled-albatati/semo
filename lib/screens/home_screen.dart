@@ -33,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               GestureDetector(
                 onTap: () {
-                  Get.offAllNamed(AppRoutes.orderspending);
+                  Get.toNamed(AppRoutes.orderspending);
                 },
                 child: const Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -58,7 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 GestureDetector(
                   onTap: () {
-                    Get.offAllNamed(AppRoutes.trackWsl);
+                    Get.toNamed(AppRoutes.trackWsl);
                   },
                   child: const Column(
                     crossAxisAlignment: CrossAxisAlignment.center,

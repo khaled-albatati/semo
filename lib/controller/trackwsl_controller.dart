@@ -58,7 +58,7 @@ class TrackWslController extends GetxController {
     update();
     try {
       var response = await http.post(Uri.parse(AppLink.trackWsl),
-          body: {"id": myServices.sharedPreferences.getString('id')});
+          body: {"id": myServices.sharedPreferences.getInt('id').toString()});
       // print("=============================== Controller $response ");
       if (response.statusCode == 200) {
         final jsondata = jsonDecode(response.body);

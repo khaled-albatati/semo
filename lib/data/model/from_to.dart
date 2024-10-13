@@ -1,8 +1,8 @@
 class AddressToAddress {
-  String? addressToAddressId;
+  int? addressToAddressId;
   String? addressToAddressSource;
   String? addressToAddressDestination;
-  String? addressToAddressPrice;
+  int? addressToAddressPrice;
 
   AddressToAddress(
       {this.addressToAddressId,

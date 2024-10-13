@@ -23,6 +23,7 @@ class RestaurantNavBarController extends GetxController {
 
   Future getRestaurants() async {
     statusRequiest = StatusRequiest.loading;
+    update();
     try {
       var response = await http.post(Uri.parse(AppLink
           .menurestaurant)); //getData from "Data folder" not "controller folder"

@@ -58,8 +58,8 @@ bool isLoading = true;
 
       if (StatusRequiest.success == statusRequiest) {
         categories.addAll(response['categories']['data']);
-        print('here ========================:');
-    print(categories);
+    //     print('here ========================:');
+    // print(categories);
   }
     update();
     }

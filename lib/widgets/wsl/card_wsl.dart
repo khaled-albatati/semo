@@ -37,7 +37,7 @@ class CardWsl extends GetView<TrackWslController> {
               Text("${"مكان التوصيل"} : ${listdata.addressOrderDestination}"),
               Text("${"الوصف"} : ${listdata.addressOrderDetails}"),
               Text(
-                  "${"الحالة " } : ${controller.printOrderStatus(listdata.addressOrderStatus!)} "),
+                  "${"الحالة " } : ${controller.printOrderStatus(listdata.addressOrderStatus.toString())} "),
               Text("${"السعر "} : ${listdata.addressOrderPrice}  ريال"),
               const Divider(),
                               ],

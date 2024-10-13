@@ -21,6 +21,7 @@ class FamilyProducerController extends GetxController {
 
   Future getFamily() async {
     statusRequiest = StatusRequiest.loading;
+    update();
     try {
       var response = await http.post(Uri.parse(AppLink
           .menufamily)); //getData from "Data folder" not "controller folder"

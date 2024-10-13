@@ -17,7 +17,7 @@ class OrdersDetailsController extends GetxController {
   List<CartModel> data = [];
 
   late StatusRequiest statusRequest;
-
+  String x='';
   late OrdersModel ordersModel;
   MyServices myServices = Get.find();
 
@@ -47,6 +47,7 @@ class OrdersDetailsController extends GetxController {
   @override
   void onInit() {
     ordersModel = Get.arguments['ordersmodel'];
+    x = ordersModel.ordersId.toString();
     intialData();
     getData();
     super.onInit();
@@ -80,16 +81,17 @@ class OrdersDetailsController extends GetxController {
     statusRequest = StatusRequiest.loading;
     try {
       var response = await http.post(Uri.parse(AppLink.ordersdetails),
-          body: {"id": ordersModel.ordersId});
+          body: {"id": x});
+          
 
-      if (kDebugMode) {
-        print("=============================== Controller $response ");
-      }
 
       if (response.statusCode == 200) {
         final jsondata = jsonDecode(response.body);
         List listdata = jsondata['data'];
         data.addAll(listdata.map((e) => CartModel.fromJson(e)));
+      if (kDebugMode) {
+        print("=============================== Controller $response ");
+      }
         statusRequest = StatusRequiest.success;
       } else {
         statusRequest = StatusRequiest.faliure;

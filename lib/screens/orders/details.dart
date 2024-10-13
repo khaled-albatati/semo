@@ -15,6 +15,7 @@ class OrdersDetails extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("147".tr),
+        centerTitle: true,
       ),
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
@@ -46,6 +47,11 @@ class OrdersDetails extends StatelessWidget {
                                       style: TextStyle(
                                           color: AppColor.backgroundColor1,
                                           fontWeight: FontWeight.bold)),
+                                  Text("ألاجمالي".tr,
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          color: AppColor.backgroundColor1,
+                                          fontWeight: FontWeight.bold)),
                                 ]),
                                 ...List.generate(
                                     controller.data.length,
@@ -58,6 +64,9 @@ class OrdersDetails extends StatelessWidget {
                                               textAlign: TextAlign.center),
                                           Text(
                                               "${controller.data[index].foodPrice}",
+                                              textAlign: TextAlign.center),
+                                          Text(
+                                              "${controller.data[index].itemsprice}",
                                               textAlign: TextAlign.center),
                                         ]))
                               ],

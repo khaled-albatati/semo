@@ -21,6 +21,7 @@ class _RestaurantNavState extends State<RestaurantNav> {
     Get.put(RestaurantNavBarController());
     super.initState();
   }
+  RestaurantNavBarController controller = Get.put(RestaurantNavBarController());
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +43,26 @@ class _RestaurantNavState extends State<RestaurantNav> {
           child: GetBuilder<RestaurantNavBarController>(
             builder: (controller) => HandlingDataView(
               statusRequiest: controller.statusRequiest,
-              widget: GridView.builder(
+              widget: controller.family.isEmpty
+                ? Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Center(
+                        child: Text(
+                          "لاتوجد مطاعم الان",
+                          style: TextStyle(fontSize: 24),
+                        ),
+                      ),
+                      const SizedBox(height: 20), // Spacing
+                      ElevatedButton(
+                        onPressed: () {
+                          controller.getRestaurants(); // Call the method to reload data
+                        },
+                        child: const Text("إعادة تحميل"),
+                      ),
+                    ],
+                  )
+                : GridView.builder(
                 itemCount: controller.family.length,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2, // Display 2 items in each row

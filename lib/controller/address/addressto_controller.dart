@@ -21,7 +21,7 @@ class AddressToAddressController extends GetxController {
   // FoodHomeController? foodHomeController;
   late AddressToAddress addressToAddress;
   late StatusRequiest statusRequiest;
-  late String price = '0';
+  late int price = 0;
   MyServices myServices = Get.find();
 
   @override
@@ -29,7 +29,7 @@ class AddressToAddressController extends GetxController {
     getLocations();
     fetchPrice();
     details = TextEditingController();
-    sendLocations(price);
+    sendLocations(price.toString());
     super.onInit();
   }
 
@@ -40,6 +40,7 @@ class AddressToAddressController extends GetxController {
 
     if (response.statusCode == 200) {
       final jsondata = jsonDecode(response.body);
+      print(jsondata);
       List listdata = jsondata['data'];
       address.addAll(listdata.map((e) => AddressToAddress.fromJson(e)));
       statusRequiest = StatusRequiest.success;
@@ -74,7 +75,7 @@ class AddressToAddressController extends GetxController {
   Future<void> sendLocations(String price) async {
     statusRequiest = StatusRequiest.loading;
     var response = await http.post(Uri.parse(AppLink.addressOrders), body: {
-      "userid": myServices.sharedPreferences.getString("id"),
+      "userid": myServices.sharedPreferences.getInt("id").toString(),
       "source": selectedLocation,
       "destination": selectedLocation1,
       "details": details.text,

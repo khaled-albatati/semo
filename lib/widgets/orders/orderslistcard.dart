@@ -13,7 +13,6 @@ class CardOrdersList extends GetView<OrdersPendingController> {
 
   @override
   Widget build(BuildContext context) {
-
     return Card(
       child: Container(
           padding: const EdgeInsets.all(10),
@@ -27,7 +26,9 @@ class CardOrdersList extends GetView<OrdersPendingController> {
                           fontSize: 18, fontWeight: FontWeight.bold)),
                   const Spacer(),
                   Text(
-                    Jiffy(listdata.ordersDatetime!,).fromNow(),
+                    Jiffy(
+                      listdata.ordersDatetime!,
+                    ).fromNow(),
                     style: const TextStyle(
                         color: AppColor.backgroundColor1,
                         fontWeight: FontWeight.bold),
@@ -38,7 +39,7 @@ class CardOrdersList extends GetView<OrdersPendingController> {
               Text("${"171".tr} : ${listdata.ordersPrice}  ريال"),
               Text("${"172".tr} : ${listdata.ordersPricedelivery}  ريال "),
               Text(
-                  "${"174".tr} : ${controller.printOrderStatus(listdata.ordersStatus!)} "),
+                  "${"174".tr} : ${controller.printOrderStatus(listdata.ordersStatus.toString())} "),
               const Divider(),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -49,8 +50,9 @@ class CardOrdersList extends GetView<OrdersPendingController> {
                         onPressed: () {
                           Get.toNamed(AppRoutes.ordersdetails,
                               arguments: {"ordersmodel": listdata});
+                              print( listdata.ordersId);
                         },
-                        color: AppColor.backgroundColor,
+                        color: AppColor.primarycolor,
                         textColor: AppColor.backgroundColor12,
                         child: const Text("التفاصيل")),
                   ),

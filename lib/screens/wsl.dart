@@ -186,7 +186,7 @@ class _WslState extends State<Wsl> {
                 ),
 
                 ButtonCheckOut(
-                    onPressed: () => address.sendLocations(address.price),
+                    onPressed: () => address.sendLocations(address.price.toString()),
                     text: 'اتمام الطلب'),
               ],
             ),

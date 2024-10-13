@@ -1,32 +1,32 @@
 class CartModel {
-  String? itemsprice;
-  String? countitems;
-  String? cartId;
-  String? cartItemsid;
-  String? cartUsersid;
-  String? cartOrders;
-  String? restaurantsId;
-  String? restaurantsName;
-  String? resturantKind;
-  String? restaurantsPhone;
-  String? restaurantsCity;
-  String? restaurantsLocation;
-  String? restaurantsCreate;
+  int? itemsprice;
+  int? countitems;
+  int? cartId;
+  int? cartItemsid;
+  int? cartUsersid;
+  int? cartOrders;
+  int? restaurantsId;
+  int? restaurantsName;
+  int? resturantKind;
+  int? restaurantsPhone;
+  int? restaurantsCity;
+  int? restaurantsLocation;
+  int? restaurantsCreate;
   String? restaurantsImg;
-  String? restaurantsCategoriesId;
+  int? restaurantsCategoriesId;
   String? restaurantsCategoriesName;
-  String? categoriesId;
+  int? categoriesId;
   String? categoriesName;
-  String? parentCategoriesId;
-  String? categoriesImage;
-  String? categoriesCreate;
-  String? categoriesNp;
-  String? foodId;
-  String? foodRestaurantId;
+  int? parentCategoriesId;
+  int? categoriesImage;
+  int? categoriesCreate;
+  int? categoriesNp;
+  int? foodId;
+  int? foodRestaurantId;
   String? foodName;
   String? foodKind;
   String? foodDescription;
-  String? foodPrice;
+  int? foodPrice;
   String? foodImage;
 
   CartModel(
@@ -61,7 +61,7 @@ class CartModel {
       this.foodImage});
 
   CartModel.fromJson(Map<String, dynamic> json) {
-    itemsprice = json['itemsprice'];
+    itemsprice = json['foodprice'];
     countitems = json['countitems'];
     cartId = json['cart_id'];
     cartItemsid = json['cart_itemsid'];
@@ -94,7 +94,7 @@ class CartModel {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['itemsprice'] = itemsprice;
+    data['foodprice'] = itemsprice;
     data['countitems'] = countitems;
     data['cart_id'] = cartId;
     data['cart_itemsid'] = cartItemsid;

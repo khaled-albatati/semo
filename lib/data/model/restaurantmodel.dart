@@ -1,5 +1,5 @@
 class RestaurantModel {
-  String? restaurantsId;
+  int? restaurantsId;
   String? restaurantsName;
   String? restaurantsPhone;
   String? restaurantsCity;
