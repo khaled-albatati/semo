@@ -39,18 +39,18 @@ class MyApp extends StatelessWidget {
         // primarySwatch: AppColor.firstColor,
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(
+            backgroundColor: WidgetStateProperty.all(
               AppColor.orange,
             ),
-            shape: MaterialStateProperty.all(
+            shape: WidgetStateProperty.all(
               const StadiumBorder(),
             ),
-            elevation: MaterialStateProperty.all(0),
+            elevation: WidgetStateProperty.all(0),
           ),
         ),
         textButtonTheme: TextButtonThemeData(
           style: ButtonStyle(
-            foregroundColor: MaterialStateProperty.all(
+            foregroundColor: WidgetStateProperty.all(
               AppColor.orange,
             ),
           ),

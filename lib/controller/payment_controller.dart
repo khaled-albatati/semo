@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
 class PaymentController extends GetxController {
@@ -5,7 +6,9 @@ class PaymentController extends GetxController {
   @override
   void onInit() {
 final double orderPrice = arguments['order_price'];
-    print(orderPrice);
+    if (kDebugMode) {
+      print(orderPrice);
+    }
     super.onInit();
   }
 }

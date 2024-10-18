@@ -31,6 +31,7 @@ class OrdersDetailsController extends GetxController {
   // CameraPosition? cameraPosition;
 
   intialData() {
+    // ignore: unrelated_type_equality_checks
     if (ordersModel.ordersType == "0") {
       // cameraPosition = CameraPosition(
       //   target: LatLng(double.parse(ordersModel.addressLat!),

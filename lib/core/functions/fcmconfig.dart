@@ -23,14 +23,14 @@ fcmconfig() {
       (message) => backgroundHandler(message));
   FirebaseMessaging.onMessage.listen(
     (message) {
-      print("you are in the app");
+      // print("you are in the app");
       FlutterRingtonePlayer.playNotification();
       Get.snackbar(message.notification!.title!, message.notification!.body!);
     },
   );
   FirebaseMessaging.onMessageOpenedApp.listen(
     (message) {
-      print("you opened the app from background notification");
+      // print("you opened the app from background notification");
       // Handle the tap action here
       // For example, you can navigate to the desired page using Get.toNamed
       Get.toNamed(AppRoutes.navbar);
@@ -39,6 +39,6 @@ fcmconfig() {
 }
 
 Future<void> backgroundHandler(RemoteMessage message) async {
-  print("you are outside the app");
+  // print("you are outside the app");
   // Perform any necessary background tasks
 }

@@ -86,6 +86,7 @@ class OrdersDetails extends StatelessWidget {
                         ),
                       ),
                     ),
+                    // ignore: unrelated_type_equality_checks
                     if (controller.ordersModel.ordersType == "0")
                       Card(
                         child: ListTile(

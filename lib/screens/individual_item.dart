@@ -360,7 +360,7 @@ class IndividualItem extends StatelessWidget {
                                                     ElevatedButton(
                                                       style: ButtonStyle(
                                                           elevation:
-                                                              MaterialStateProperty
+                                                              WidgetStateProperty
                                                                   .all(5.0)),
                                                       onPressed: () {},
                                                       child: const Text("-"),
@@ -400,7 +400,7 @@ class IndividualItem extends StatelessWidget {
                                                     ElevatedButton(
                                                       style: ButtonStyle(
                                                           elevation:
-                                                              MaterialStateProperty
+                                                              WidgetStateProperty
                                                                   .all(5.0)),
                                                       onPressed: () {},
                                                       child: const Text("+"),

@@ -84,6 +84,7 @@ class NavBar extends StatelessWidget {
                 ],
               ),
             ),
+            // ignore: deprecated_member_use
             body: WillPopScope(
               child: controller.listpage.elementAt(controller.currentPage),
               onWillPop: () {

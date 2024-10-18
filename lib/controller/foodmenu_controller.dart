@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:semo/core/class/statusrequiest.dart';
@@ -110,7 +111,9 @@ class FoodMenuController extends GetxController {
               onPressed: () {
                 // Handle order confirmation logic here
                 String notes = notesController.text;
-                print('طباعة الطلب: $notes');
+                if (kDebugMode) {
+                  print('طباعة الطلب: $notes');
+                }
 
                 // Print the selected food items and their quantities
                 double totalPrice =
@@ -118,14 +121,18 @@ class FoodMenuController extends GetxController {
                 itemDetails.forEach((foodId, details) {
                   int quantity = details['quantity'];
                   if (quantity > 0) {
-                    print(
+                    if (kDebugMode) {
+                      print(
                         'Food ID: $foodId, Food Name: ${details['name']}, Quantity: $quantity');
+                    }
                   }
                 });
 
                 // Print total price
-                print(
-                    'الإجمالي: ريال${totalPrice.toStringAsFixed(2)}'); // Print total price in Arabic
+                if (kDebugMode) {
+                  print(
+                    'الإجمالي: ريال${totalPrice.toStringAsFixed(2)}');
+                } // Print total price in Arabic
 
                 Navigator.of(context)
                     .pop(); // Close the dialog after confirmation
@@ -178,7 +185,9 @@ class FoodMenuController extends GetxController {
     onBackInit();
     statusRequiest = StatusRequiest.loading;
     catid = Get.arguments['catid'];
-    print('===========================$catid');
+    if (kDebugMode) {
+      print('===========================$catid');
+    }
     // foodRestaurantsModel = FoodRestaurantsModel();
     categories = Get.arguments['categories'];
     categoriess = Get.arguments['categories'];
@@ -227,7 +236,9 @@ class FoodMenuController extends GetxController {
       }
     } catch (e) {
       statusRequiest = StatusRequiest.serverException;
-      print("Error: $e");
+      if (kDebugMode) {
+        print("Error: $e");
+      }
     }
     update();
   }

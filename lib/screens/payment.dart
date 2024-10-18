@@ -1,3 +1,181 @@
+// import 'package:flutter/material.dart';
+// import 'package:get/get.dart';
+// import '../const/colors.dart';
+// import '../controller/address/view_controller.dart';
+// import '../controller/cart_controller.dart';
+// import '../data/model/addressmodel.dart';
+// import '../widgets/checkout/address.dart';
+// import '../widgets/checkout/button.dart';
+// import '../widgets/checkout/payment.dart';
+// import '../widgets/checkout/price.dart';
+
+// class Payment extends StatefulWidget {
+//   const Payment({super.key});
+
+//   @override
+//   State<Payment> createState() => _PaymentState();
+// }
+
+// class _PaymentState extends State<Payment> {
+//   @override
+//   void initState() {
+//     super.initState();
+//     Future.delayed(const Duration(seconds: 2), () {
+//       controller.onInit();
+//     });
+//   }
+
+//   CartController controller = Get.put(CartController());
+//   AddressViewController address = Get.put(AddressViewController());
+//   String? selectedLocation;
+//   int? selectedOption;
+//   int? object;
+//   // Inside your Payment widget
+//   @override
+//   Widget build(BuildContext context) {
+//     final colors = address.data;
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: const Text('اكمال الطلب'),
+//         centerTitle: true,
+//       ),
+//       body: GetBuilder<CartController>(
+//         builder: (controller) => controller.isLoading
+//             ? const Center(child: CircularProgressIndicator())
+//             : SingleChildScrollView(
+//                 scrollDirection: Axis.vertical,
+//                 child: Column(
+//                   crossAxisAlignment: CrossAxisAlignment.start,
+//                   children: [
+//                     const SizedBox(height: 10),
+//                     GetBuilder<AddressViewController>(
+//                       builder: (controllerx) => controller.isLoading
+//                           ? const Center(child: CircularProgressIndicator())
+//                           : CheckoutAdress(
+//                               location: 'مواقعك',
+//                               widget: DropdownButton<String>(
+//                                 hint: const Text('اختر موقع'),
+//                                 value: controller.selectedLocation,
+//                                 items: colors.map<DropdownMenuItem<String>>(
+//                                   (AddressModel address) {
+//                                     return DropdownMenuItem<String>(
+//                                       value: address.addressLong,
+//                                       child: Text(
+//                                         address.addressLong!,
+//                                         style: const TextStyle(fontSize: 12.0),
+//                                       ),
+//                                     );
+//                                   },
+//                                 ).toList(), // No need for a Set if you're using a list directly
+//                                 onChanged: (String? newValue) {
+//                                   setState(() {
+//                                     controller.selectedLocation = newValue;
+//                                     // controller.addressModelPrice.addressId=1;
+//                                     // print(newValue);
+
+//                                     if (newValue != null) {
+//                                       // Find the selected AddressModelPrice
+//                                       var selectedAddress = colors.firstWhere(
+//                                         (address) =>
+//                                             address.addressLong == newValue,
+//                                       );
+//                                       controller.addressModelPrice.addressId =
+//                                           selectedAddress.addressId;
+//                                       controller.addressModelPrice
+//                                               .addresspricePrice =
+//                                           selectedAddress.addresspricePrice;
+//                                       // Ensure selectedAddress is not null
+//                                       // Access the price from AddressModelPrice
+//                                       // print(
+//                                       //     "Selected Price: ${selectedAddress.addresspricePrice}");
+//                                     }
+//                                   });
+//                                 },
+//                               ),
+//                             ),
+//                     ),
+//                     const SizedBox(height: 10),
+//                     Container(
+//                       height: 10,
+//                       width: double.infinity,
+//                       color: AppColor.placeholderBg,
+//                     ),
+//                     const SizedBox(height: 20),
+//                     const CheckOutPayment(),
+//                     Column(
+//                       mainAxisAlignment: MainAxisAlignment.start,
+//                       children: <Widget>[
+//                         ListTile(
+//                           title: const Text('الدفع عند الاستلام'),
+//                           leading: Radio<int>(
+//                             value: 1,
+//                             groupValue: selectedOption,
+//                             onChanged: (int? value) {
+//                               setState(() {
+//                                 selectedOption = value;
+//                                 controller.selectedPaymentMethod =
+//                                     selectedOption.toString();
+//                               });
+//                             },
+//                           ),
+//                         ),
+//                         ListTile(
+//                           title: const Text('عبر المحفظة'),
+//                           leading: Radio<int>(
+//                             value: 2,
+//                             groupValue: selectedOption,
+//                             onChanged: (int? value) {
+//                               setState(() {
+//                                 selectedOption = value;
+//                                 controller.selectedPaymentMethod =
+//                                     selectedOption.toString();
+//                               });
+//                             },
+//                           ),
+//                         ),
+//                       ],
+//                     ),
+//                     const SizedBox(height: 20),
+//                     Container(
+//                       height: 10,
+//                       width: double.infinity,
+//                       color: AppColor.placeholderBg,
+//                     ),
+//                     const SizedBox(height: 20),
+//                     PriceCheckOut(
+//                       deliveryCost:
+//                           controller.addressModelPrice.addresspricePrice ?? 0,
+//                       discount: controller.priceorders,
+//                       subtotal: controller.totalPrice,
+//                       total: controller.getTotalPrice().toString(),
+//                     ),
+//                     Container(
+//                       height: 10,
+//                       width: double.infinity,
+//                       color: AppColor.placeholderBg,
+//                     ),
+//                     const SizedBox(height: 20),
+//                     ButtonCheckOut(
+//                       text: 'اتمام الطلب',
+//                       onPressed: () {
+//                         if (controller.selectedPaymentMethod == '1') {
+//                           controller.checkout();
+//                         } else {
+//                           controller.checkoutWallet();
+//                         }
+//                       },
+//                     ),
+//                   ],
+//                 ),
+//               ),
+//       ),
+//     );
+//   }
+// }
+
+
+
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../const/colors.dart';
@@ -17,6 +195,9 @@ class Payment extends StatefulWidget {
 }
 
 class _PaymentState extends State<Payment> {
+   final TextEditingController couponController = TextEditingController();
+  int discountAmount = 0;
+
   @override
   void initState() {
     super.initState();
@@ -25,6 +206,13 @@ class _PaymentState extends State<Payment> {
     });
   }
 
+  void validateCoupon(String couponCode) {
+    controller.validateCoupon(couponCode).then((discount) {
+      setState(() {
+        discountAmount = discount;
+      });
+    });
+  }
   CartController controller = Get.put(CartController());
   AddressViewController address = Get.put(AddressViewController());
   String? selectedLocation;
@@ -71,7 +259,7 @@ class _PaymentState extends State<Payment> {
                                   setState(() {
                                     controller.selectedLocation = newValue;
                                     // controller.addressModelPrice.addressId=1;
-                                    print(newValue);
+                                    // print(newValue);
 
                                     if (newValue != null) {
                                       // Find the selected AddressModelPrice
@@ -86,8 +274,8 @@ class _PaymentState extends State<Payment> {
                                           selectedAddress.addresspricePrice;
                                       // Ensure selectedAddress is not null
                                       // Access the price from AddressModelPrice
-                                      print(
-                                          "Selected Price: ${selectedAddress.addresspricePrice}");
+                                      // print(
+                                      //     "Selected Price: ${selectedAddress.addresspricePrice}");
                                     }
                                   });
                                 },
@@ -141,13 +329,27 @@ class _PaymentState extends State<Payment> {
                       width: double.infinity,
                       color: AppColor.placeholderBg,
                     ),
+                      const SizedBox(height: 20),
+                  TextField(
+                    controller: couponController,
+                    decoration: const InputDecoration(
+                      labelText: 'ادخل كود الخصم',
+                      border: OutlineInputBorder(),
+                    ),
+                    onChanged: validateCoupon,
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    'الخصم: ${discountAmount.toStringAsFixed(2)}',
+                    style: const TextStyle(color: Colors.green, fontSize: 16),
+                  ),
                     const SizedBox(height: 20),
                     PriceCheckOut(
                       deliveryCost:
                           controller.addressModelPrice.addresspricePrice ?? 0,
                       discount: controller.priceorders,
                       subtotal: controller.totalPrice,
-                      total: controller.getTotalPrice().toString(),
+                      total: controller.getTotalPrice(discountAmount.toDouble()).toString(),
                     ),
                     Container(
                       height: 10,
@@ -159,9 +361,9 @@ class _PaymentState extends State<Payment> {
                       text: 'اتمام الطلب',
                       onPressed: () {
                         if (controller.selectedPaymentMethod == '1') {
-                          controller.checkout();
+                          controller.checkout(couponController.text);
                         } else {
-                          controller.checkoutWallet();
+                          controller.checkoutWallet(couponController.text);
                         }
                       },
                     ),
@@ -172,7 +374,6 @@ class _PaymentState extends State<Payment> {
     );
   }
 }
-
 
 // import 'package:flutter/material.dart';
 // import 'package:get/get.dart';

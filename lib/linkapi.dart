@@ -98,7 +98,8 @@ class AppLink {
   static const String sendAddressToAddress = "$server/address/from_to_send.php";
 
   //================== Coupon ==================\\
-  static const String checkcoupon = "$server/coupon/checkcoupon.php";
+  static const String checkcoupon = "$server/coupon/checkcoupon(1).php";
+  static const String validateCoupon = "$server/coupon/validateCoupon.php";
 
   //================== Checkout ==================\\
   static const String checkout = "$server/orders/checkout.php";

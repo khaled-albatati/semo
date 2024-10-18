@@ -40,7 +40,7 @@ class AddressToAddressController extends GetxController {
 
     if (response.statusCode == 200) {
       final jsondata = jsonDecode(response.body);
-      print(jsondata);
+      // print(jsondata);
       List listdata = jsondata['data'];
       address.addAll(listdata.map((e) => AddressToAddress.fromJson(e)));
       statusRequiest = StatusRequiest.success;

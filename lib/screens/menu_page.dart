@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:semo/controller/foodmenu_controller.dart';
@@ -8,6 +9,7 @@ class MenuPage extends StatefulWidget {
   const MenuPage({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _MenuPageState createState() => _MenuPageState();
 }
 
@@ -135,8 +137,10 @@ class _MenuPageState extends State<MenuPage>
 
                         if (quantity > 0) {
                           controller.send(foodId);
-                          print(
+                          if (kDebugMode) {
+                            print(
                               'الاي دي: $foodId,  اسم الوجبة: ${details['name']}, الكمية: $quantity');
+                          }
                         }
                       });
 

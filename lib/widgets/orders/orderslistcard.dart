@@ -50,7 +50,7 @@ class CardOrdersList extends GetView<OrdersPendingController> {
                         onPressed: () {
                           Get.toNamed(AppRoutes.ordersdetails,
                               arguments: {"ordersmodel": listdata});
-                              print( listdata.ordersId);
+                              // print( listdata.ordersId);
                         },
                         color: AppColor.primarycolor,
                         textColor: AppColor.backgroundColor12,

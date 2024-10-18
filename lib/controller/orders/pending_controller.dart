@@ -85,11 +85,11 @@ class OrdersPendingController extends GetxController {
       // print("=============================== Controller $response ");
       if (response.statusCode == 200) {
         final jsondata = jsonDecode(response.body);
-        print('==================JsonData  : $jsondata');
+        // print('==================JsonData  : $jsondata');
         List listdata = jsondata['data'];
-        print('==================ListData  : $listdata');
+        // print('==================ListData  : $listdata');
         data.addAll(listdata.map((e) => OrdersModel.fromJson(e)));
-        print('==================Data   :$data');
+        // print('==================Data   :$data');
         data = data.reversed.toList();
 
         statusRequest = StatusRequiest.success;

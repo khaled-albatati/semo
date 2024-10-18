@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:semo/core/constant/routes.dart';
@@ -36,9 +37,13 @@ class LoginControllerImp extends LoginController {
     var formdata = formstateLogin.currentState;
     if (formdata!.validate()) {
       try {
+        String? fcmToken = await FirebaseMessaging.instance.getToken();
+        print(fcmToken);
+
         var response = await http.post(Uri.parse(AppLink.login), body: {
           'username': username.text,
           'password': password.text,
+          'fcm_token': fcmToken, // Send the FCM token to the backend
         });
         if (response.statusCode == 200) {
           Map<String, dynamic> responseBody = json.decode(response.body);
@@ -49,7 +54,7 @@ class LoginControllerImp extends LoginController {
             // String userid = myServices.sharedPreferences.getString("id")!;
             myServices.sharedPreferences
                 .setString("username", responseBody['data']['user_name']);
-                print('object');
+                // print('object');
             myServices.sharedPreferences
                 .setString("email", responseBody['data']['user_email']);
             myServices.sharedPreferences

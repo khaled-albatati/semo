@@ -1,5 +1,5 @@
 import 'package:semo/core/constant/color.dart';
-// import 'package:haz4u/core/constant/imgaeassets.dart';
+// import '/core/constant/imgaeassets.dart';
 import 'package:flutter/material.dart';
 
 class CardDeliveryTypeCheckout extends StatelessWidget {
