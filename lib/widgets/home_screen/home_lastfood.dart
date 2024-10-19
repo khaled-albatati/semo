@@ -49,7 +49,7 @@ class RecentItemCardView extends GetView<AllController> {
             controller.foodLast,
             foodRestaurantsModel.restaurantsId,
             foodRestaurantsModel.restaurantsName,
-            foodRestaurantsModel);
+            foodRestaurantsModel,foodRestaurantsModel.restaurantsLocation);
       },
       child: Padding(
         padding: const EdgeInsets.fromLTRB(0, 0, 5, 16),

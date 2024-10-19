@@ -52,7 +52,7 @@ class MostPopularCardView extends GetView<AllController> {
               controller.restaurantHome,
               foodRestaurantsModel.restaurantsId,
               foodRestaurantsModel.restaurantsName,
-              foodRestaurantsModel),
+              foodRestaurantsModel,foodRestaurantsModel.restaurantsLocation ),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(30),
             child: SizedBox(

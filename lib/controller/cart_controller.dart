@@ -33,6 +33,7 @@ class CartController extends GetxController {
   int totalcountitems = 0;
   double totalPrice=0;
   bool isLoading = true;
+   String restaurants_location='الديس';
 
   Future<void> loadData() async {
     // Simulating an asynchronous data loading operation
@@ -328,11 +329,41 @@ class CartController extends GetxController {
   goTruckingOrder() {
     Get.offAllNamed(AppRoutes.orderspending);
   }
+  Future<double> fetchDeliveryPrice(String source, String destination) async {
+    try {
+      final response = await http.post(
+        Uri.parse(AppLink.addressPrice), // Replace with your actual endpoint
+        body: {
+          'source': restaurants_location,
+          'destination': destination,
+        },
+      );
+      print('des:  $restaurants_location');
+      print('des:  $destination');
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        if (data['error'] == null) {
+          return double.tryParse(data['price'].toString()) ?? 0.0;
+        } else {
+          Get.snackbar("Error", data['error']);
+          return 0.0;
+        }
+      } else {
+        Get.snackbar("Error", "Failed to fetch delivery price");
+        return 0.0;
+      }
+    } catch (e) {
+      Get.snackbar("Error", "An error occurred: $e");
+      return 0.0;
+    }
+  }
 
   @override
   void onInit() {
     loadData();
-        totalPrice = Get.arguments['total_price'];
+        totalPrice = Get.arguments['total_price']; 
+        restaurants_location = Get.arguments['restaurants_location'];
+        print(restaurants_location);
 
     priceorders;
     addressModelPrice = AddressModelPrice();

@@ -132,12 +132,13 @@ bool isLoading = true;
         arguments: {"foodRestaurantsModel": foodRestaurantsModel});
   }
 
-  goToMenu(categories, categoryid, categoriesName, foodRestaurantsModel) {
+  goToMenu(categories, categoryid, categoriesName, foodRestaurantsModel,restaurantsLocation) {
     Get.toNamed(AppRoutes.menuPage, arguments: {
       "categories": categories,
       "catid": categoryid, //the space have big baaaaad effect
       "categoriesname": categoriesName,
       "foodRestaurantsModel": foodRestaurantsModel,
+      'restaurants_location':restaurantsLocation
     });
   }
   goToMenu1(categories, categoryid, categoriesName, foodRestaurantsModel) {

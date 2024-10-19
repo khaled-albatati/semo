@@ -32,7 +32,7 @@ class FoodMenuController extends GetxController {
   int? selectedCat;
   MyServices myServices = Get.find();
     double totalPrice = 0.0;
-
+    late String restaurants_location;
   late TabController tabController;
   late FoodMenuController food;
   late Map<String, dynamic> foodMenuMap = {};
@@ -141,7 +141,7 @@ class FoodMenuController extends GetxController {
                 onPressed: () {
                   Get.toNamed(
                     AppRoutes.payment,
-                    arguments: {'total_price': totalPrice}, // Use a map to pass the arguments
+                    arguments: {'total_price': totalPrice,'restaurants_location':restaurants_location}, // Use a map to pass the arguments
                   );
                 },
                 child: const Text('تاكيد الطلب'), // "Confirm Order" in Arabic
@@ -194,13 +194,14 @@ class FoodMenuController extends GetxController {
     selectedCat = Get.arguments['selectedCat'];
     categoriesName = Get.arguments['categoriesname'];
     foodRestaurantsModel = Get.arguments['foodRestaurantsModel'];
+    restaurants_location=Get.arguments['restaurants_location'];
     // print('-========================');
     // print('cat id = ${catid} '); //categories_id
     // print('categories = ${categories}'); //list data
     // print('selected cat = ${selectedCat}'); //null
     // print('categoriesName = ${categoriesName}');//categories_name
     // print(' hhhhhhhhhhhere = ${foodRestaurantsModel.restaurantsName}');
-
+    print('location :         $restaurants_location');
     menu();
     meal(categories);
     meall(categories);
