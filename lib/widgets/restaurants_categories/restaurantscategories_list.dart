@@ -28,7 +28,7 @@ class RestaurantsCategoriesList
                         i: index,
                         foodRestaurantsModel: FoodRestaurantsModel.fromJson(
                             controller.restaurant[index]),
-                        restaurantModel: RestaurantModel.fromJson(
+                        restaurantModel: RestaurantsModel.fromJson(
                             controller.restaurant[index])),
                   );
                 },
@@ -40,7 +40,7 @@ class RestaurantsCategoriesList
 
 class RestaurantsCategoriesListView
     extends GetView<RestaurantCategoriesController> {
-  final RestaurantModel restaurantModel;
+  final RestaurantsModel restaurantModel;
   final FoodRestaurantsModel foodRestaurantsModel;
   final int? i;
   const RestaurantsCategoriesListView(

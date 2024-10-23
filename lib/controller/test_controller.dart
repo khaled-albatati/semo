@@ -15,7 +15,7 @@ class AllController extends GetxController {
   MyServices myServices = Get.find();
   HomeData homedata =HomeData(Get.find());
   CategoriesModel? categoriesModel;
-  RestaurantModel? restaurantModel;
+  RestaurantsModel? restaurantModel;
   // FoodHomeController? foodHomeController;
 
   late StatusRequiest statusRequiest;

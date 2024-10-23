@@ -17,7 +17,7 @@ class RestaurantCategoriesController extends GetxController{
   // RestaurantModel? restaurantmodel;
   late StatusRequiest statusRequiest;
   // int? id;
-  String? catid;
+  int? catid;
   // int? selectedCat;
 
 
@@ -28,7 +28,7 @@ bool isLoading = true;
     await Future.delayed(const Duration(seconds: 2));
     
     // Data loading complete, update isLoading
-    await getRestaurant(catid!);
+    await getRestaurant(catid.toString());
     await topRestaurant();
     isLoading = false;
     

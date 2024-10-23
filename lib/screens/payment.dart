@@ -52,6 +52,7 @@ class _PaymentState extends State<Payment> {
       setState(() {
         deliveryPrice = price;
         controller.addressModelPrice.addresspricePrice = deliveryPrice.toInt();
+      controller.addressid= selectedAddress.addressId.toString();
       });
     });
   }

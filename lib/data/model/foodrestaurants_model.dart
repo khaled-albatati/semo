@@ -1,4 +1,5 @@
 class FoodRestaurantsModel {
+  
   int? foodId;
   int? foodRestaurantId;
   String? foodName;
@@ -8,21 +9,24 @@ class FoodRestaurantsModel {
   String? foodImage;
   int? restaurantsId;
   String? restaurantsName;
+  int? restaurantsAprove;
+  String? restaurantsPassword;
+  String? restaurantsToken;
+  int? restaurantsStatus;
+  String? resturantKind;
   String? restaurantsPhone;
   String? restaurantsCity;
   String? restaurantsLocation;
+  int? restaurantsRole;
   String? restaurantsCreate;
   String? restaurantsImg;
+  int? restaurantsCategoriesId;
   String? restaurantsCategoriesName;
-  int? categoriesId;
-  String? categoriesName;
-  String? parentCategoriesId;
-  String? categoriesImage;
-  String? categoriesCreate;
-  String? categoriesNp;
-  String? cartCount;
-  String? unfinishedorders;
-  String? countitems;
+  String? restaurantsDayOpen;
+  String? restaurantsDayClose;
+  String? restaurantsNightOpen;
+  String? restaurantsNightClose;
+  int? restaurantsVacation;
 
   FoodRestaurantsModel(
       {this.foodId,
@@ -34,22 +38,24 @@ class FoodRestaurantsModel {
       this.foodImage,
       this.restaurantsId,
       this.restaurantsName,
+      this.restaurantsAprove,
+      this.restaurantsPassword,
+      this.restaurantsToken,
+      this.restaurantsStatus,
+      this.resturantKind,
       this.restaurantsPhone,
       this.restaurantsCity,
       this.restaurantsLocation,
+      this.restaurantsRole,
       this.restaurantsCreate,
       this.restaurantsImg,
+      this.restaurantsCategoriesId,
       this.restaurantsCategoriesName,
-      this.categoriesId,
-      this.categoriesName,
-      this.parentCategoriesId,
-      this.categoriesImage,
-      this.categoriesCreate,
-      this.categoriesNp,
-      this.cartCount,
-      this.unfinishedorders,
-      this.countitems,
-      });
+      this.restaurantsDayOpen,
+      this.restaurantsDayClose,
+      this.restaurantsNightOpen,
+      this.restaurantsNightClose,
+      this.restaurantsVacation});
 
   FoodRestaurantsModel.fromJson(Map<String, dynamic> json) {
     foodId = json['food_id'];
@@ -61,21 +67,24 @@ class FoodRestaurantsModel {
     foodImage = json['food_image'];
     restaurantsId = json['restaurants_id'];
     restaurantsName = json['restaurants_name'];
+    restaurantsAprove = json['restaurants_aprove'];
+    restaurantsPassword = json['restaurants_password'];
+    restaurantsToken = json['restaurants_token'];
+    restaurantsStatus = json['restaurants_status'];
+    resturantKind = json['resturant_kind'];
     restaurantsPhone = json['restaurants_phone'];
     restaurantsCity = json['restaurants_city'];
     restaurantsLocation = json['restaurants_location'];
+    restaurantsRole = json['restaurants_role'];
     restaurantsCreate = json['restaurants_create'];
     restaurantsImg = json['restaurants_img'];
+    restaurantsCategoriesId = json['restaurants_categories_id'];
     restaurantsCategoriesName = json['restaurants_categories_name'];
-    categoriesId = json['categories_id'];
-    categoriesName = json['categories_name'];
-    parentCategoriesId = json['parent_categories_id'];
-    categoriesImage = json['categories_image'];
-    categoriesCreate = json['categories_create'];
-    categoriesNp = json['categories_np'];
-    cartCount = json['cart_count'];
-    unfinishedorders= json['unfinished_orders'];
-    countitems= json['countitems'];
+    restaurantsDayOpen = json['restaurants_day_open'];
+    restaurantsDayClose = json['restaurants_day_close'];
+    restaurantsNightOpen = json['restaurants_night_open'];
+    restaurantsNightClose = json['restaurants_night_close'];
+    restaurantsVacation = json['restaurants_vacation'];
   }
 
   Map<String, dynamic> toJson() {
@@ -89,21 +98,67 @@ class FoodRestaurantsModel {
     data['food_image'] = foodImage;
     data['restaurants_id'] = restaurantsId;
     data['restaurants_name'] = restaurantsName;
+    data['restaurants_aprove'] = restaurantsAprove;
+    data['restaurants_password'] = restaurantsPassword;
+    data['restaurants_token'] = restaurantsToken;
+    data['restaurants_status'] = restaurantsStatus;
+    data['resturant_kind'] = resturantKind;
     data['restaurants_phone'] = restaurantsPhone;
     data['restaurants_city'] = restaurantsCity;
     data['restaurants_location'] = restaurantsLocation;
+    data['restaurants_role'] = restaurantsRole;
     data['restaurants_create'] = restaurantsCreate;
     data['restaurants_img'] = restaurantsImg;
+    data['restaurants_categories_id'] = restaurantsCategoriesId;
     data['restaurants_categories_name'] = restaurantsCategoriesName;
-    data['categories_id'] = categoriesId;
-    data['categories_name'] = categoriesName;
-    data['parent_categories_id'] = parentCategoriesId;
-    data['categories_image'] = categoriesImage;
-    data['categories_create'] = categoriesCreate;
-    data['categories_np'] = categoriesNp;
-    data['cart_count'] = cartCount;
-    data['unfinished_orders']=unfinishedorders;
-    data['countitems']=countitems;
+    data['restaurants_day_open'] = restaurantsDayOpen;
+    data['restaurants_day_close'] = restaurantsDayClose;
+    data['restaurants_night_open'] = restaurantsNightOpen;
+    data['restaurants_night_close'] = restaurantsNightClose;
+    data['restaurants_vacation'] = restaurantsVacation;
     return data;
+  }
+bool isOpen() {
+    // Check if the restaurant is on vacation
+    if (restaurantsVacation == 1) {
+      return false; // Restaurant is on vacation
+    }
+
+    // Get current time
+    final now = DateTime.now();
+    final currentHour = now.hour;
+
+    // Parse opening and closing times
+    int? dayOpen = _parseTimeToHour(restaurantsDayOpen);
+    int? dayClose = _parseTimeToHour(restaurantsDayClose);
+    int? nightOpen = _parseTimeToHour(restaurantsNightOpen);
+    int? nightClose = _parseTimeToHour(restaurantsNightClose);
+    // Check day shift
+    if (dayOpen != null && dayClose != null &&
+        currentHour >= dayOpen && currentHour < dayClose) {
+      return true; // Open during day shift
+    }
+
+    // Check night shift
+    if (nightOpen != null && nightClose != null &&
+        currentHour >= nightOpen && currentHour < nightClose) {
+      return true; // Open during night shift
+    }
+
+    return false; // Closed
+  }
+
+  // Helper method to parse time strings like "HH:MM:SS" to an hour integer
+  int? _parseTimeToHour(String? time) {
+    if (time == null) return null;
+    try {
+      final parts = time.split(':');
+      if (parts.length >= 2) {
+        return int.parse(parts[0]); // Return hour part
+      }
+    } catch (e) {
+      print("Error parsing time: $time");
+    }
+    return null;
   }
 }

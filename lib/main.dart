@@ -9,13 +9,15 @@ import 'core/localization/changelocal.dart';
 import 'core/localization/translation.dart';
 import 'core/services/services.dart';
 import 'firebase_options.dart';
+import 'noti.dart';
 
 void main() async {
   Jiffy.locale('ar');
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
-  );
+  );final notificationService = NotificationService();
+  await notificationService.initializeFirebase();
   await initialServices();
   runApp(const MyApp());
 }

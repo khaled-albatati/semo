@@ -31,14 +31,14 @@ class RestaurantCard extends GetView<RestaurantHomeController> {
             foodRestaurantsModel:
                 FoodRestaurantsModel.fromJson(controller.restaurantHome[index]),
             restaurantModel:
-                RestaurantModel.fromJson(controller.restaurantHome[index]));
+                RestaurantsModel.fromJson(controller.restaurantHome[index]));
       },
     );
   }
 }
 
 class RestaurantCardView extends StatelessWidget {
-  final RestaurantModel restaurantModel;
+  final RestaurantsModel restaurantModel;
   final FoodRestaurantsModel foodRestaurantsModel;
 
   final int? i;
@@ -136,7 +136,7 @@ class RestaurantCardView extends StatelessWidget {
                     const SizedBox(
                       width: 5,
                     ),
-                    Text("${restaurantModel.restaurantKind}"),
+                    Text("${restaurantModel.resturantKind}"),
                   ],
                 ),
                 const SizedBox(

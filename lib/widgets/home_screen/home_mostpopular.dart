@@ -23,7 +23,7 @@ class MostPopularCard extends GetView<AllController> {
           physics: const NeverScrollableScrollPhysics(),
           padding: const EdgeInsets.only(left: 30),
           child: MostPopularCardView(
-              i: index,
+              // i: index,
               foodRestaurantsModel: FoodRestaurantsModel.fromJson(
                   controller.restaurantHome[index])),
         );
@@ -34,42 +34,61 @@ class MostPopularCard extends GetView<AllController> {
 
 class MostPopularCardView extends GetView<AllController> {
   final FoodRestaurantsModel foodRestaurantsModel;
-  final int? i;
 
   const MostPopularCardView({
     super.key,
     required this.foodRestaurantsModel,
-    this.i,
   });
 
   @override
   Widget build(BuildContext context) {
+    final isOpen = foodRestaurantsModel.isOpen();
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        InkWell(
-          onTap: () => controller.goToMenu(
-              controller.restaurantHome,
-              foodRestaurantsModel.restaurantsId,
-              foodRestaurantsModel.restaurantsName,
-              foodRestaurantsModel,foodRestaurantsModel.restaurantsLocation ),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(30),
-            child: SizedBox(
-              width: 260,
-              height: 160,
-              child: CachedNetworkImage(
-                imageUrl:
-                    "${AppLink.restaurantImage}/${foodRestaurantsModel.restaurantsImg}",
-                placeholder: (context, url) =>
-                    Lottie.asset('assets/images/lottile/loadin_data.json'),
-                errorWidget: (context, url, error) =>
-                    Image.asset('assets/images/nofood.png'),
-                height: 160,
-                fit: BoxFit.fill,
+        Stack(
+          alignment: Alignment.center,
+          children: [
+            InkWell(
+              onTap: isOpen
+                  ? () => controller.goToMenu(
+                      controller.restaurantHome,
+                      foodRestaurantsModel.restaurantsId,
+                      foodRestaurantsModel.restaurantsName,
+                      foodRestaurantsModel,
+                      foodRestaurantsModel.restaurantsLocation)
+                  : null, // Disable tap if closed
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(30),
+                child: SizedBox(
+                  width: 260,
+                  height: 160,
+                  child: CachedNetworkImage(
+                    imageUrl:
+                        "${AppLink.restaurantImage}/${foodRestaurantsModel.restaurantsImg}",
+                    placeholder: (context, url) => Lottie.asset('assets/images/lottile/loadin_data.json'),
+                    errorWidget: (context, url, error) => Image.asset('assets/images/nofood.png'),
+                    height: 160,
+                    fit: BoxFit.fill,
+                  ),
+                ),
               ),
             ),
-          ),
+            if (!isOpen)
+              Positioned(
+                top: 10,
+                right: 10,
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  color: Colors.red,
+                  child: const Text(
+                    "مغلق",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              ),
+          ],
         ),
         const SizedBox(height: 10),
         Text(
@@ -81,9 +100,7 @@ class MostPopularCardView extends GetView<AllController> {
         Row(
           children: [
             Text('${foodRestaurantsModel.restaurantsCategoriesName}'),
-            const SizedBox(
-              width: 5,
-            ),
+            const SizedBox(width: 5),
             const Padding(
               padding: EdgeInsets.only(bottom: 5.0),
               child: Text(
@@ -94,25 +111,13 @@ class MostPopularCardView extends GetView<AllController> {
                 ),
               ),
             ),
-            const SizedBox(
-              width: 5,
-            ),
+            const SizedBox(width: 5),
             Text('${foodRestaurantsModel.restaurantsName}'),
-            const SizedBox(
-              width: 20,
-            ),
+            const SizedBox(width: 20),
             Image.asset(
               Helper.getAssetName("star_filled.png", "virtual"),
             ),
-            const SizedBox(
-              width: 5,
-            ),
-            // const Text(
-            //   "4.9",
-            //   style: TextStyle(
-            //     color: AppColor.orange,
-            //   ),
-            // )
+            const SizedBox(width: 5),
           ],
         )
       ],

@@ -10,15 +10,16 @@ class RestaurantsCategories extends GetView<RestaurantCategoriesController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text("المطاعم"), centerTitle: true),
-      body: const SafeArea(
-          child: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: Column(
-          children: [
-            RestaurantsCategoriesList(),
-          ],
-        ),
-      )),
+      body: const Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SingleChildScrollView(
+                  scrollDirection: Axis.vertical,
+                  child: RestaurantsCategoriesList(),
+                ),
+        ],
+      ),
     );
   }
 }

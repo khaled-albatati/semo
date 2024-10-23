@@ -201,16 +201,16 @@ class CartController extends GetxController {
     try {
       var response = await http.post(Uri.parse(AppLink.wallet), body: {
         "usersid": myServices.sharedPreferences.getInt("id").toString(),
-        "addressid": addressModelPrice.addressId.toString(),
+        "addressid": addressid.toString(),
         "pricedelivery": addressModelPrice.addresspricePrice.toString(),
         "ordersprice": totalPrice.toString(),
         "paymentmethod": "1",
         "couponid": couponCode, // Include coupon code in request
       });
-
       if (response.statusCode == 200) {
+      print('==================================1');
         Get.snackbar("تم", "تم الطلب بنجاح");
-        print('dfsd');
+        Get.offAllNamed(AppRoutes.navbar);
       } else {
         Get.snackbar("خطأ", "حاول مرة أخرى");
       }
@@ -338,8 +338,6 @@ class CartController extends GetxController {
           'destination': destination,
         },
       );
-      print('des:  $restaurants_location');
-      print('des:  $destination');
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
         if (data['error'] == null) {
