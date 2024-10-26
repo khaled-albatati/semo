@@ -35,6 +35,7 @@ class RecentItemCard extends GetView<AllController> {
 class RecentItemCardView extends GetView<AllController> {
   final FoodRestaurantsModel foodRestaurantsModel;
   final int? i;
+
   const RecentItemCardView({
     super.key,
     required this.foodRestaurantsModel,
@@ -43,14 +44,20 @@ class RecentItemCardView extends GetView<AllController> {
 
   @override
   Widget build(BuildContext context) {
+    final isOpen = foodRestaurantsModel.isOpen(); // Check if the restaurant is open
+
     return InkWell(
-      onTap: () {
-        controller.goToMenu(
-            controller.foodLast,
-            foodRestaurantsModel.restaurantsId,
-            foodRestaurantsModel.restaurantsName,
-            foodRestaurantsModel,foodRestaurantsModel.restaurantsLocation);
-      },
+      onTap: isOpen
+          ? () {
+              controller.goToMenu(
+                controller.foodLast,
+                foodRestaurantsModel.restaurantsId,
+                foodRestaurantsModel.restaurantsName,
+                foodRestaurantsModel,
+                foodRestaurantsModel.restaurantsLocation,
+              );
+            }
+          : () => Get.snackbar('المطعم مغلق', ''), // Disable tap if closed
       child: Padding(
         padding: const EdgeInsets.fromLTRB(0, 0, 5, 16),
         child: Row(
@@ -68,14 +75,11 @@ class RecentItemCardView extends GetView<AllController> {
                       Lottie.asset('assets/images/lottile/loadin_data.json'),
                   errorWidget: (context, url, error) =>
                       Image.asset('assets/images/nofood.png'),
-                  // width: 120,
                   fit: BoxFit.fill,
                 ),
               ),
             ),
-            const SizedBox(
-              width: 10,
-            ),
+            const SizedBox(width: 10),
             Expanded(
               child: SizedBox(
                 height: 100,
@@ -92,9 +96,7 @@ class RecentItemCardView extends GetView<AllController> {
                     Row(
                       children: [
                         Text('${foodRestaurantsModel.restaurantsName}'),
-                        const SizedBox(
-                          width: 5,
-                        ),
+                        const SizedBox(width: 5),
                         const Padding(
                           padding: EdgeInsets.only(bottom: 5.0),
                           child: Text(
@@ -105,13 +107,9 @@ class RecentItemCardView extends GetView<AllController> {
                             ),
                           ),
                         ),
-                        const SizedBox(
-                          width: 5,
-                        ),
+                        const SizedBox(width: 5),
                         Text('${foodRestaurantsModel.foodPrice} ريال'),
-                        const SizedBox(
-                          width: 20,
-                        ),
+                        const SizedBox(width: 20),
                       ],
                     ),
                     Row(
@@ -119,9 +117,7 @@ class RecentItemCardView extends GetView<AllController> {
                         Image.asset(
                           Helper.getAssetName("star_filled.png", "virtual"),
                         ),
-                        const SizedBox(
-                          width: 5,
-                        ),
+                        const SizedBox(width: 5),
                         Text(
                           "${foodRestaurantsModel.foodKind}",
                           style: const TextStyle(
@@ -134,7 +130,22 @@ class RecentItemCardView extends GetView<AllController> {
                   ],
                 ),
               ),
-            )
+            ),
+            // Display "مغلق" if the restaurant is closed
+            if (!isOpen)
+              Positioned(
+                top: 10,
+                right: 10,
+                child: Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  color: Colors.red,
+                  child: const Text(
+                    "مغلق",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              ),
           ],
         ),
       ),

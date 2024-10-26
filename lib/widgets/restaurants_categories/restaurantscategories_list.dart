@@ -40,18 +40,23 @@ class RestaurantsCategoriesList
   }
 }
 
-class RestaurantsCategoriesListView
-    extends GetView<RestaurantCategoriesController> {
+
+class RestaurantsCategoriesListView extends GetView<RestaurantCategoriesController> {
   final RestaurantsModel restaurantModel;
   final FoodRestaurantsModel foodRestaurantsModel;
   final int? i;
-  const RestaurantsCategoriesListView(
-      {super.key,
-      required this.restaurantModel,
-      this.i,
-      required this.foodRestaurantsModel});
+
+  const RestaurantsCategoriesListView({
+    super.key,
+    required this.restaurantModel,
+    this.i,
+    required this.foodRestaurantsModel,
+  });
+
   @override
   Widget build(BuildContext context) {
+    final isOpen = foodRestaurantsModel.isOpen(); // Check if the restaurant is open
+
     return SafeArea(
       child: Column(
         children: [
@@ -66,58 +71,77 @@ class RestaurantsCategoriesListView
               child: Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(12, 8, 12, 8),
                 child: InkWell(
-                  onTap: () {
-                    controller.goToMenu(
-                        controller.restaurant,
-                        restaurantModel.restaurantsId,
-                        restaurantModel.restaurantsName,
-                        foodRestaurantsModel);
-                  },
+                  onTap: isOpen
+                      ? () {
+                          controller.goToMenu(
+                            controller.restaurant,
+                            restaurantModel.restaurantsId,
+                            restaurantModel.restaurantsName,
+                            foodRestaurantsModel,
+                          );
+                        }
+                      : () => Get.snackbar('المطعم مغلق', ''), // Disable tap if closed
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
-                      Container(
-                        width: 90,
-                        height: 90,
-                        decoration: BoxDecoration(
-                          // color: const Color(0x4C4B39EF),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: Padding(
-                          padding:
-                              const EdgeInsetsDirectional.fromSTEB(2, 2, 2, 2),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(6),
-                            child: CachedNetworkImage(
-                              imageUrl:
-                                  "${AppLink.restaurantImage}/${restaurantModel.restaurantsImg}",
-                              width: 90,
-                              height: 90,
-                              fit: BoxFit.cover,
+                      Stack(
+                        children: [
+                          // Restaurant Image
+                          Container(
+                            width: 90,
+                            height: 90,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(2, 2, 2, 2),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(6),
+                                child: CachedNetworkImage(
+                                  imageUrl:
+                                      "${AppLink.restaurantImage}/${restaurantModel.restaurantsImg}",
+                                  width: 90,
+                                  height: 90,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
                             ),
                           ),
-                        ),
+                          // Closed Badge
+                          if (!isOpen)
+                            Positioned(
+                              top: 0,
+                              right: 0,
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                                color: Colors.red,
+                                child: const Text(
+                                  "مغلق",
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              ),
+                            ),
+                        ],
                       ),
+                      // Restaurant Details
                       Expanded(
                         child: Padding(
-                          padding:
-                              const EdgeInsetsDirectional.fromSTEB(12, 0, 0, 0),
+                          padding: const EdgeInsetsDirectional.fromSTEB(12, 0, 0, 0),
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                "${restaurantModel.restaurantsName}",
-                              ),
-                              Expanded(
-                                child: Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      0, 4, 0, 0),
-                                  child: Text(
-                                    "${restaurantModel.restaurantsCity}",
-                                  ),
+                                restaurantModel.restaurantsName.toString(),
+                                style: TextStyle(
+                                  fontWeight: isOpen ? FontWeight.normal : FontWeight.bold,
+                                  color: isOpen ? Colors.black : Colors.red,
                                 ),
+                              ),
+                              const SizedBox(height: 4),
+                              Text(
+                                restaurantModel.restaurantsCity.toString(),
                               ),
                             ],
                           ),
@@ -130,9 +154,7 @@ class RestaurantsCategoriesListView
               ),
             ),
           ),
-          const SizedBox(
-            height: 1,
-          )
+          const SizedBox(height: 1),
         ],
       ),
     );

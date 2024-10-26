@@ -104,7 +104,7 @@ class _ProducerFamilyState extends State<ProducerFamily> {
 class Family extends GetView<FamilyProducerController> {
   final FoodRestaurantsModel foodRestaurantsModel;
   final int? i;
-  // final String mealType;
+
   const Family({
     super.key,
     required this.foodRestaurantsModel,
@@ -113,46 +113,55 @@ class Family extends GetView<FamilyProducerController> {
 
   @override
   Widget build(BuildContext context) {
-    // return InkWell(
-    //   onTap: () =>controller.goToMenu(controller.family,foodRestaurantsModel.restaurantsId, foodRestaurantsModel.restaurantsName,foodRestaurantsModel),
-    //   child: Container(
-    //     decoration: BoxDecoration(
-    //       border: Border.all(
-    //         color: Colors.black, // Border color
-    //         width: 1.0, // Border width
-    //       ),
-    //     ),
-    //     child: // Generated code for this Column Widget...
+    final isOpen = foodRestaurantsModel.isOpen(); // Check if the restaurant is open
 
     return InkWell(
       splashColor: Colors.transparent,
       focusColor: Colors.transparent,
       hoverColor: Colors.transparent,
       highlightColor: Colors.transparent,
-      onTap: () => controller.goToMenu(
-          controller.family,
-          foodRestaurantsModel.restaurantsId,
-          foodRestaurantsModel.restaurantsName,
-          foodRestaurantsModel),
+      onTap: isOpen
+          ? () => controller.goToMenu(
+                controller.family,
+                foodRestaurantsModel.restaurantsId,
+                foodRestaurantsModel.restaurantsName,
+                foodRestaurantsModel,
+              )
+          : () => Get.snackbar('المطعم مغلق', 'لا يمكنك الدخول للمطعم المغلق'), // Show a message if closed
       child: Column(
         mainAxisSize: MainAxisSize.max,
         children: [
-          ClipRRect(
-            borderRadius: const BorderRadius.only(
-              bottomLeft: Radius.circular(0),
-              bottomRight: Radius.circular(0),
-              topLeft: Radius.circular(8),
-              topRight: Radius.circular(8),
-            ),
-            child: CachedNetworkImage(
-              imageUrl:
-                  "${AppLink.restaurantImage}/${foodRestaurantsModel.restaurantsImg}",
-              placeholder: (context, url) =>
-                  Lottie.asset('assets/images/lottile/loadin_data.json'),
-              errorWidget: (context, url, error) =>
-                  Image.asset('assets/images/nofood.png'),
-              width: double.infinity,
-            ),
+          Stack(
+            children: [
+              ClipRRect(
+                borderRadius: const BorderRadius.only(
+                  bottomLeft: Radius.circular(0),
+                  bottomRight: Radius.circular(0),
+                  topLeft: Radius.circular(8),
+                  topRight: Radius.circular(8),
+                ),
+                child: CachedNetworkImage(
+                  imageUrl: "${AppLink.restaurantImage}/${foodRestaurantsModel.restaurantsImg}",
+                  placeholder: (context, url) => Lottie.asset('assets/images/lottile/loadin_data.json'),
+                  errorWidget: (context, url, error) => Image.asset('assets/images/nofood.png'),
+                  width: double.infinity,
+                ),
+              ),
+              // Closed Badge
+              if (!isOpen)
+                Positioned(
+                  top: 0,
+                  right: 0,
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    color: Colors.red,
+                    child: const Text(
+                      "مغلق",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ),
+            ],
           ),
           Padding(
             padding: const EdgeInsetsDirectional.fromSTEB(16, 8, 16, 8),
@@ -165,36 +174,18 @@ class Family extends GetView<FamilyProducerController> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   mainAxisSize: MainAxisSize.max,
                   children: [
-                    Text('${foodRestaurantsModel.restaurantsName}',
-                        style: const TextStyle(
-                            color: AppColor.orange,
-                            fontWeight: FontWeight.bold)),
+                    Text(
+                      '${foodRestaurantsModel.restaurantsName}',
+                      style: const TextStyle(
+                        color: AppColor.orange,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ],
                 ),
               ],
             ),
           ),
-          // Padding(
-          //   padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
-          //   child: Row(
-          //     mainAxisSize: MainAxisSize.max,
-          //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //     children: [
-          //       Expanded(
-          //         child: Padding(
-          //           padding: EdgeInsetsDirectional.fromSTEB(0, 0, 12, 0),
-          //           child: Text(
-          //           '  colu,'
-
-          //           ),
-          //         ),
-          //       ),
-          //       Text(
-          //        'sdfsdfsd'
-          //       ),
-          //     ],
-          //   ),
-          // ),
         ],
       ),
     );
