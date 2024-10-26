@@ -42,71 +42,68 @@ class FoodMenuController extends GetxController {
   int totalItems = 0;
   Map<String, int> itemQuantities = {}; // Map to hold quantities per food item
 
-  double calculateTotalPrice() {
+ double calculateTotalPrice() {
+  totalPrice = 0.0; // Reset totalPrice at the start
 
-    itemDetails.forEach((foodId, details) {
-      int quantity = details['quantity'];
-      double price = details['price']; // Use food_price here
-      totalPrice += quantity * price; // Calculate total price
-    });
+  itemDetails.forEach((foodId, details) {
+    int quantity = details['quantity'];
+    double price = details['price']; // Use food_price here
+    totalPrice += quantity * price; // Calculate total price
+  });
 
-    return totalPrice;
-  }
+  return totalPrice;
+}
 
   void showOrderSummary(BuildContext context) {
-    TextEditingController notesController =
-        TextEditingController(); // Controller for notes input
+  TextEditingController notesController = TextEditingController();
 
-    List<Widget> orderItems = itemDetails.entries
-        .where((entry) => entry.value['quantity'] > 0)
-        .map((entry) {
-      return Text(
-          'الوجبة: ${entry.value['name']}, الكمية: ${entry.value['quantity']}');
-    }).toList();
+  List<Widget> orderItems = itemDetails.entries
+      .where((entry) => entry.value['quantity'] > 0)
+      .map((entry) {
+    return Text('الوجبة: ${entry.value['name']}, الكمية: ${entry.value['quantity']}');
+  }).toList();
 
-    double totalPrice = calculateTotalPrice(); // Calculate total price
+  double totalPrice = calculateTotalPrice(); // This will now return the correct total
 
-    showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: const Text('مراجعة الطلب'),
-          content: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                ...orderItems,
-                const SizedBox(height: 16),
-                Text(
-                  'إجمالي السعر: ${totalPrice.toStringAsFixed(2)} ريال',
-                ), // Display total price
-                const SizedBox(height: 16),
-                Container(
-                  padding: const EdgeInsets.all(8.0),
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: TextField(
-                    controller: notesController,
-                    decoration: const InputDecoration(
-                      labelText: 'ملاحظات الطلب',
-                      border: InputBorder.none,
-                    ),
-                    maxLines: 3,
-                    keyboardType: TextInputType.multiline,
-                  ),
+  showDialog(
+    context: context,
+    builder: (context) {
+      return AlertDialog(
+        title: const Text('مراجعة الطلب'),
+        content: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ...orderItems,
+              const SizedBox(height: 16),
+              Text('إجمالي السعر: ${totalPrice.toStringAsFixed(2)} ريال'),
+              const SizedBox(height: 16),
+              Container(
+                padding: const EdgeInsets.all(8.0),
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.grey),
+                  borderRadius: BorderRadius.circular(8),
                 ),
-              ],
-            ),
+                child: TextField(
+                  controller: notesController,
+                  decoration: const InputDecoration(
+                    labelText: 'ملاحظات الطلب',
+                    border: InputBorder.none,
+                  ),
+                  maxLines: 3,
+                  keyboardType: TextInputType.multiline,
+                ),
+              ),
+            ],
           ),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop(); // Close the dialog
-              },
-              child: const Text('اغلاق'), // "Close" in Arabic
-            ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop(); // Close the dialog
+            },
+            child: const Text('اغلاق'),
+          ),
             TextButton(
               onPressed: () {
                 // Handle order confirmation logic here
@@ -182,7 +179,9 @@ class FoodMenuController extends GetxController {
 
   @override
   void onInit() async {
+    
     onBackInit();
+    resetCart();
     statusRequiest = StatusRequiest.loading;
     catid = Get.arguments['catid'];
     if (kDebugMode) {
@@ -363,7 +362,12 @@ class FoodMenuController extends GetxController {
     }
     update();
   }
-
+void resetOrder() {
+  itemQuantities.clear();
+  itemDetails.clear();
+  totalItems = 0;
+  totalPrice = 0.0;
+}
   onBack() async {
     // statusRequiest = StatusRequiest.loading;
     update();
@@ -385,6 +389,25 @@ class FoodMenuController extends GetxController {
     }
   }
 
+resetCart()async{
+   try {
+      final response = await http.post(Uri.parse(AppLink.cartReset), body: {
+        'usersid': myServices.sharedPreferences.getInt('id').toString()
+      });
+
+      // statusRequiest = handlingData(response);
+      if (response.statusCode == 200) {
+        statusRequiest = StatusRequiest.success;
+      } else {
+        statusRequiest = StatusRequiest.faliure;
+      }
+
+      // update();
+    } catch (e) {
+      statusRequiest = StatusRequiest.serverException;
+    }
+  
+}
   changeCat(val, catval) async {
     selectedCat = val;
     catid = catval;

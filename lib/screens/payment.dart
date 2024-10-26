@@ -162,20 +162,20 @@ class _PaymentState extends State<Payment> {
                       },
                       child: const Text('تأكيد الكود'),
                     ),
-                    const SizedBox(height: 10),
-                    Text(
-                      'الخصم: ${discountAmount.toStringAsFixed(2)}',
-                      style: const TextStyle(color: Colors.green, fontSize: 16),
-                    ),
-                    const SizedBox(height: 20),
-                    // Displaying the calculated delivery price
-                    Text(
-                      'سعر التوصيل: ${deliveryPrice.toStringAsFixed(2)}',
-                      style: const TextStyle(fontSize: 16, color: Colors.black),
-                    ),
+                    // const SizedBox(height: 10),
+                    // Text(
+                    //   'الخصم: ${discountAmount.toStringAsFixed(2)}',
+                    //   style: const TextStyle(color: Colors.green, fontSize: 16),
+                    // ),
+                    // const SizedBox(height: 20),
+                    // // Displaying the calculated delivery price
+                    // Text(
+                    //   'سعر التوصيل: ${deliveryPrice.toStringAsFixed(2)}',
+                    //   style: const TextStyle(fontSize: 16, color: Colors.black),
+                    // ),
                     PriceCheckOut(
                       deliveryCost: deliveryPrice.toInt(),
-                      discount: controller.priceorders,
+                      discount: discountAmount.toDouble(),
                       subtotal: controller.totalPrice,
                       total: controller.getTotalPrice(discountAmount.toDouble()).toString(),
                     ),

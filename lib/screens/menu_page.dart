@@ -20,6 +20,8 @@ class _MenuPageState extends State<MenuPage>
   @override
   void initState() {
     super.initState();
+      controller.resetOrder(); // Reset the order state when the controller is initialized
+
     controller.food = Get.put(FoodMenuController());
     controller.food.menu().then((_) {
       setState(() {

@@ -16,23 +16,25 @@ class RestaurantsCategoriesList
     return GetBuilder<RestaurantCategoriesController>(
         builder: (controller) => controller.isLoading
             ? const Center(child: CircularProgressIndicator())
-            : ListView.builder(
-                physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                scrollDirection: Axis.vertical,
-                itemCount: controller.restaurant.length,
-                itemBuilder: (context, index) {
-                  return SingleChildScrollView(
-                    physics: const NeverScrollableScrollPhysics(),
-                    child: RestaurantsCategoriesListView(
-                        i: index,
-                        foodRestaurantsModel: FoodRestaurantsModel.fromJson(
-                            controller.restaurant[index]),
-                        restaurantModel: RestaurantsModel.fromJson(
-                            controller.restaurant[index])),
-                  );
-                },
-              ));
+            : SingleChildScrollView(
+              child: ListView.builder(
+                  physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  scrollDirection: Axis.vertical,
+                  itemCount: controller.restaurant.length,
+                  itemBuilder: (context, index) {
+                    return SingleChildScrollView(
+                      // physics: const NeverScrollableScrollPhysics(),
+                      child: RestaurantsCategoriesListView(
+                          i: index,
+                          foodRestaurantsModel: FoodRestaurantsModel.fromJson(
+                              controller.restaurant[index]),
+                          restaurantModel: RestaurantsModel.fromJson(
+                              controller.restaurant[index])),
+                    );
+                  },
+                ),
+            ));
     // },
     // );
   }

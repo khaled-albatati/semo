@@ -53,9 +53,10 @@ loadData();    // getRestaurant();
 
   Future getRestaurant(String categoriesid) async{
     statusRequiest = StatusRequiest.loading;
+    print('==================================: $categoriesid');
     try{
     var response = await http.post(Uri.parse(AppLink.restaurantCategories),body: {
-      "id":categoriesid
+      "id":categoriesid.toString()
     }); //getData from "Data folder" not "controller folder"
     statusRequiest= handlingData(response); 
     
