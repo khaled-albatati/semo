@@ -61,8 +61,10 @@ class LoginControllerImp extends LoginController {
                 .setString("userphone", responseBody['data']['user_phone']);
             myServices.sharedPreferences
                 .setInt("user_wallet", responseBody['data']['user_wallet']);
+            myServices.sharedPreferences
+                .setString("userwhats", responseBody['data']['user_whats']);
 
-            // FirebaseMessaging.instance.subscribeToTopic("users");
+            FirebaseMessaging.instance.subscribeToTopic("Users");
             // FirebaseMessaging.instance.subscribeToTopic("users$userid");
             Get.offAllNamed(AppRoutes.navbar);
           } else if (status == 'failure') {

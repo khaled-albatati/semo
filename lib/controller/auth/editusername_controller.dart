@@ -26,7 +26,7 @@ class EditUserNameController extends GetxController {
     var formdata = formstate.currentState;
     if (formdata!.validate()) {
         var response = await http.post(Uri.parse(AppLink.editUserName), body: {
-          'id': myServices.sharedPreferences.getString("id"),
+          'id': myServices.sharedPreferences.getInt("id").toString(),
           'user_name': username.text,
      } );
 

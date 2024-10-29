@@ -27,6 +27,7 @@ import 'screens/restaurants_categories.dart';
 import 'view/tracking.dart';
 import 'widgets/address/adddetails.dart';
 import 'widgets/address/view.dart';
+import 'widgets/change_screen/whats.dart';
 
 List<GetPage<dynamic>>? routes = [
   GetPage(name: "/", page: () => const NavBar()),
@@ -148,6 +149,10 @@ List<GetPage<dynamic>>? routes = [
   GetPage(
     name: AppRoutes.addressadddetails,
     page: () => const AddressAddDetails(),
+  ),
+  GetPage(
+    name: AppRoutes.changeWhats,
+    page: () => const ChangeWhats(),
   ),
  
   // ========================= Address =========================\\

@@ -23,7 +23,7 @@ class CartController extends GetxController {
   String? couponname;
   late TextEditingController namecoupn;
   String? selectedPaymentMethod;
-  String? couponid;
+  int? couponid;
   CartData cartData = CartData(Get.find());
   late StatusRequiest statusRequiest;
   MyServices myServices = Get.find();
@@ -34,6 +34,7 @@ class CartController extends GetxController {
   double totalPrice=0;
   bool isLoading = true;
    String restaurants_location='الديس';
+   String notes='لايوجد';
 
   Future<void> loadData() async {
     // Simulating an asynchronous data loading operation
@@ -170,6 +171,7 @@ class CartController extends GetxController {
         final jsondata = jsonDecode(response.body);
          String status = jsondata['status'];
         if (status == 'success') {
+          couponid = jsondata['data']['coupon_id'];
           discountAmount = jsondata['data']['coupon_discount'];
         } else {
           Get.snackbar("خطأ", "كود الخصم غير صالح");
@@ -197,6 +199,10 @@ class CartController extends GetxController {
     }
 
     int discount = await validateCoupon(couponCode ?? '');
+    print(couponid.toString());
+    print('===========total :  ${totalPrice.toString()}');
+    print(discount);
+    print(getTotalPrice(discount.toDouble()).toString());
 
     try {
       var response = await http.post(Uri.parse(AppLink.wallet), body: {
@@ -205,7 +211,9 @@ class CartController extends GetxController {
         "pricedelivery": addressModelPrice.addresspricePrice.toString(),
         "ordersprice": totalPrice.toString(),
         "paymentmethod": "1",
-        "couponid": couponCode, // Include coupon code in request
+        "couponid": couponid.toString(), // Include coupon code in request
+        "coupondiscount": discount.toString(), // Include coupon code in request
+        "notes": notes.toString(), // Include coupon code in request
       });
       if (response.statusCode == 200) {
       print('==================================1');
@@ -361,6 +369,8 @@ class CartController extends GetxController {
     loadData();
         totalPrice = Get.arguments['total_price']; 
         restaurants_location = Get.arguments['restaurants_location'];
+        notes = Get.arguments['notes'];
+        print(notes);
         print(restaurants_location);
 
     priceorders;

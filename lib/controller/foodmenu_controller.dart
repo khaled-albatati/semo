@@ -35,6 +35,7 @@ class FoodMenuController extends GetxController {
     late String restaurants_location;
   late TabController tabController;
   late FoodMenuController food;
+  String? notes;
   late Map<String, dynamic> foodMenuMap = {};
   // late Map<String, List<Map<String, dynamic>>> _foodMenuMap;
   Map<String, Map<String, dynamic>> itemDetails =
@@ -107,7 +108,7 @@ class FoodMenuController extends GetxController {
             TextButton(
               onPressed: () {
                 // Handle order confirmation logic here
-                String notes = notesController.text;
+                 notes = notesController.text;
                 if (kDebugMode) {
                   print('طباعة الطلب: $notes');
                 }
@@ -138,7 +139,7 @@ class FoodMenuController extends GetxController {
                 onPressed: () {
                   Get.toNamed(
                     AppRoutes.payment,
-                    arguments: {'total_price': totalPrice,'restaurants_location':restaurants_location}, // Use a map to pass the arguments
+                    arguments: {'total_price': totalPrice,'restaurants_location':restaurants_location,'notes':notesController.text}, // Use a map to pass the arguments
                   );
                 },
                 child: const Text('تاكيد الطلب'), // "Confirm Order" in Arabic

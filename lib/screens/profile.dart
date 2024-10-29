@@ -150,6 +150,13 @@ class Profile extends GetView<ProfileControllerImp> {
                         onPressed: () => Get.toNamed(AppRoutes.changePhone),
                       ),
                       WidgetRowProfile(
+                        text: "رقم الواتس",
+                        icon: Icons.phone,
+                        moveicon: Icons.arrow_forward,
+                        color: Colors.green,
+                        onPressed: () => Get.toNamed(AppRoutes.changeWhats),
+                      ),
+                      WidgetRowProfile(
                         text: "العناوين",
                         icon: Icons.location_on_outlined,
                         moveicon: Icons.arrow_forward,

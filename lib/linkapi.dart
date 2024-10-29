@@ -29,6 +29,7 @@ class AppLink {
   static const String deleteAccount = "$server/delete_account.php";
   static const String editUserName= "$server/auth/edit/editUserName.php";
   static const String editPhone = "$server/auth/edit/editPhone.php";
+  static const String editWhats = "$server/auth/edit/editWhats.php";
   static const String editEmail= "$server/auth/edit/editEmail.php";
   static const String editPassword= "$server/auth/edit/editPassword.php";
   static const String profile = "$server/auth/profile.php";
