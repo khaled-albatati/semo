@@ -12,7 +12,7 @@ class SendNotificationTopic extends StatelessWidget {
           child: Column(
         children: [
           TextButton(
-              onPressed: () => noti.sendFCMMessage(),
+              onPressed: () => noti.sendFCMMessage("Admin","",""),
               child: const Text('ارسال')),
         ],
       )),

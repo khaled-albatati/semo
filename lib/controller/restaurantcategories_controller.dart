@@ -97,12 +97,15 @@ loadData();    // getRestaurant();
   // goToProductPage(foodRestaurantsModel) {
   //   Get.toNamed("menu", arguments: {"menu": foodRestaurantsModel});
   // }
-    goToMenu(categories,categoryid,categoriesName,foodRestaurantsModel) {
+
+  //Y
+    goToMenu(categories,categoryid,categoriesName,foodRestaurantsModel,restaurantsLocation) {
     Get.toNamed(AppRoutes.menuPage, arguments: {
       "categories": categories,
       "catid": categoryid, //the space have big baaaaad effect
       "categoriesname":categoriesName,
       "foodRestaurantsModel":foodRestaurantsModel,
+      "restaurants_location":restaurantsLocation
       
     });
   }

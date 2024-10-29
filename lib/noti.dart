@@ -67,15 +67,15 @@ class NotificationService {
     return credentials.accessToken.data;
   }
 
-  Future<void> sendFCMMessage() async {
+  Future<void> sendFCMMessage(String topic, String title , String body) async {
     final serverKey = await getAccessToken();
     final currentFCMToken = await FirebaseMessaging.instance.getToken();
     final message = {
       'message': {
-        'topic': 'users',
+        'topic': topic,
         'notification': {
-          'body': 'This is an FCM notification message!',
-          'title': 'FCM Message'
+          'body': body,
+          'title': title
         },
         'data': {
           'current_user_fcm_token': currentFCMToken,

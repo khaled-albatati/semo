@@ -1,4 +1,4 @@
-#Tue Oct 29 12:42:09 AST 2024
+#Tue Oct 29 19:17:53 AST 2024
 base.0=C\:\\Users\\coolalonge\\AndroidStudioProjects\\semo\\build\\app\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
 base.1=C\:\\Users\\coolalonge\\AndroidStudioProjects\\semo\\build\\app\\intermediates\\dex\\debug\\mergeLibDexDebug\\0\\classes.dex
 base.2=C\:\\Users\\coolalonge\\AndroidStudioProjects\\semo\\build\\app\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex

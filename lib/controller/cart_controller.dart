@@ -10,6 +10,7 @@ import 'package:semo/data/model/cartmodel.dart';
 import '../data/datasource/remote/address_data.dart';
 import '../data/model/addressmodel_price.dart';
 import '../linkapi.dart';
+import '../noti.dart';
 
 class CartController extends GetxController {
   String? selectedLocation;
@@ -31,10 +32,30 @@ class CartController extends GetxController {
   double priceorders = 0.0;
   // double deliverycost = 0.0;
   int totalcountitems = 0;
-  double totalPrice=0;
+  double totalPrice = 0;
   bool isLoading = true;
-   String restaurants_location='الديس';
-   String notes='لايوجد';
+  String restaurants_location = 'الديس';
+  String notes = 'لايوجد';
+  NotificationService noti = NotificationService();
+  Future<bool> resetCart() async {
+    try {
+      final response = await http.post(Uri.parse(AppLink.cartReset), body: {
+        'usersid': myServices.sharedPreferences.getInt('id').toString()
+      });
+
+      // statusRequiest = handlingData(response);
+      if (response.statusCode == 200) {
+        statusRequiest = StatusRequiest.success;
+      } else {
+        statusRequiest = StatusRequiest.faliure;
+      }
+
+      // update();
+    } catch (e) {
+      statusRequiest = StatusRequiest.serverException;
+    }
+    return true;
+  }
 
   Future<void> loadData() async {
     // Simulating an asynchronous data loading operation
@@ -154,8 +175,7 @@ class CartController extends GetxController {
     update();
   }
 
-
- Future<int> validateCoupon(String couponCode) async {
+  Future<int> validateCoupon(String couponCode) async {
     if (couponCode.isEmpty) return 0;
 
     int discountAmount = 0;
@@ -169,7 +189,7 @@ class CartController extends GetxController {
 
       if (response.statusCode == 200) {
         final jsondata = jsonDecode(response.body);
-         String status = jsondata['status'];
+        String status = jsondata['status'];
         if (status == 'success') {
           couponid = jsondata['data']['coupon_id'];
           discountAmount = jsondata['data']['coupon_discount'];
@@ -182,20 +202,22 @@ class CartController extends GetxController {
     }
     return discountAmount;
   }
+
 ////////////////////////Coupon start///////////////////////////////////
   // getTotalPrice() {
   //   final double addressPrice =
   //       double.tryParse(addressModelPrice.addresspricePrice ?? '0') ?? 0.0;
   //   return (priceorders - priceorders * discountcoupon! / 100) + addressPrice;
   // }
-    int getTotalPrice(double discount) {
-    final int addressPrice = int.tryParse(addressModelPrice.addresspricePrice.toString()) ?? 0;
+  int getTotalPrice(double discount) {
+    final int addressPrice =
+        int.tryParse(addressModelPrice.addresspricePrice.toString()) ?? 0;
     return (totalPrice - discount).round() + addressPrice;
   }
 
   Future<void> checkout(String? couponCode) async {
     if (selectedPaymentMethod == null) {
-       Get.snackbar("ملاحظة", "يرجى اختيار طريقة الدفع");
+      Get.snackbar("ملاحظة", "يرجى اختيار طريقة الدفع");
     }
 
     int discount = await validateCoupon(couponCode ?? '');
@@ -216,8 +238,9 @@ class CartController extends GetxController {
         "notes": notes.toString(), // Include coupon code in request
       });
       if (response.statusCode == 200) {
-      print('==================================1');
+        print('==================================1');
         Get.snackbar("تم", "تم الطلب بنجاح");
+        noti.sendFCMMessage("Admin", "طلب جديد", "");
         Get.offAllNamed(AppRoutes.navbar);
       } else {
         Get.snackbar("خطأ", "حاول مرة أخرى");
@@ -229,12 +252,12 @@ class CartController extends GetxController {
 
   getAddress() async {
     // statusRequiest = StatusRequiest.loading;
-    String x =  myServices.sharedPreferences.getInt('id').toString();
+    String x = myServices.sharedPreferences.getInt('id').toString();
     // print('=================================$x');
-    var response = await http.post(Uri.parse(AppLink.addressViewPrice),
-        body: {"usersid":x});
+    var response = await http
+        .post(Uri.parse(AppLink.addressViewPrice), body: {"usersid": x});
 
-      // print("=============================== Controller $response ");
+    // print("=============================== Controller $response ");
     Map<String, dynamic> responseBody = json.decode(response.body);
     String status = responseBody['status'];
     if (status == 'success') {
@@ -308,7 +331,7 @@ class CartController extends GetxController {
 
   Future<void> checkoutWallet(String? couponCode) async {
     if (selectedPaymentMethod == null) {
-       Get.snackbar("ملاحظة", "يرجى اختيار طريقة الدفع");
+      Get.snackbar("ملاحظة", "يرجى اختيار طريقة الدفع");
     }
 
     int discount = await validateCoupon(couponCode ?? '');
@@ -337,6 +360,7 @@ class CartController extends GetxController {
   goTruckingOrder() {
     Get.offAllNamed(AppRoutes.orderspending);
   }
+
   Future<double> fetchDeliveryPrice(String source, String destination) async {
     try {
       final response = await http.post(
@@ -367,11 +391,11 @@ class CartController extends GetxController {
   @override
   void onInit() {
     loadData();
-        totalPrice = Get.arguments['total_price']; 
-        restaurants_location = Get.arguments['restaurants_location'];
-        notes = Get.arguments['notes'];
-        print(notes);
-        print(restaurants_location);
+    totalPrice = Get.arguments['total_price'];
+    restaurants_location = Get.arguments['restaurants_location'];
+    notes = Get.arguments['notes'];
+    print(notes);
+    print(restaurants_location);
 
     priceorders;
     addressModelPrice = AddressModelPrice();
