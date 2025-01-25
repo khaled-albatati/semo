@@ -120,12 +120,18 @@ class FoodMenuController extends GetxController {
                   int quantity = details['quantity'];
                   if (quantity > 0) {
                     if (kDebugMode) {
+                    send(foodId, quantity);
                       print(
                         'Food ID: $foodId, Food Name: ${details['name']}, Quantity: $quantity');
                     }
+                    print('==============================: first: $foodId =================: second: $quantity');
                   }
                 });
 
+                  Get.toNamed(
+                    AppRoutes.payment,
+                    arguments: {'total_price': totalPrice,'restaurants_location':restaurants_location,'notes':notesController.text}, // Use a map to pass the arguments
+                  );
                 // Print total price
                 if (kDebugMode) {
                   print(
@@ -135,48 +141,47 @@ class FoodMenuController extends GetxController {
                 Navigator.of(context)
                     .pop(); // Close the dialog after confirmation
               },
-              child: TextButton(
-                onPressed: () {
-                  Get.toNamed(
-                    AppRoutes.payment,
-                    arguments: {'total_price': totalPrice,'restaurants_location':restaurants_location,'notes':notesController.text}, // Use a map to pass the arguments
-                  );
-                },
+              
                 child: const Text('تاكيد الطلب'), // "Confirm Order" in Arabic
               ),
-            ),
+            
           ],
         );
       },
     );
   }
 
-  Future send(String foodid) async {
-    statusRequiest = StatusRequiest.loading;
-    final userId = myServices.sharedPreferences.getInt('id');
-    try {
+  Future<void> send(String foodid, int quantity) async {
+  statusRequiest = StatusRequiest.loading;
+  final userId = myServices.sharedPreferences.getInt('id');
+
+  try {
+    for (int i = 0; i < quantity; i++) {
       var response = await http.post(Uri.parse(AppLink.cartadd), body: {
         "usersid": userId.toString(),
         "itemsid": foodid,
       });
-      // print(response.body);
+
       if (response.statusCode == 200) {
-        statusRequiest = StatusRequiest.loading;
-        update();
-
-        // print("=============================== Controller $response ");
-
-        // Get.rawSnackbar(
-        //     title: "اشعار",
-        //     messageText: const Text("تم اضافة المنتج الى السلة "));
+        // Handle success (you may want to update your state or show a message)
+       Get.toNamed(
+      AppRoutes.payment,
+      arguments: {
+        'total_price': totalPrice,
+        'restaurants_location': restaurants_location,
+        'notes': notes.toString(),
+      },
+    );
       } else {
         statusRequiest = StatusRequiest.faliure;
+        break; // Exit the loop if there's an error
       }
-    } catch (e) {
-      statusRequiest = StatusRequiest.serverException;
     }
-    update();
+  } catch (e) {
+    statusRequiest = StatusRequiest.serverException;
   }
+  update();
+}
 
   @override
   void onInit() async {

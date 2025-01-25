@@ -1,5 +1,5 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter_ringtone_player/flutter_ringtone_player.dart';
+// import 'package:flutter_ringtone_player/flutter_ringtone_player.dart';
 import 'package:get/get.dart';
 
 import '../constant/routes.dart';
@@ -24,7 +24,7 @@ fcmconfig() {
   FirebaseMessaging.onMessage.listen(
     (message) {
       // print("you are in the app");
-      FlutterRingtonePlayer.playNotification();
+      // FlutterRingtonePlayer.playNotification();
       Get.snackbar(message.notification!.title!, message.notification!.body!);
     },
   );

@@ -4,7 +4,7 @@ import 'package:semo/const/colors.dart';
 import 'package:semo/controller/auth/profile_controller.dart';
 import 'package:semo/core/constant/routes.dart';
 import 'package:semo/utils/helper.dart';
-import 'package:social_share/social_share.dart';
+// import 'package:social_share/social_share.dart';
 
 import '../widgets/profile/widget_profile.dart';
 
@@ -170,13 +170,13 @@ class Profile extends GetView<ProfileControllerImp> {
                         color: Colors.blue,
                         onPressed: () => Get.offAllNamed(AppRoutes.developer),
                       ),
-                       WidgetRowProfile(
-                        text: "مشاركة التطبيق",
-                        icon: Icons.share,
-                        moveicon: Icons.arrow_forward,
-                        color: Colors.green,
-                        onPressed: () => SocialShare.shareOptions(applink),
-                      ),
+                      //  WidgetRowProfile(
+                      //   text: "مشاركة التطبيق",
+                      //   icon: Icons.share,
+                      //   moveicon: Icons.arrow_forward,
+                      //   color: Colors.green,
+                      //   onPressed: () => SocialShare.shareOptions(applink),
+                      // ),
                        WidgetRowProfile(
                         text: "حذف الحساب",
                         icon: Icons.no_accounts_outlined,

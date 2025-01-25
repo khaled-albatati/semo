@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\coolalonge\\AndroidStudioProjects\\semo\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-sw\\values-sw.xml",
+            "outputFile": "com.semodelivery.semo.semo.app-mergeDebugResources-32:/values-sw/values-sw.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\coolalonge\\.gradle\\caches\\transforms-3\\251a469395854ff245b7f4fdd7bba301\\transformed\\jetified-play-services-base-18.0.1\\res\\values-sw\\values.xml",
+                    "source": "C:\\Users\\coolalonge\\.gradle\\caches\\transforms-3\\5c354eff26465da94d2c995ebbc7f3dc\\transformed\\jetified-play-services-base-18.0.1\\res\\values-sw\\values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
                         "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
@@ -21,24 +21,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\coolalonge\\.gradle\\caches\\transforms-3\\93dd53feaf3cad8855ad6fc611d1a270\\transformed\\core-1.13.1\\res\\values-sw\\values-sw.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8,9",
-                        "startColumns": "4,4,4,4,4,4,4,4",
-                        "startOffsets": "55,149,251,348,449,556,663,778",
-                        "endColumns": "93,101,96,100,106,106,114,100",
-                        "endOffsets": "144,246,343,444,551,658,773,874"
-                    },
-                    "to": {
-                        "startLines": "2,3,4,5,6,7,8,27",
-                        "startColumns": "4,4,4,4,4,4,4,4",
-                        "startOffsets": "55,149,251,348,449,556,663,3039",
-                        "endColumns": "93,101,96,100,106,106,114,100",
-                        "endOffsets": "144,246,343,444,551,658,773,3135"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\coolalonge\\.gradle\\caches\\transforms-3\\555c90831fb82f4de0a21485bcaa149c\\transformed\\jetified-play-services-basement-18.1.0\\res\\values-sw\\values.xml",
+                    "source": "C:\\Users\\coolalonge\\.gradle\\caches\\transforms-3\\0f38a5f6aa8810df97a0efdf7592b28d\\transformed\\jetified-play-services-basement-18.1.0\\res\\values-sw\\values.xml",
                     "from": {
                         "startLines": "4",
                         "startColumns": "0",
@@ -52,6 +35,23 @@
                         "startOffsets": "1793",
                         "endColumns": "145",
                         "endOffsets": "1934"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\coolalonge\\.gradle\\caches\\transforms-3\\3e4fa42964ec6369b3a52ce840a46646\\transformed\\core-1.13.1\\res\\values-sw\\values-sw.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,149,251,348,449,556,663,778",
+                        "endColumns": "93,101,96,100,106,106,114,100",
+                        "endOffsets": "144,246,343,444,551,658,773,874"
+                    },
+                    "to": {
+                        "startLines": "2,3,4,5,6,7,8,27",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,149,251,348,449,556,663,3039",
+                        "endColumns": "93,101,96,100,106,106,114,100",
+                        "endOffsets": "144,246,343,444,551,658,773,3135"
                     }
                 }
             ]

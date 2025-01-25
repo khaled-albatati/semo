@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 import 'package:semo/core/constant/routes.dart';
-import 'package:semo/screens/cart.dart';
 import 'package:semo/screens/dessert_screen.dart';
 import 'package:semo/screens/home_screen.dart';
 import 'package:semo/screens/inbox_screen.dart';
@@ -52,10 +51,10 @@ List<GetPage<dynamic>>? routes = [
   GetPage(
       name: AppRoutes.restaurantCategories,
       page: () => const RestaurantsCategories()),
-  GetPage(
-    name: AppRoutes.cart,
-    page: () => const Cart(),
-  ),
+  // GetPage(
+  //   name: AppRoutes.cart,
+  //   page: () => const Cart(),
+  // ),
   // GetPage(
   //   name: AppRoutes.menu,
   //   page: () => const Menu(),

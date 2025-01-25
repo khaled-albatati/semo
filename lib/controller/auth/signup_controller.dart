@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:semo/core/constant/routes.dart';
@@ -24,6 +25,7 @@ class SignUpControllerImp extends SignUpController {
   // late TextEditingController email;
   late TextEditingController password;
   late TextEditingController phone;
+  late TextEditingController whats;
   List data = []; //متغير لتخزين البيانات بعد جلبها من ال backend .
   SignUpData signUpData = SignUpData(Get.find());
   late StatusRequiest statusRequiest;
@@ -35,10 +37,14 @@ class SignUpControllerImp extends SignUpController {
   signUp() async {
     var formdata = formstate.currentState;
     if (formdata!.validate()) {
+      String? fcmToken = await FirebaseMessaging.instance.getToken();
+        print(fcmToken);
       var response = await http.post(Uri.parse(AppLink.signUp), body: {
         'username': username.text,
         'password': password.text,
+        'whats': whats.text,
         // 'email': email.text,
+        'fcm_token': fcmToken,
         'phone': phone.text,
       });
       if (response.statusCode == 200) {
@@ -61,12 +67,15 @@ class SignUpControllerImp extends SignUpController {
                     Icon(Icons.cancel, color: Colors.red, size: 50),
                   ],
                 ),
-                content: const Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text('اسم المستخدم او رقم الهاتف مستخدم بالفعل'),
-                  ],
+                content: const SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text('اسم المستخدم او رقم الهاتف مستخدم بالفعل'),
+                    ],
+                  ),
                 ),
                 actions: [
                   Row(
@@ -107,6 +116,7 @@ class SignUpControllerImp extends SignUpController {
     // email = TextEditingController();
     password = TextEditingController();
     phone = TextEditingController();
+    whats = TextEditingController();
 
     super.onInit();
   }
@@ -116,6 +126,7 @@ class SignUpControllerImp extends SignUpController {
     username.dispose();
     // email.dispose();
     password.dispose();
+    whats.dispose();
     phone.dispose();
     super.dispose();
   }

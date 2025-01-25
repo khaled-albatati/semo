@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\coolalonge\\AndroidStudioProjects\\semo\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-pt\\values-pt.xml",
+            "outputFile": "com.semodelivery.semo.semo.app-mergeDebugResources-32:/values-pt/values-pt.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\coolalonge\\.gradle\\caches\\transforms-3\\93dd53feaf3cad8855ad6fc611d1a270\\transformed\\core-1.13.1\\res\\values-pt\\values-pt.xml",
+                    "source": "C:\\Users\\coolalonge\\.gradle\\caches\\transforms-3\\3e4fa42964ec6369b3a52ce840a46646\\transformed\\core-1.13.1\\res\\values-pt\\values-pt.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9",
                         "startColumns": "4,4,4,4,4,4,4,4",

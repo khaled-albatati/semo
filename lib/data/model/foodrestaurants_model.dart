@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 class FoodRestaurantsModel {
   
   int? foodId;
@@ -118,62 +120,56 @@ class FoodRestaurantsModel {
     data['restaurants_vacation'] = restaurantsVacation;
     return data;
   }
-bool isOpen() {
-  // Check if the restaurant is on vacation
-  if (restaurantsVacation == 1) {
-    return false; // Restaurant is on vacation
+ String getCurrentTimeFormatted() {
+    final now = DateTime.now();
+    final formatter = DateFormat('HH:mm');
+    return formatter.format(now); // Returns the time in HH:mm format
   }
 
-  // Get current time
-  final now = DateTime.now();
-  print("Current time: $now");
-
-  // Print input time strings
-  print("Day Open String: $restaurantsDayOpen");
-  print("Day Close String: $restaurantsDayClose");
-  print("Night Open String: $restaurantsNightOpen");
-  print("Night Close String: $restaurantsNightClose");
-
-  // Parse opening and closing times
-  DateTime? dayOpen = _parseTimeToDateTime(restaurantsDayOpen, now);
-  DateTime? dayClose = _parseTimeToDateTime(restaurantsDayClose, now);
-  DateTime? nightOpen = _parseTimeToDateTime(restaurantsNightOpen, now);
-  DateTime? nightClose = _parseTimeToDateTime(restaurantsNightClose, now);
-
-  print("Day Open: $dayOpen");
-  print("Day Close: $dayClose");
-  print("Night Open: $nightOpen");
-  print("Night Close: $nightClose");
-
-  // Check day shift
-  if (dayOpen != null && dayClose != null &&
-      now.isAfter(dayOpen) && now.isBefore(dayClose)) {
-    return true; // Open during day shift
-  }
-
-  // Check night shift
-  if (nightOpen != null && nightClose != null &&
-      now.isAfter(nightOpen) && now.isBefore(nightClose)) {
-    return true; // Open during night shift
-  }
-
-  return false; // Closed
-}
-
-// Helper method to parse time strings like "HH:mm:ss" to DateTime
-DateTime? _parseTimeToDateTime(String? time, DateTime currentDate) {
-  if (time == null) return null;
-  try {
-    final parts = time.split(':');
-    if (parts.length >= 2) { // Check for HH:mm or HH:mm:ss
-      final hour = int.parse(parts[0]);
-      final minute = int.parse(parts[1]);
-      // If seconds are present, we can ignore them
-      return DateTime(currentDate.year, currentDate.month, currentDate.day, hour, minute);
+  bool isOpen() {
+    // Check if the restaurant is on vacation
+    if (restaurantsVacation == 1) {
+      return false; // Restaurant is on vacation
     }
-  } catch (e) {
-    print("Error parsing time: $time. Exception: $e");
+
+    // Get current time
+    String currentTime = getCurrentTimeFormatted();
+    print("Current Time: $currentTime");
+
+    // Parse opening and closing times
+    DateTime? dayOpen = _parseTimeToDateTime(restaurantsDayOpen);
+    DateTime? dayClose = _parseTimeToDateTime(restaurantsDayClose);
+    DateTime? nightOpen = _parseTimeToDateTime(restaurantsNightOpen);
+    DateTime? nightClose = _parseTimeToDateTime(restaurantsNightClose);
+
+    // Check day shift
+    DateTime now = DateTime.now();
+    if (dayOpen != null && dayClose != null &&
+        now.isAfter(dayOpen) && now.isBefore(dayClose)) {
+      return true; // Open during day shift
+    }
+
+    // Check night shift
+    if (nightOpen != null && nightClose != null &&
+        now.isAfter(nightOpen) && now.isBefore(nightClose)) {
+      return true; // Open during night shift
+    }
+
+    return false; // Closed
   }
-  return null;
-}
+
+  DateTime? _parseTimeToDateTime(String? time) {
+    if (time == null) return null;
+    try {
+      final parts = time.split(':');
+      if (parts.length >= 2) { // Check for HH:mm or HH:mm:ss
+        final hour = int.parse(parts[0]);
+        final minute = int.parse(parts[1]);
+        return DateTime.now().copyWith(hour: hour, minute: minute, second: 0);
+      }
+    } catch (e) {
+      print("Error parsing time: $time. Exception: $e");
+    }
+    return null;
+  }
 }

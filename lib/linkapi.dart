@@ -26,7 +26,7 @@ class AppLink {
   //================== AUTH ==================\\
   static const String signUp = "$server/auth/signup.php";
   static const String login = "$server/auth/login.php";
-  static const String deleteAccount = "$server/delete_account.php";
+  static const String deleteAccount = "$server/auth/delete_account.php";
   static const String editUserName= "$server/auth/edit/editUserName.php";
   static const String editPhone = "$server/auth/edit/editPhone.php";
   static const String editWhats = "$server/auth/edit/editWhats.php";

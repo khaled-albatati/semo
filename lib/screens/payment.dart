@@ -20,7 +20,7 @@ class _PaymentState extends State<Payment> {
   final TextEditingController couponController = TextEditingController();
   int discountAmount = 0;
   double deliveryPrice = 0.0; // To hold the calculated delivery price
-  String? restaurantsLocation; // To hold the restaurant's location
+  String? restaurantsLocation=''; // To hold the restaurant's location
 
   CartController controller = Get.put(CartController());
   AddressViewController address = Get.put(AddressViewController());
@@ -33,7 +33,7 @@ class _PaymentState extends State<Payment> {
   void initState() {
     super.initState();
     // Get the restaurant's location from the arguments passed to this widget
-    restaurantsLocation = Get.arguments['restaurants_location'];
+    // restaurantsLocation = Get.arguments['restaurants_location'];
     Future.delayed(const Duration(seconds: 2), () {
       controller.onInit();
     });
@@ -164,12 +164,21 @@ class _PaymentState extends State<Payment> {
                           border: OutlineInputBorder(),
                         ),
                       ),
-                      TextButton(
-                        onPressed: () {
-                          validateCoupon(couponController.text);
-                        },
-                        child: const Text('تأكيد الكود'),
+                      const SizedBox(height: 5,),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          ElevatedButton(
+                            onPressed: () {
+                              validateCoupon(couponController.text);
+                            },
+                            child: const Text('تأكيد الكود'),
+                          ),
+                        ],
                       ),
+                      const SizedBox(height: 5,),
+                      const Divider(),
                       // const SizedBox(height: 10),
                       // Text(
                       //   'الخصم: ${discountAmount.toStringAsFixed(2)}',

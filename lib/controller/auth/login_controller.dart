@@ -62,7 +62,9 @@ class LoginControllerImp extends LoginController {
             myServices.sharedPreferences
                 .setInt("user_wallet", responseBody['data']['user_wallet']);
             myServices.sharedPreferences
-                .setString("userwhats", responseBody['data']['user_whats']);
+                .setString("userwhats", responseBody['data']['users_whats']);
+            myServices.sharedPreferences
+                .setInt("userAprove", responseBody['data']['user_aprrove']);
 
             FirebaseMessaging.instance.subscribeToTopic("Users");
             // FirebaseMessaging.instance.subscribeToTopic("users$userid");

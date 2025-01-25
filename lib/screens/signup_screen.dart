@@ -12,6 +12,7 @@ class SignUpScreen extends GetView<SignUpControllerImp> {
   final passwordController = TextEditingController();
   final phoneController = TextEditingController();
   final nameController = TextEditingController();
+  final whatsController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -58,6 +59,22 @@ class SignUpScreen extends GetView<SignUpControllerImp> {
                     TextFormField(
                       decoration: const InputDecoration(hintText: 'رقم الهاتف'),
                       controller: controller.phone,
+                      keyboardType: TextInputType.number,
+                      inputFormatters: <TextInputFormatter>[
+                        FilteringTextInputFormatter.digitsOnly
+                      ],
+                      validator: (val) {
+                        return validInput(
+                          val!,
+                          9,
+                          9,
+                          "phone",
+                        );
+                      },
+                    ),
+                    TextFormField(
+                      decoration: const InputDecoration(hintText: 'رقم الواتس'),
+                      controller: controller.whats,
                       keyboardType: TextInputType.number,
                       inputFormatters: <TextInputFormatter>[
                         FilteringTextInputFormatter.digitsOnly

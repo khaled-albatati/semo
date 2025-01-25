@@ -128,7 +128,7 @@ class _MenuPageState extends State<MenuPage>
                 : const Center(child: CircularProgressIndicator()), // Loader
           ),
           Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(5.0),
             child: ElevatedButton(
               onPressed: controller.totalItems > 0
                   ? () {
@@ -138,7 +138,7 @@ class _MenuPageState extends State<MenuPage>
                         int quantity = details['quantity'];
 
                         if (quantity > 0) {
-                          controller.send(foodId);
+                          // controller.send(foodId,quantity);
                           if (kDebugMode) {
                             print(
                               'الاي دي: $foodId,  اسم الوجبة: ${details['name']}, الكمية: $quantity');

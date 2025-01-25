@@ -17,7 +17,7 @@ class NavBar extends StatelessWidget {
     MyServices myServices = Get.find();
     // myServices.sharedPreferences.getString("id");
      return Visibility(
-      visible: myServices.sharedPreferences.getInt('id')!=null,replacement:  const LoginScreen(),
+      visible: myServices.sharedPreferences.getInt('id')!=null &&myServices.sharedPreferences.getInt('userAprove')!=2 ,replacement:  const LoginScreen(),
       child: GetBuilder<NavBarControllerImp>(
       builder: ((controller) => Scaffold(
             floatingActionButton: FloatingActionButton(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:semo/controller/auth/delete_controller.dart';
+import 'package:semo/core/constant/zero.dart';
 
 import '../../utils/helper.dart';
 
@@ -30,10 +31,10 @@ class DeleteAccount extends StatelessWidget {
                 const Spacer(),
                 // const Text('Add your details to login'),
                 // const Spacer(),
-                TextField(
-                    controller: controller.username,
-                    decoration: const InputDecoration(
-                      hintText: 'اسم المستخدم',
+                 TextField(
+                    
+                    decoration: InputDecoration(
+                      hintText: myServices.sharedPreferences.getString("username").toString(),
                     )),
                 const Spacer(),
                 TextField(

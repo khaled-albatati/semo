@@ -1,26 +1,26 @@
 [
     {
-        "merged": "C:\\Users\\coolalonge\\AndroidStudioProjects\\semo\\build\\app\\intermediates\\merged_res\\debug\\mipmap-xhdpi_ic_launcher.png.flat",
-        "source": "C:\\Users\\coolalonge\\AndroidStudioProjects\\semo\\android\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher.png"
+        "merged": "com.semodelivery.semo.semo.app-merged_res-34:/mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "com.semodelivery.semo.semo.app-main-28:/mipmap-xxhdpi/ic_launcher.png"
     },
     {
-        "merged": "C:\\Users\\coolalonge\\AndroidStudioProjects\\semo\\build\\app\\intermediates\\merged_res\\debug\\mipmap-xxhdpi_ic_launcher.png.flat",
-        "source": "C:\\Users\\coolalonge\\AndroidStudioProjects\\semo\\android\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher.png"
+        "merged": "com.semodelivery.semo.semo.app-merged_res-34:/mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "com.semodelivery.semo.semo.app-main-28:/mipmap-xxxhdpi/ic_launcher.png"
     },
     {
-        "merged": "C:\\Users\\coolalonge\\AndroidStudioProjects\\semo\\build\\app\\intermediates\\merged_res\\debug\\mipmap-hdpi_ic_launcher.png.flat",
-        "source": "C:\\Users\\coolalonge\\AndroidStudioProjects\\semo\\android\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher.png"
+        "merged": "com.semodelivery.semo.semo.app-merged_res-34:/mipmap-hdpi_ic_launcher.png.flat",
+        "source": "com.semodelivery.semo.semo.app-main-28:/mipmap-hdpi/ic_launcher.png"
     },
     {
-        "merged": "C:\\Users\\coolalonge\\AndroidStudioProjects\\semo\\build\\app\\intermediates\\merged_res\\debug\\drawable-v21_launch_background.xml.flat",
-        "source": "C:\\Users\\coolalonge\\AndroidStudioProjects\\semo\\android\\app\\src\\main\\res\\drawable-v21\\launch_background.xml"
+        "merged": "com.semodelivery.semo.semo.app-merged_res-34:/mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "com.semodelivery.semo.semo.app-main-28:/mipmap-xhdpi/ic_launcher.png"
     },
     {
-        "merged": "C:\\Users\\coolalonge\\AndroidStudioProjects\\semo\\build\\app\\intermediates\\merged_res\\debug\\mipmap-xxxhdpi_ic_launcher.png.flat",
-        "source": "C:\\Users\\coolalonge\\AndroidStudioProjects\\semo\\android\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher.png"
+        "merged": "com.semodelivery.semo.semo.app-merged_res-34:/drawable-v21_launch_background.xml.flat",
+        "source": "com.semodelivery.semo.semo.app-main-28:/drawable-v21/launch_background.xml"
     },
     {
-        "merged": "C:\\Users\\coolalonge\\AndroidStudioProjects\\semo\\build\\app\\intermediates\\merged_res\\debug\\mipmap-mdpi_ic_launcher.png.flat",
-        "source": "C:\\Users\\coolalonge\\AndroidStudioProjects\\semo\\android\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher.png"
+        "merged": "com.semodelivery.semo.semo.app-merged_res-34:/mipmap-mdpi_ic_launcher.png.flat",
+        "source": "com.semodelivery.semo.semo.app-main-28:/mipmap-mdpi/ic_launcher.png"
     }
 ]

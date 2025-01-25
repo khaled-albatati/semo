@@ -34,16 +34,18 @@ class DeleteControllerImp extends DeleteController {
     statusRequiest = StatusRequiest.loading;
     try {
       var response = await http.post(Uri.parse(AppLink.deleteAccount), body: {
-        'username': username.text,
+        'username': myServices.sharedPreferences.getString("username").toString(),
         'password': password.text,
       });
       if (response.statusCode == 200) {
         Map<String, dynamic> responseBody = json.decode(response.body);
         statusRequiest = handlingData(responseBody);
         if (statusRequiest == StatusRequiest.success) {
-          Get.offAllNamed(AppRoutes.navbar);
+          myServices.sharedPreferences.clear();
+          Get.offAllNamed(AppRoutes.login);
+         Get.snackbar(responseBody['message'],''); 
         } else {
-          Get.defaultDialog(title: "99".tr, middleText: "110".tr);
+          Get.defaultDialog(title:responseBody['message'],);
           statusRequiest = StatusRequiest.faliure;
         }
       } else {
