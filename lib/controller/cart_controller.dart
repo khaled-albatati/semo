@@ -209,6 +209,7 @@ class CartController extends GetxController {
     Get.offAllNamed(AppRoutes.orderspending);
   }
 
+
   Future<double> fetchDeliveryPrice(String source, String destination) async {
     try {
       final response = await http.post(
