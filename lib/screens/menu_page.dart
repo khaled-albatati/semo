@@ -5,6 +5,8 @@ import 'package:semo/controller/foodmenu_controller.dart';
 import '../data/model/foodrestaurants_model.dart';
 import '../widgets/menu_page/menu.dart';
 
+//page for display menu after choose restaurant
+
 class MenuPage extends StatefulWidget {
   const MenuPage({super.key});
 

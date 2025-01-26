@@ -11,9 +11,9 @@
 //   // static const routeName = "/profileScreen";
 //   @override
 //   Widget build(BuildContext context) {
-//     final email = controller.myServices.sharedPreferences.getString('email');
  
 //     Get.put(ProfileControllerImp());
+//     final email = controller.myServices.sharedPreferences.getString('email');
 //     return Scaffold(
 //       body: Stack(
 //         children: [
@@ -41,7 +41,7 @@
 //                       //     )
 //                       //   ],
 //                       // ),
-//                       Container(decoration: BoxDecoration(image: DecorationImage(image: AssetImage('assets/images/real/hamburger3.jpg'),fit: BoxFit.cover)),
+//                       Container(decoration: const BoxDecoration(image: DecorationImage(image: AssetImage('assets/images/real/hamburger3.jpg'),fit: BoxFit.cover)),
 //                         child: Column(children: [
 //                         const SizedBox(
 //                           height: 20,
@@ -101,7 +101,7 @@
 //                         ),
 //                         Text(
 //                           "مرحبا بك : ${controller.myServices.sharedPreferences.getString('username')}",
-//                           style: Helper.getTheme(context).headline4?.copyWith(
+//                           style: Helper.getTheme(context).headlineMedium?.copyWith(
 //                                 color: AppColor.primary,
 //                               ),
 //                         ),

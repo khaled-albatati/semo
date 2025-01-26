@@ -65,7 +65,8 @@ class _RestaurantNavState extends State<RestaurantNav> {
                   )
                 : GridView.builder(
                     itemCount: controller.family.length,
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                       childAspectRatio: 3 / 4,
                       crossAxisSpacing: 1,
@@ -73,7 +74,8 @@ class _RestaurantNavState extends State<RestaurantNav> {
                     ),
                     itemBuilder: (BuildContext context, int index) {
                       return Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(7, 10, 7, 18),
+                        padding:
+                            const EdgeInsetsDirectional.fromSTEB(7, 10, 7, 18),
                         child: Container(
                           width: double.infinity,
                           decoration: BoxDecoration(
@@ -89,7 +91,8 @@ class _RestaurantNavState extends State<RestaurantNav> {
                             borderRadius: BorderRadius.circular(8),
                           ),
                           child: RestaurantsNavBar(
-                            foodRestaurantsModel: FoodRestaurantsModel.fromJson(controller.family[index]),
+                            foodRestaurantsModel: FoodRestaurantsModel.fromJson(
+                                controller.family[index]),
                             i: index,
                           ),
                         ),
@@ -115,7 +118,8 @@ class RestaurantsNavBar extends GetView<RestaurantNavBarController> {
 
   @override
   Widget build(BuildContext context) {
-    final isOpen = foodRestaurantsModel.isOpen(); // Check if the restaurant is open
+    final isOpen =
+        foodRestaurantsModel.isOpen(); // Check if the restaurant is open
 
     return InkWell(
       splashColor: Colors.transparent,
@@ -129,7 +133,8 @@ class RestaurantsNavBar extends GetView<RestaurantNavBarController> {
                 foodRestaurantsModel.restaurantsName,
                 foodRestaurantsModel,
               )
-          : () => Get.snackbar('المطعم مغلق', 'لا يمكنك الدخول للمطعم المغلق'), // Show a message if closed
+          : () => Get.snackbar('المطعم مغلق',
+              'لا يمكنك الدخول للمطعم المغلق'), // Show a message if closed
       child: Column(
         mainAxisSize: MainAxisSize.max,
         children: [
@@ -145,9 +150,12 @@ class RestaurantsNavBar extends GetView<RestaurantNavBarController> {
                 child: SizedBox(
                   height: 150,
                   child: CachedNetworkImage(
-                    imageUrl: "${AppLink.restaurantImage}/${foodRestaurantsModel.restaurantsImg}",
-                    placeholder: (context, url) => Lottie.asset('assets/images/lottile/loadin_data.json'),
-                    errorWidget: (context, url, error) => Image.asset('assets/images/nofood.png'),
+                    imageUrl:
+                        "${AppLink.restaurantImage}/${foodRestaurantsModel.restaurantsImg}",
+                    placeholder: (context, url) =>
+                        Lottie.asset('assets/images/lottile/loadin_data.json'),
+                    errorWidget: (context, url, error) =>
+                        Image.asset('assets/images/nofood.png'),
                     width: double.infinity,
                     fit: BoxFit.cover,
                   ),
@@ -159,7 +167,8 @@ class RestaurantsNavBar extends GetView<RestaurantNavBarController> {
                   top: 0,
                   right: 0,
                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                     color: Colors.red,
                     child: const Text(
                       "مغلق",

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:semo/const/colors.dart';
 import 'package:semo/controller/test_controller.dart';
+import 'package:semo/widgets/home_screen/home_subtitle.dart';
 import '../core/class/handling_dataview.dart';
 import '../core/constant/routes.dart';
-import '../utils/helper.dart';
 import '../widgets/home_screen/home_categorycard.dart';
 import '../widgets/home_screen/home_mostpopular.dart';
 import '../widgets/home_screen/home_lastfood.dart';
@@ -93,50 +92,25 @@ class _HomeScreenState extends State<HomeScreen> {
                             const SizedBox(
                               height: 20,
                             ),
-                            const Padding(
-                              padding: EdgeInsets.symmetric(
-                                horizontal: 20,
-                              ),
-                              child: SingleChildScrollView(
-                                scrollDirection: Axis.horizontal,
-                                child: Row(
-                                  children: [
-                                    HomeCategories(),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 50,
-                            ),
-                            Container(
-                              margin: const EdgeInsets.fromLTRB(0, 0, 0, 20),
-                              decoration: BoxDecoration(boxShadow: const [
-                                BoxShadow(
-                                  color: AppColor.orange,
-                                ),
-                              ], borderRadius: BorderRadius.circular(10)),
-                              width: MediaQuery.of(context).size.width,
+                            const SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Text(
-                                    " المطاعم ",
-                                    style: Helper.getTheme(context)
-                                        .headlineSmall
-                                        ?.copyWith(
-                                          color: Colors.white,
-                                        ),
+                                  HomeCategories(),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  SizedBox(
+                                    width: 10,
                                   ),
                                 ],
                               ),
                             ),
+                            const SizedBox(
+                              height: 15,
+                            ),
+                            const HomeSubtitle(title: " المطاعم "),
+                            
                             const SizedBox(
                               height: 20,
                             ),
@@ -157,28 +131,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             const SizedBox(
                               height: 20,
                             ),
-                            Container(
-                              margin: const EdgeInsets.fromLTRB(0, 0, 0, 20),
-                              decoration: BoxDecoration(boxShadow: const [
-                                BoxShadow(
-                                  color: AppColor.orange,
-                                ),
-                              ], borderRadius: BorderRadius.circular(10)),
-                              width: MediaQuery.of(context).size.width,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    "اجدد الوجبات",
-                                    style: Helper.getTheme(context)
-                                        .headlineSmall
-                                        ?.copyWith(
-                                          color: Colors.white,
-                                        ),
-                                  ),
-                                ],
-                              ),
-                            ),
+                            const HomeSubtitle(title: "اجدد الوجبات"),
                             Container(
                               padding: const EdgeInsets.symmetric(
                                 horizontal: 20,

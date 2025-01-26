@@ -184,6 +184,7 @@ class CartController extends GetxController {
     if (selectedPaymentMethod == null) {
       Get.snackbar("ملاحظة", "يرجى اختيار طريقة الدفع");
     }
+    // ignore: unused_local_variable
     int discount = await validateCoupon(couponCode ?? '');
     try {
       var response = await http.post(Uri.parse(AppLink.eWallet), body: {

@@ -1,15 +1,10 @@
 import 'package:get/get.dart';
 import 'package:semo/core/constant/routes.dart';
-import 'package:semo/screens/dessert_screen.dart';
 import 'package:semo/screens/home_screen.dart';
-import 'package:semo/screens/inbox_screen.dart';
 import 'package:semo/screens/login_screen.dart';
 import 'package:semo/screens/menu_page.dart';
-import 'package:semo/screens/myorder_screen.dart';
 import 'package:semo/screens/navbar.dart';
-import 'package:semo/screens/new_pwscreen.dart';
 import 'package:semo/screens/profile.dart';
-import 'package:semo/screens/sent_otpscreen.dart';
 import 'package:semo/screens/signup_screen.dart';
 import 'package:semo/screens/splash_screen.dart';
 import 'package:semo/screens/track_wsl.dart';
@@ -29,7 +24,7 @@ import 'widgets/address/view.dart';
 import 'widgets/change_screen/whats.dart';
 
 List<GetPage<dynamic>>? routes = [
-  GetPage(name: "/", page: () => const NavBar()),
+  GetPage(name: "/", page: () =>  const NavBar()),
 // GetPage(name:"/", page:()=> const  SplashScreen(),middlewares: [
 //   MyMiddleWare(),
 // ]),
@@ -99,19 +94,13 @@ List<GetPage<dynamic>>? routes = [
   //   name: AppRoutes.successSignUp,
   //   page: () => const SuccessSignUp(),
   // ),
-  GetPage(
-    name: AppRoutes.verfiyCode,
-    page: () => const SendOTPScreen(),
-  ),
+
   // ========================= Start =========================\\
   GetPage(
     name: AppRoutes.splashScreenone,
     page: () => const SplashScreen(),
   ),
-  GetPage(
-    name: AppRoutes.dessertScreen,
-    page: () => const DessertScreen(),
-  ),
+
   GetPage(
     name: AppRoutes.navbar,
     page: () => const NavBar(),
@@ -120,27 +109,21 @@ List<GetPage<dynamic>>? routes = [
     name: AppRoutes.homePage,
     page: () => const HomeScreen(),
   ),
-  GetPage(
-    name: AppRoutes.newPwScreen,
-    page: () => const NewPwScreen(),
-  ),
-  GetPage(
-    name: AppRoutes.sendOTPScreen,
-    page: () => const SendOTPScreen(),
-  ),
+  
+
 
   GetPage(
     name: AppRoutes.profile,
     page: () => const Profile(),
   ),
-  GetPage(
-    name: AppRoutes.myorderscreen,
-    page: () => const MyOrderScreen(),
-  ),
-  GetPage(
-    name: AppRoutes.inboxScreen,
-    page: () => const InboxScreen(),
-  ),
+  // GetPage(
+  //   name: AppRoutes.myorderscreen,
+  //   page: () => const MyOrderScreen(),
+  // ),
+  // GetPage(
+  //   name: AppRoutes.inboxScreen,
+  //   page: () => const InboxScreen(),
+  // ),
   GetPage(
     name: AppRoutes.tracking,
     page: () => const Tracking(),

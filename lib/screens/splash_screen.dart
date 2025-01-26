@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:semo/core/constant/routes.dart';
 import '../utils/helper.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -16,7 +18,8 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   void initState() {
-    _timer = Timer(const Duration(milliseconds: 4000), () {
+    _timer = Timer(const Duration(milliseconds: 1500), () {
+      Get.offAllNamed(AppRoutes.navbar);
       // Navigator.of(context).pushReplacementNamed(LandingScreen.routeName);
     });
     super.initState();

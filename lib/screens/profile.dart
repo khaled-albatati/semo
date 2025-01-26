@@ -14,7 +14,7 @@ class Profile extends GetView<ProfileControllerImp> {
   // static const routeName = "/profileScreen";
   @override
   Widget build(BuildContext context) {
-    String applink='حمل تطبيق سيمو الان من خلال \n https://play.google.com/store/apps/details?id=com.semodelivery.semo.semo';
+    // String applink='حمل تطبيق سيمو الان من خلال \n https://play.google.com/store/apps/details?id=com.semodelivery.semo.semo';
     Get.put(ProfileControllerImp());
 
     return Scaffold(
@@ -103,15 +103,17 @@ class Profile extends GetView<ProfileControllerImp> {
                       ),
                       Text(
                         "مرحبا بك : ${controller.myServices.sharedPreferences.getString('username')}",
-                        style: Helper.getTheme(context).headlineMedium?.copyWith(
-                              color: AppColor.primary,
-                            ),
+                        style:
+                            Helper.getTheme(context).headlineMedium?.copyWith(
+                                  color: AppColor.primary,
+                                ),
                       ),
                       Text(
                         "رصيدك : ${controller.myServices.sharedPreferences.getInt('user_wallet')} ريال",
-                        style: Helper.getTheme(context).headlineMedium?.copyWith(
-                              color: AppColor.primary,
-                            ),
+                        style:
+                            Helper.getTheme(context).headlineMedium?.copyWith(
+                                  color: AppColor.primary,
+                                ),
                       ),
                       const SizedBox(
                         height: 5,
@@ -119,7 +121,7 @@ class Profile extends GetView<ProfileControllerImp> {
                       const SizedBox(
                         height: 5,
                       ),
-                      
+
                       WidgetRowProfile(
                         text: "الاسم",
                         icon: Icons.person_outline,
@@ -163,7 +165,7 @@ class Profile extends GetView<ProfileControllerImp> {
                         color: Colors.orange,
                         onPressed: () => Get.toNamed(AppRoutes.addressview),
                       ),
-                       WidgetRowProfile(
+                      WidgetRowProfile(
                         text: "المطور",
                         icon: Icons.developer_mode,
                         moveicon: Icons.arrow_forward,
@@ -177,12 +179,13 @@ class Profile extends GetView<ProfileControllerImp> {
                       //   color: Colors.green,
                       //   onPressed: () => SocialShare.shareOptions(applink),
                       // ),
-                       WidgetRowProfile(
+                      WidgetRowProfile(
                         text: "حذف الحساب",
                         icon: Icons.no_accounts_outlined,
                         moveicon: Icons.arrow_forward,
                         color: Colors.red,
-                        onPressed: () => Get.toNamed(AppRoutes.deleteAccountPage),
+                        onPressed: () =>
+                            Get.toNamed(AppRoutes.deleteAccountPage),
                       ),
                       // ProfileInput(
                       //   label: "  رقم الجوال",
