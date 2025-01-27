@@ -8,6 +8,7 @@ import 'package:semo/core/class/handling_dataview.dart';
 import '../controller/restaurant_navbarcontroller.dart';
 import '../data/model/foodrestaurants_model.dart';
 import '../linkapi.dart';
+import '../utils/helper.dart';
 
 class RestaurantNav extends StatefulWidget {
   const RestaurantNav({Key? key}) : super(key: key);
@@ -38,9 +39,11 @@ class _RestaurantNavState extends State<RestaurantNav> {
         centerTitle: true,
       ),
       body: Container(
-        decoration: const BoxDecoration(
-          color: Colors.white,
-        ),
+                  decoration: BoxDecoration(
+                      image: DecorationImage(fit: BoxFit.cover,
+                          image: AssetImage(
+                    Helper.getAssetName("splashIcon.png", "virtual"),
+                  ))),
         child: GetBuilder<RestaurantNavBarController>(
           builder: (controller) => HandlingDataView(
             statusRequiest: controller.statusRequiest,

@@ -8,6 +8,7 @@ import '../const/colors.dart';
 import '../core/class/handling_dataview.dart';
 import '../data/model/foodrestaurants_model.dart';
 import '../linkapi.dart';
+import '../utils/helper.dart';
 
 class ProducerFamily extends StatefulWidget {
   const ProducerFamily({Key? key}) : super(key: key);
@@ -37,65 +38,72 @@ class _ProducerFamilyState extends State<ProducerFamily> {
         title: const Text("الاسر المنتجة"),
         centerTitle: true,
       ),
-      body: GetBuilder<FamilyProducerController>(
-        builder: (controller) {
-          return HandlingDataView(
-            statusRequiest: controller.statusRequiest,
-            widget: controller.family.isEmpty
-                ? Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Center(
-                        child: Text(
-                      "لاتوجد اسر منتجة الان",
-                      style: TextStyle(fontSize: 24),
-                     ),
-                      ),
-                      const SizedBox(height: 20), // Spacing
-                      ElevatedButton(
-                        onPressed: () {
-                          controller.getFamily(); // Call the method to reload data
-                        },
-                        child: const Text("إعادة تحميل"),
-                      ),
-                    ],
-                  )
-                : GridView.builder(
-                    itemCount: controller.family.length,
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2, // Display 2 items in each row
-                      childAspectRatio: 3 / 4, // Square shape for each item
-                      crossAxisSpacing: 1, // Spacing between items horizontally
-                      mainAxisSpacing: 0, // Spacing between items vertically
-                    ),
-                    itemBuilder: (BuildContext context, int index) {
-                      return Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(7, 10, 7, 18),
-                        child: Container(
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            boxShadow: const [
-                              BoxShadow(
-                                blurRadius: 4,
-                                color: Color(0x32000000),
-                                offset: Offset(0, 2),
-                                blurStyle: BlurStyle.solid,
-                              ),
-                            ],
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: Family(
-                            foodRestaurantsModel: FoodRestaurantsModel.fromJson(
-                                controller.family[index]),
-                            i: index,
-                          ),
+      body: Container(
+                  decoration: BoxDecoration(
+                      image: DecorationImage(fit: BoxFit.cover,
+                          image: AssetImage(
+                    Helper.getAssetName("splashIcon.png", "virtual"),
+                  ))),
+        child: GetBuilder<FamilyProducerController>(
+          builder: (controller) {
+            return HandlingDataView(
+              statusRequiest: controller.statusRequiest,
+              widget: controller.family.isEmpty
+                  ? Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Center(
+                          child: Text(
+                        "لاتوجد اسر منتجة الان",
+                        style: TextStyle(fontSize: 24),
+                       ),
                         ),
-                      );
-                    },
-                  ),
-          );
-        },
+                        const SizedBox(height: 20), // Spacing
+                        ElevatedButton(
+                          onPressed: () {
+                            controller.getFamily(); // Call the method to reload data
+                          },
+                          child: const Text("إعادة تحميل"),
+                        ),
+                      ],
+                    )
+                  : GridView.builder(
+                      itemCount: controller.family.length,
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2, // Display 2 items in each row
+                        childAspectRatio: 3 / 4, // Square shape for each item
+                        crossAxisSpacing: 1, // Spacing between items horizontally
+                        mainAxisSpacing: 0, // Spacing between items vertically
+                      ),
+                      itemBuilder: (BuildContext context, int index) {
+                        return Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(7, 10, 7, 18),
+                          child: Container(
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              boxShadow: const [
+                                BoxShadow(
+                                  blurRadius: 4,
+                                  color: Color(0x32000000),
+                                  offset: Offset(0, 2),
+                                  blurStyle: BlurStyle.solid,
+                                ),
+                              ],
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Family(
+                              foodRestaurantsModel: FoodRestaurantsModel.fromJson(
+                                  controller.family[index]),
+                              i: index,
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+            );
+          },
+        ),
       ),
     );
   }

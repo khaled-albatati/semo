@@ -39,16 +39,26 @@ class TrackWslController extends GetxController {
   }
 
   String printOrderStatus(String val) {
-    if (val == "1") {
-      return "في انتظار الموافقه";
+   if (val == "1") {
+      return "في انتظار الموافقة";
     } else if (val == "2") {
-      return "تمت الموافقه , قيد التجهيز انتظر 90 دقيقة";
+      return "تم قبول الطلب";
     } else if (val == "3") {
-      return "تمت استلام الطلب والمندوب على الطريق";
-    } else if (val == "4") {
-      return "تم توصيل الطلب";
+      return "في انتظار موافقة الكابتن";
+    }else if (val == "4") {
+      return "في انتظار موافقة المطعم";
+    } else if (val == "5") {
+      return "يتم تجهيز الطلب";
+    } else if (val == "6") {
+      return "تم تجهيز الطلب من المطعم";
+    } else if (val == "7") {
+      return "الطلب في الطريق";
+    } else if (val == "8") {
+      return "في انتظار العميل";
+    } else if (val == "9") {
+      return "تم تسليم الطلب للعميل ";
     } else {
-      return "Archive";
+      return "غير معروف";
     }
   }
 

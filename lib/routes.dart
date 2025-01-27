@@ -24,7 +24,7 @@ import 'widgets/address/view.dart';
 import 'widgets/change_screen/whats.dart';
 
 List<GetPage<dynamic>>? routes = [
-  GetPage(name: "/", page: () =>  const NavBar()),
+  GetPage(name: "/", page: () =>  const SplashScreen()),
 // GetPage(name:"/", page:()=> const  SplashScreen(),middlewares: [
 //   MyMiddleWare(),
 // ]),

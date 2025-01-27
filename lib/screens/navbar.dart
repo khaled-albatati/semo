@@ -7,6 +7,7 @@ import 'package:semo/controller/navbar_controller.dart';
 import 'package:semo/view/widget_view/navbar/widgetbutton_navbar.dart';
 import '../const/colors.dart';
 import '../core/services/services.dart';
+import '../utils/helper.dart';
 import 'login_screen.dart';
 
 class NavBar extends StatelessWidget {
@@ -32,56 +33,63 @@ class NavBar extends StatelessWidget {
             bottomNavigationBar: BottomAppBar(
               shape: const CircularNotchedRectangle(),
               notchMargin: 4,
-              child: Row(
-                children: [
-                  Row(
-                    children: [
+              child: Container(
+                  decoration: BoxDecoration(
+                      image: DecorationImage(fit: BoxFit.cover,
+                          image: AssetImage(
+                    Helper.getAssetName("splashIcon.png", "virtual"),
+                  ))),
+                child: Row(
+                  children: [
+                    Row(
+                      children: [
+                        WidgetButtonNavBar(
+                          onPressed: () {
+                            controller.changePage(1);
+                          },
+                          text: "مرسال",
+                          icon: Icons.motorcycle_outlined,
+                          active: controller.currentPage == 1 ? true : false,
+                
+                          // color: AppColor.primarycolor
+                        ),
+                        WidgetButtonNavBar(
+                          onPressed: () {
+                            controller.changePage(2);
+                          },
+                          text: "اسر منتجة",
+                          icon: Icons.storefront_sharp,
+                          active: controller.currentPage == 2 ? true : false,
+                          // color: AppColor.primarycolor
+                        ),
+                      ],
+                    ),
+                    const Spacer(),
+                    const Spacer(),
+                    // const Spacer(),
+                    Row(children: [
                       WidgetButtonNavBar(
                         onPressed: () {
-                          controller.changePage(1);
+                          controller.changePage(3);
                         },
-                        text: "مرسال",
-                        icon: Icons.motorcycle_outlined,
-                        active: controller.currentPage == 1 ? true : false,
-
+                        text: "المطاعم",
+                        icon: Icons.restaurant_menu,
+                        active: controller.currentPage == 3 ? true : false,
                         // color: AppColor.primarycolor
                       ),
                       WidgetButtonNavBar(
                         onPressed: () {
-                          controller.changePage(2);
+                          controller.changePage(4);
                         },
-                        text: "اسر منتجة",
-                        icon: Icons.storefront_sharp,
-                        active: controller.currentPage == 2 ? true : false,
+                        text: "10".tr,
+                        icon: Icons.settings_outlined,
+                        active: controller.currentPage == 4 ? true : false,
+                
                         // color: AppColor.primarycolor
                       ),
-                    ],
-                  ),
-                  const Spacer(),
-                  const Spacer(),
-                  // const Spacer(),
-                  Row(children: [
-                    WidgetButtonNavBar(
-                      onPressed: () {
-                        controller.changePage(3);
-                      },
-                      text: "المطاعم",
-                      icon: Icons.restaurant_menu,
-                      active: controller.currentPage == 3 ? true : false,
-                      // color: AppColor.primarycolor
-                    ),
-                    WidgetButtonNavBar(
-                      onPressed: () {
-                        controller.changePage(4);
-                      },
-                      text: "10".tr,
-                      icon: Icons.settings_outlined,
-                      active: controller.currentPage == 4 ? true : false,
-
-                      // color: AppColor.primarycolor
-                    ),
-                  ]),
-                ],
+                    ]),
+                  ],
+                ),
               ),
             ),
             // ignore: deprecated_member_use

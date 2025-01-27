@@ -18,7 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   void initState() {
-    _timer = Timer(const Duration(milliseconds: 1500), () {
+    _timer = Timer(const Duration(milliseconds: 6000), () {
       Get.offAllNamed(AppRoutes.navbar);
       // Navigator.of(context).pushReplacementNamed(LandingScreen.routeName);
     });
@@ -42,9 +42,9 @@ class _SplashScreenState extends State<SplashScreen> {
               ),
             ),
             Align(
-              alignment: Alignment.center,
+              alignment: Alignment.centerLeft,
               child: Image.asset(
-                Helper.getAssetName("MealMonkeyLogo.png", "virtual"),
+                'assets/images/semo.png',
               ),
             ),
           ],

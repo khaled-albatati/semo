@@ -34,16 +34,26 @@ class OrdersArchiveController extends GetxController {
   }
 
   String printOrderStatus(String val) {
-    if (val == "0") {
-      return "Pending Approval";
-    } else if (val == "1") {
-      return "The Order is being Prepared ";
+    if (val == "1") {
+      return "في انتظار الموافقة";
     } else if (val == "2") {
-      return "Ready To Picked up by Delivery man";
+      return "تم قبول الطلب";
     } else if (val == "3") {
-      return "On The Way";
+      return "في انتظار موافقة الكابتن";
+    }else if (val == "4") {
+      return "في انتظار موافقة المطعم";
+    } else if (val == "5") {
+      return "يتم تجهيز الطلب";
+    } else if (val == "6") {
+      return "تم تجهيز الطلب من المطعم";
+    } else if (val == "7") {
+      return "الطلب في الطريق";
+    } else if (val == "8") {
+      return "في انتظار العميل";
+    } else if (val == "9") {
+      return "تم تسليم الطلب للعميل ";
     } else {
-      return "Archive";
+      return "غير معروف";
     }
   }
 

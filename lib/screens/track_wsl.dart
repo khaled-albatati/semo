@@ -4,6 +4,7 @@ import 'package:semo/controller/trackwsl_controller.dart';
 import 'package:semo/widgets/wsl/card_wsl.dart';
 import '../core/class/handling_dataview.dart';
 import '../core/constant/routes.dart';
+import '../utils/helper.dart';
 
 class TrackWsl extends StatelessWidget {
   const TrackWsl({super.key});
@@ -22,6 +23,11 @@ class TrackWsl extends StatelessWidget {
         ),
       ]),
       body: Container(
+                  decoration: BoxDecoration(
+                      image: DecorationImage(fit: BoxFit.cover,
+                          image: AssetImage(
+                    Helper.getAssetName("splashIcon.png", "virtual"),
+                  ))),
         padding: const EdgeInsets.all(10),
         child: GetBuilder<TrackWslController>(
           builder: ((controller) => HandlingDataView(

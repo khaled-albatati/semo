@@ -27,13 +27,13 @@ class WidgetButtonNavBar extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, color: active == true ? AppColor.orange: AppColor.black),
+          Icon(icon, color: active == true ? AppColor.orange: AppColor.primary),
           Text(
             text,
             
             style: TextStyle(
               fontSize: 11,
-                color: active == true ? AppColor.orange : AppColor.black),
+                color: active == true ? AppColor.orange : AppColor.primary),
           )
         ],
       ),

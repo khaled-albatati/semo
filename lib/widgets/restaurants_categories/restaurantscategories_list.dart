@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 import '../../controller/restaurantcategories_controller.dart';
 import '../../data/model/foodrestaurants_model.dart';
 import '../../data/model/restaurantmodel.dart';
@@ -61,12 +62,21 @@ class RestaurantsCategoriesListView extends GetView<RestaurantCategoriesControll
       child: Column(
         children: [
           Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 1),
+            padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 5),
             child: Container(
               width: double.infinity,
               height: 90,
-              decoration: const BoxDecoration(
-                color: Colors.white,
+              decoration: BoxDecoration(
+                color: Colors.white, // Set a background color
+                borderRadius: BorderRadius.circular(8), // Optional: rounded corners
+                boxShadow: const [
+                  BoxShadow(
+                    color: Colors.black26, // Shadow color
+                    blurRadius: 8.0, // Softness of the shadow
+                    spreadRadius: 1.0, // Size of the shadow
+                    offset: Offset(0, 2), // Direction of the shadow
+                  ),
+                ],
               ),
               child: Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(12, 8, 12, 8),
@@ -101,6 +111,8 @@ class RestaurantsCategoriesListView extends GetView<RestaurantCategoriesControll
                                 child: CachedNetworkImage(
                                   imageUrl:
                                       "${AppLink.restaurantImage}/${restaurantModel.restaurantsImg}",
+                                       placeholder: (context, url) => Lottie.asset('assets/images/lottile/loadin_data.json'),
+                  errorWidget: (context, url, error) => Image.asset('assets/images/nofood.png'),
                                   width: 90,
                                   height: 90,
                                   fit: BoxFit.cover,

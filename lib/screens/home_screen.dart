@@ -4,6 +4,7 @@ import 'package:semo/controller/test_controller.dart';
 import 'package:semo/widgets/home_screen/home_subtitle.dart';
 import '../core/class/handling_dataview.dart';
 import '../core/constant/routes.dart';
+import '../utils/helper.dart';
 import '../widgets/home_screen/home_categorycard.dart';
 import '../widgets/home_screen/home_mostpopular.dart';
 import '../widgets/home_screen/home_lastfood.dart';
@@ -82,79 +83,86 @@ class _HomeScreenState extends State<HomeScreen> {
               )
             : HandlingDataView(
                 statusRequiest: controller.statusRequiest,
-                widget: Stack(
-                  children: [
-                    SafeArea(
-                      child: SingleChildScrollView(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            const SingleChildScrollView(
-                              scrollDirection: Axis.horizontal,
-                              child: Row(
-                                children: [
-                                  HomeCategories(),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                ],
+                widget: Container(
+                  decoration: BoxDecoration(
+                      image: DecorationImage(fit: BoxFit.cover,
+                          image: AssetImage(
+                    Helper.getAssetName("splashIcon.png", "virtual"),
+                  ))),
+                  child: Stack(
+                    children: [
+                      SafeArea(
+                        child: SingleChildScrollView(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const SizedBox(
+                                height: 20,
                               ),
-                            ),
-                            const SizedBox(
-                              height: 15,
-                            ),
-                            const HomeSubtitle(title: " المطاعم "),
-                            
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            Container(
-                              height: 250,
-                              width: double.infinity,
-                              padding: const EdgeInsets.only(left: 20),
-                              child: const SingleChildScrollView(
+                              const SingleChildScrollView(
                                 scrollDirection: Axis.horizontal,
                                 child: Row(
-                                  children: [MostPopularCard()],
+                                  children: [
+                                    HomeCategories(),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                  ],
                                 ),
                               ),
-                            ),
-                            // const SizedBox(
-                            //   height: 20,
-                            // ),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            const HomeSubtitle(title: "اجدد الوجبات"),
-                            Container(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 20,
+                              const SizedBox(
+                                height: 15,
                               ),
-                              child: Column(
-                                children: [
-                                  GestureDetector(
-                                      onTap: () {
-                                        // Navigator.of(context)
-                                        //     .pushNamed(IndividualItem.routeName);
-                                      },
-                                      child: const RecentItemCard()),
-                                  const SizedBox(
-                                    height: 10,
-                                  )
-                                ],
+                              const HomeSubtitle(title: " المطاعم "),
+
+                              const SizedBox(
+                                height: 20,
                               ),
-                            )
-                          ],
+                              Container(
+                                height: 250,
+                                width: double.infinity,
+                                padding: const EdgeInsets.only(left: 20),
+                                child: const SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  child: Row(
+                                    children: [MostPopularCard()],
+                                  ),
+                                ),
+                              ),
+                              // const SizedBox(
+                              //   height: 20,
+                              // ),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              const HomeSubtitle(title: "اجدد الوجبات"),
+                              Container(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 20,
+                                ),
+                                child: Column(
+                                  children: [
+                                    GestureDetector(
+                                        onTap: () {
+                                          // Navigator.of(context)
+                                          //     .pushNamed(IndividualItem.routeName);
+                                        },
+                                        child: const RecentItemCard()),
+                                    const SizedBox(
+                                      height: 10,
+                                    )
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
       ),

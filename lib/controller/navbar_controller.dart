@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:semo/core/functions/redirect.dart';
 import 'package:semo/screens/home_screen.dart';
 import 'package:semo/screens/producer_family.dart';
 import 'package:semo/screens/profile.dart';
@@ -54,7 +55,12 @@ class NavBarControllerImp extends NavBarController {
             myServices.sharedPreferences
             .setString("userphone", responseBody['data']['user_phone']);
             myServices.sharedPreferences
-            .setString("userwhats", responseBody['data']['user_whats']);
+            .setString("userwhats", responseBody['data']['users_whats']).toString();
+            myServices.sharedPreferences
+                .setInt("userAprove", responseBody['data']['user_aprrove']);
+                print('===========================================');
+                print(myServices.sharedPreferences.getInt('userAprove'));
+            Redirector.redirectUser();
         // myServices.sharedPreferences.setString("id",response['data']['user_id']);
 
         // users.addAll(response['users']);
@@ -62,6 +68,8 @@ class NavBarControllerImp extends NavBarController {
         // items.addAll(response['items']);
       } else {
         statusRequiest = StatusRequiest.faliure;
+            Redirector.redirectUser();
+
       }
     }
     update();
