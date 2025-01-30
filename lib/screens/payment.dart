@@ -32,8 +32,6 @@ class _PaymentState extends State<Payment> {
   @override
   void initState() {
     super.initState();
-    // Get the restaurant's location from the arguments passed to this widget
-    // restaurantsLocation = Get.arguments['restaurants_location'];
     Future.delayed(const Duration(seconds: 2), () {
       controller.onInit();
     });
@@ -210,8 +208,12 @@ class _PaymentState extends State<Payment> {
                         onPressed: () {
                           if (controller.selectedPaymentMethod == '1') {
                             controller.checkout(couponController.text);
-                          } else {
-                            controller.checkoutWallet(couponController.text);
+                          } 
+                          // else if(controller.selectedPaymentMethod == '2') {
+                          //   controller.checkoutWallet(couponController.text);
+                          // }
+                          else {
+                             Get.snackbar('هنالك خطأ', "يرجى اختيار طريقة دفع");
                           }
                         },
                       ),

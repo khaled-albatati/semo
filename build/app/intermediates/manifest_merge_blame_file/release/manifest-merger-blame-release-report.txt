@@ -1,0 +1,404 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.semodelivery.semo.semo"
+4    android:versionCode="2"
+5    android:versionName="2" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="21"
+9        android:targetSdkVersion="35" />
+10
+11    <uses-permission android:name="android.permission.INTERNET" />
+11-->[:firebase_messaging] C:\Users\coolalonge\AndroidStudioProjects\semo\build\firebase_messaging\intermediates\merged_manifest\release\AndroidManifest.xml:7:5-67
+11-->[:firebase_messaging] C:\Users\coolalonge\AndroidStudioProjects\semo\build\firebase_messaging\intermediates\merged_manifest\release\AndroidManifest.xml:7:22-64
+12    <uses-permission android:name="android.permission.WAKE_LOCK" />
+12-->[:firebase_messaging] C:\Users\coolalonge\AndroidStudioProjects\semo\build\firebase_messaging\intermediates\merged_manifest\release\AndroidManifest.xml:8:5-68
+12-->[:firebase_messaging] C:\Users\coolalonge\AndroidStudioProjects\semo\build\firebase_messaging\intermediates\merged_manifest\release\AndroidManifest.xml:8:22-65
+13    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- Permissions options for the `notification` group -->
+13-->[:firebase_messaging] C:\Users\coolalonge\AndroidStudioProjects\semo\build\firebase_messaging\intermediates\merged_manifest\release\AndroidManifest.xml:9:5-79
+13-->[:firebase_messaging] C:\Users\coolalonge\AndroidStudioProjects\semo\build\firebase_messaging\intermediates\merged_manifest\release\AndroidManifest.xml:9:22-76
+14    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" /> <!-- Required by older versions of Google Play services to create IID tokens -->
+14-->[:firebase_messaging] C:\Users\coolalonge\AndroidStudioProjects\semo\build\firebase_messaging\intermediates\merged_manifest\release\AndroidManifest.xml:11:5-77
+14-->[:firebase_messaging] C:\Users\coolalonge\AndroidStudioProjects\semo\build\firebase_messaging\intermediates\merged_manifest\release\AndroidManifest.xml:11:22-74
+15    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+15-->[com.google.firebase:firebase-messaging:23.3.1] C:\Users\coolalonge\.gradle\caches\transforms-3\91215b24990a8e484f27f31ee83ce67d\transformed\jetified-firebase-messaging-23.3.1\AndroidManifest.xml:26:5-82
+15-->[com.google.firebase:firebase-messaging:23.3.1] C:\Users\coolalonge\.gradle\caches\transforms-3\91215b24990a8e484f27f31ee83ce67d\transformed\jetified-firebase-messaging-23.3.1\AndroidManifest.xml:26:22-79
+16
+17    <permission
+17-->[androidx.core:core:1.13.1] C:\Users\coolalonge\.gradle\caches\transforms-3\3e4fa42964ec6369b3a52ce840a46646\transformed\core-1.13.1\AndroidManifest.xml:22:5-24:47
+18        android:name="com.semodelivery.semo.semo.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+18-->[androidx.core:core:1.13.1] C:\Users\coolalonge\.gradle\caches\transforms-3\3e4fa42964ec6369b3a52ce840a46646\transformed\core-1.13.1\AndroidManifest.xml:23:9-81
+19        android:protectionLevel="signature" />
+19-->[androidx.core:core:1.13.1] C:\Users\coolalonge\.gradle\caches\transforms-3\3e4fa42964ec6369b3a52ce840a46646\transformed\core-1.13.1\AndroidManifest.xml:24:9-44
+20
+21    <uses-permission android:name="com.semodelivery.semo.semo.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+21-->[androidx.core:core:1.13.1] C:\Users\coolalonge\.gradle\caches\transforms-3\3e4fa42964ec6369b3a52ce840a46646\transformed\core-1.13.1\AndroidManifest.xml:26:5-97
+21-->[androidx.core:core:1.13.1] C:\Users\coolalonge\.gradle\caches\transforms-3\3e4fa42964ec6369b3a52ce840a46646\transformed\core-1.13.1\AndroidManifest.xml:26:22-94
+22
+23    <application
+24        android:name="android.app.Application"
+24-->C:\Users\coolalonge\AndroidStudioProjects\semo\android\app\src\main\AndroidManifest.xml:4:9-42
+25        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+25-->[androidx.core:core:1.13.1] C:\Users\coolalonge\.gradle\caches\transforms-3\3e4fa42964ec6369b3a52ce840a46646\transformed\core-1.13.1\AndroidManifest.xml:28:18-86
+26        android:extractNativeLibs="true"
+27        android:icon="@mipmap/launcher_icon"
+27-->C:\Users\coolalonge\AndroidStudioProjects\semo\android\app\src\main\AndroidManifest.xml:5:9-45
+28        android:label="semo" >
+28-->C:\Users\coolalonge\AndroidStudioProjects\semo\android\app\src\main\AndroidManifest.xml:3:9-29
+29        <activity
+29-->C:\Users\coolalonge\AndroidStudioProjects\semo\android\app\src\main\AndroidManifest.xml:6:9-31:20
+30            android:name="com.semodelivery.semo.semo.MainActivity"
+30-->C:\Users\coolalonge\AndroidStudioProjects\semo\android\app\src\main\AndroidManifest.xml:7:13-41
+31            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+31-->C:\Users\coolalonge\AndroidStudioProjects\semo\android\app\src\main\AndroidManifest.xml:11:13-163
+32            android:exported="true"
+32-->C:\Users\coolalonge\AndroidStudioProjects\semo\android\app\src\main\AndroidManifest.xml:8:13-36
+33            android:hardwareAccelerated="true"
+33-->C:\Users\coolalonge\AndroidStudioProjects\semo\android\app\src\main\AndroidManifest.xml:12:13-47
+34            android:launchMode="singleTop"
+34-->C:\Users\coolalonge\AndroidStudioProjects\semo\android\app\src\main\AndroidManifest.xml:9:13-43
+35            android:theme="@style/LaunchTheme"
+35-->C:\Users\coolalonge\AndroidStudioProjects\semo\android\app\src\main\AndroidManifest.xml:10:13-47
+36            android:windowSoftInputMode="adjustResize" >
+36-->C:\Users\coolalonge\AndroidStudioProjects\semo\android\app\src\main\AndroidManifest.xml:13:13-55
+37
+38            <!--
+39                 Specifies an Android theme to apply to this Activity as soon as
+40                 the Android process has started. This theme is visible to the user
+41                 while the Flutter UI initializes. After that, this theme continues
+42                 to determine the Window background behind the Flutter UI.
+43            -->
+44            <meta-data
+44-->C:\Users\coolalonge\AndroidStudioProjects\semo\android\app\src\main\AndroidManifest.xml:18:13-21:17
+45                android:name="io.flutter.embedding.android.NormalTheme"
+45-->C:\Users\coolalonge\AndroidStudioProjects\semo\android\app\src\main\AndroidManifest.xml:19:15-70
+46                android:resource="@style/NormalTheme" />
+46-->C:\Users\coolalonge\AndroidStudioProjects\semo\android\app\src\main\AndroidManifest.xml:20:15-52
+47
+48            <intent-filter>
+48-->C:\Users\coolalonge\AndroidStudioProjects\semo\android\app\src\main\AndroidManifest.xml:22:13-25:29
+49                <action android:name="android.intent.action.MAIN" />
+49-->C:\Users\coolalonge\AndroidStudioProjects\semo\android\app\src\main\AndroidManifest.xml:23:17-68
+49-->C:\Users\coolalonge\AndroidStudioProjects\semo\android\app\src\main\AndroidManifest.xml:23:25-66
+50
+51                <category android:name="android.intent.category.LAUNCHER" />
+51-->C:\Users\coolalonge\AndroidStudioProjects\semo\android\app\src\main\AndroidManifest.xml:24:17-76
+51-->C:\Users\coolalonge\AndroidStudioProjects\semo\android\app\src\main\AndroidManifest.xml:24:27-74
+52            </intent-filter>
+53            <intent-filter>
+53-->C:\Users\coolalonge\AndroidStudioProjects\semo\android\app\src\main\AndroidManifest.xml:26:13-29:17
+54                <action android:name="FLUTTER_NOTIFICATION_CLICK" />
+54-->C:\Users\coolalonge\AndroidStudioProjects\semo\android\app\src\main\AndroidManifest.xml:27:3-55
+54-->C:\Users\coolalonge\AndroidStudioProjects\semo\android\app\src\main\AndroidManifest.xml:27:11-52
+55
+56                <category android:name="android.intent.category.DEFAULT" />
+56-->C:\Users\coolalonge\AndroidStudioProjects\semo\android\app\src\main\AndroidManifest.xml:28:3-62
+56-->C:\Users\coolalonge\AndroidStudioProjects\semo\android\app\src\main\AndroidManifest.xml:28:13-59
+57            </intent-filter>
+58        </activity>
+59        <!--
+60             Don't delete the meta-data below.
+61             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java
+62        -->
+63        <meta-data
+63-->C:\Users\coolalonge\AndroidStudioProjects\semo\android\app\src\main\AndroidManifest.xml:34:9-36:33
+64            android:name="flutterEmbedding"
+64-->C:\Users\coolalonge\AndroidStudioProjects\semo\android\app\src\main\AndroidManifest.xml:35:13-44
+65            android:value="2" />
+65-->C:\Users\coolalonge\AndroidStudioProjects\semo\android\app\src\main\AndroidManifest.xml:36:13-30
+66
+67        <service
+67-->[:firebase_messaging] C:\Users\coolalonge\AndroidStudioProjects\semo\build\firebase_messaging\intermediates\merged_manifest\release\AndroidManifest.xml:14:9-17:72
+68            android:name="io.flutter.plugins.firebase.messaging.FlutterFirebaseMessagingBackgroundService"
+68-->[:firebase_messaging] C:\Users\coolalonge\AndroidStudioProjects\semo\build\firebase_messaging\intermediates\merged_manifest\release\AndroidManifest.xml:15:13-107
+69            android:exported="false"
+69-->[:firebase_messaging] C:\Users\coolalonge\AndroidStudioProjects\semo\build\firebase_messaging\intermediates\merged_manifest\release\AndroidManifest.xml:16:13-37
+70            android:permission="android.permission.BIND_JOB_SERVICE" />
+70-->[:firebase_messaging] C:\Users\coolalonge\AndroidStudioProjects\semo\build\firebase_messaging\intermediates\merged_manifest\release\AndroidManifest.xml:17:13-69
+71        <service
+71-->[:firebase_messaging] C:\Users\coolalonge\AndroidStudioProjects\semo\build\firebase_messaging\intermediates\merged_manifest\release\AndroidManifest.xml:18:9-24:19
+72            android:name="io.flutter.plugins.firebase.messaging.FlutterFirebaseMessagingService"
+72-->[:firebase_messaging] C:\Users\coolalonge\AndroidStudioProjects\semo\build\firebase_messaging\intermediates\merged_manifest\release\AndroidManifest.xml:19:13-97
+73            android:exported="false" >
+73-->[:firebase_messaging] C:\Users\coolalonge\AndroidStudioProjects\semo\build\firebase_messaging\intermediates\merged_manifest\release\AndroidManifest.xml:20:13-37
+74            <intent-filter>
+74-->[:firebase_messaging] C:\Users\coolalonge\AndroidStudioProjects\semo\build\firebase_messaging\intermediates\merged_manifest\release\AndroidManifest.xml:21:13-23:29
+75                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+75-->[:firebase_messaging] C:\Users\coolalonge\AndroidStudioProjects\semo\build\firebase_messaging\intermediates\merged_manifest\release\AndroidManifest.xml:22:17-78
+75-->[:firebase_messaging] C:\Users\coolalonge\AndroidStudioProjects\semo\build\firebase_messaging\intermediates\merged_manifest\release\AndroidManifest.xml:22:25-75
+76            </intent-filter>
+77        </service>
+78
+79        <receiver
+79-->[:firebase_messaging] C:\Users\coolalonge\AndroidStudioProjects\semo\build\firebase_messaging\intermediates\merged_manifest\release\AndroidManifest.xml:26:9-33:20
+80            android:name="io.flutter.plugins.firebase.messaging.FlutterFirebaseMessagingReceiver"
+80-->[:firebase_messaging] C:\Users\coolalonge\AndroidStudioProjects\semo\build\firebase_messaging\intermediates\merged_manifest\release\AndroidManifest.xml:27:13-98
+81            android:exported="true"
+81-->[:firebase_messaging] C:\Users\coolalonge\AndroidStudioProjects\semo\build\firebase_messaging\intermediates\merged_manifest\release\AndroidManifest.xml:28:13-36
+82            android:permission="com.google.android.c2dm.permission.SEND" >
+82-->[:firebase_messaging] C:\Users\coolalonge\AndroidStudioProjects\semo\build\firebase_messaging\intermediates\merged_manifest\release\AndroidManifest.xml:29:13-73
+83            <intent-filter>
+83-->[:firebase_messaging] C:\Users\coolalonge\AndroidStudioProjects\semo\build\firebase_messaging\intermediates\merged_manifest\release\AndroidManifest.xml:30:13-32:29
+84                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+84-->[:firebase_messaging] C:\Users\coolalonge\AndroidStudioProjects\semo\build\firebase_messaging\intermediates\merged_manifest\release\AndroidManifest.xml:31:17-81
+84-->[:firebase_messaging] C:\Users\coolalonge\AndroidStudioProjects\semo\build\firebase_messaging\intermediates\merged_manifest\release\AndroidManifest.xml:31:25-78
+85            </intent-filter>
+86        </receiver>
+87
+88        <service
+88-->[:firebase_messaging] C:\Users\coolalonge\AndroidStudioProjects\semo\build\firebase_messaging\intermediates\merged_manifest\release\AndroidManifest.xml:35:9-39:19
+89            android:name="com.google.firebase.components.ComponentDiscoveryService"
+89-->[:firebase_messaging] C:\Users\coolalonge\AndroidStudioProjects\semo\build\firebase_messaging\intermediates\merged_manifest\release\AndroidManifest.xml:35:18-89
+90            android:directBootAware="true"
+90-->[com.google.firebase:firebase-common:20.4.2] C:\Users\coolalonge\.gradle\caches\transforms-3\4ecdf63d5ad5656ec618fbb3997f971a\transformed\jetified-firebase-common-20.4.2\AndroidManifest.xml:32:13-43
+91            android:exported="false" >
+91-->[com.google.firebase:firebase-messaging:23.3.1] C:\Users\coolalonge\.gradle\caches\transforms-3\91215b24990a8e484f27f31ee83ce67d\transformed\jetified-firebase-messaging-23.3.1\AndroidManifest.xml:56:13-37
+92            <meta-data
+92-->[:firebase_messaging] C:\Users\coolalonge\AndroidStudioProjects\semo\build\firebase_messaging\intermediates\merged_manifest\release\AndroidManifest.xml:36:13-38:85
+93                android:name="com.google.firebase.components:io.flutter.plugins.firebase.messaging.FlutterFirebaseAppRegistrar"
+93-->[:firebase_messaging] C:\Users\coolalonge\AndroidStudioProjects\semo\build\firebase_messaging\intermediates\merged_manifest\release\AndroidManifest.xml:37:17-128
+94                android:value="com.google.firebase.components.ComponentRegistrar" />
+94-->[:firebase_messaging] C:\Users\coolalonge\AndroidStudioProjects\semo\build\firebase_messaging\intermediates\merged_manifest\release\AndroidManifest.xml:38:17-82
+95            <meta-data
+95-->[:firebase_core] C:\Users\coolalonge\AndroidStudioProjects\semo\build\firebase_core\intermediates\merged_manifest\release\AndroidManifest.xml:9:13-11:85
+96                android:name="com.google.firebase.components:io.flutter.plugins.firebase.core.FlutterFirebaseCoreRegistrar"
+96-->[:firebase_core] C:\Users\coolalonge\AndroidStudioProjects\semo\build\firebase_core\intermediates\merged_manifest\release\AndroidManifest.xml:10:17-124
+97                android:value="com.google.firebase.components.ComponentRegistrar" />
+97-->[:firebase_core] C:\Users\coolalonge\AndroidStudioProjects\semo\build\firebase_core\intermediates\merged_manifest\release\AndroidManifest.xml:11:17-82
+98            <meta-data
+98-->[com.google.firebase:firebase-messaging:23.3.1] C:\Users\coolalonge\.gradle\caches\transforms-3\91215b24990a8e484f27f31ee83ce67d\transformed\jetified-firebase-messaging-23.3.1\AndroidManifest.xml:57:13-59:85
+99                android:name="com.google.firebase.components:com.google.firebase.messaging.FirebaseMessagingKtxRegistrar"
+99-->[com.google.firebase:firebase-messaging:23.3.1] C:\Users\coolalonge\.gradle\caches\transforms-3\91215b24990a8e484f27f31ee83ce67d\transformed\jetified-firebase-messaging-23.3.1\AndroidManifest.xml:58:17-122
+100                android:value="com.google.firebase.components.ComponentRegistrar" />
+100-->[com.google.firebase:firebase-messaging:23.3.1] C:\Users\coolalonge\.gradle\caches\transforms-3\91215b24990a8e484f27f31ee83ce67d\transformed\jetified-firebase-messaging-23.3.1\AndroidManifest.xml:59:17-82
+101            <meta-data
+101-->[com.google.firebase:firebase-messaging:23.3.1] C:\Users\coolalonge\.gradle\caches\transforms-3\91215b24990a8e484f27f31ee83ce67d\transformed\jetified-firebase-messaging-23.3.1\AndroidManifest.xml:60:13-62:85
+102                android:name="com.google.firebase.components:com.google.firebase.messaging.FirebaseMessagingRegistrar"
+102-->[com.google.firebase:firebase-messaging:23.3.1] C:\Users\coolalonge\.gradle\caches\transforms-3\91215b24990a8e484f27f31ee83ce67d\transformed\jetified-firebase-messaging-23.3.1\AndroidManifest.xml:61:17-119
+103                android:value="com.google.firebase.components.ComponentRegistrar" />
+103-->[com.google.firebase:firebase-messaging:23.3.1] C:\Users\coolalonge\.gradle\caches\transforms-3\91215b24990a8e484f27f31ee83ce67d\transformed\jetified-firebase-messaging-23.3.1\AndroidManifest.xml:62:17-82
+104            <meta-data
+104-->[com.google.firebase:firebase-iid:21.1.0] C:\Users\coolalonge\.gradle\caches\transforms-3\93d38e8c4bf8dc70c0d04ac89d327916\transformed\jetified-firebase-iid-21.1.0\AndroidManifest.xml:32:13-34:85
+105                android:name="com.google.firebase.components:com.google.firebase.iid.Registrar"
+105-->[com.google.firebase:firebase-iid:21.1.0] C:\Users\coolalonge\.gradle\caches\transforms-3\93d38e8c4bf8dc70c0d04ac89d327916\transformed\jetified-firebase-iid-21.1.0\AndroidManifest.xml:33:17-96
+106                android:value="com.google.firebase.components.ComponentRegistrar" />
+106-->[com.google.firebase:firebase-iid:21.1.0] C:\Users\coolalonge\.gradle\caches\transforms-3\93d38e8c4bf8dc70c0d04ac89d327916\transformed\jetified-firebase-iid-21.1.0\AndroidManifest.xml:34:17-82
+107            <meta-data
+107-->[com.google.firebase:firebase-installations:17.2.0] C:\Users\coolalonge\.gradle\caches\transforms-3\763ee4d5d95b98fc25a0c31c78873919\transformed\jetified-firebase-installations-17.2.0\AndroidManifest.xml:15:13-17:85
+108                android:name="com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsKtxRegistrar"
+108-->[com.google.firebase:firebase-installations:17.2.0] C:\Users\coolalonge\.gradle\caches\transforms-3\763ee4d5d95b98fc25a0c31c78873919\transformed\jetified-firebase-installations-17.2.0\AndroidManifest.xml:16:17-130
+109                android:value="com.google.firebase.components.ComponentRegistrar" />
+109-->[com.google.firebase:firebase-installations:17.2.0] C:\Users\coolalonge\.gradle\caches\transforms-3\763ee4d5d95b98fc25a0c31c78873919\transformed\jetified-firebase-installations-17.2.0\AndroidManifest.xml:17:17-82
+110            <meta-data
+110-->[com.google.firebase:firebase-installations:17.2.0] C:\Users\coolalonge\.gradle\caches\transforms-3\763ee4d5d95b98fc25a0c31c78873919\transformed\jetified-firebase-installations-17.2.0\AndroidManifest.xml:18:13-20:85
+111                android:name="com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsRegistrar"
+111-->[com.google.firebase:firebase-installations:17.2.0] C:\Users\coolalonge\.gradle\caches\transforms-3\763ee4d5d95b98fc25a0c31c78873919\transformed\jetified-firebase-installations-17.2.0\AndroidManifest.xml:19:17-127
+112                android:value="com.google.firebase.components.ComponentRegistrar" />
+112-->[com.google.firebase:firebase-installations:17.2.0] C:\Users\coolalonge\.gradle\caches\transforms-3\763ee4d5d95b98fc25a0c31c78873919\transformed\jetified-firebase-installations-17.2.0\AndroidManifest.xml:20:17-82
+113            <meta-data
+113-->[com.google.firebase:firebase-common-ktx:20.4.2] C:\Users\coolalonge\.gradle\caches\transforms-3\0296cd2f2375340a9151bd4af64c8796\transformed\jetified-firebase-common-ktx-20.4.2\AndroidManifest.xml:12:13-14:85
+114                android:name="com.google.firebase.components:com.google.firebase.ktx.FirebaseCommonLegacyRegistrar"
+114-->[com.google.firebase:firebase-common-ktx:20.4.2] C:\Users\coolalonge\.gradle\caches\transforms-3\0296cd2f2375340a9151bd4af64c8796\transformed\jetified-firebase-common-ktx-20.4.2\AndroidManifest.xml:13:17-116
+115                android:value="com.google.firebase.components.ComponentRegistrar" />
+115-->[com.google.firebase:firebase-common-ktx:20.4.2] C:\Users\coolalonge\.gradle\caches\transforms-3\0296cd2f2375340a9151bd4af64c8796\transformed\jetified-firebase-common-ktx-20.4.2\AndroidManifest.xml:14:17-82
+116            <meta-data
+116-->[com.google.firebase:firebase-common:20.4.2] C:\Users\coolalonge\.gradle\caches\transforms-3\4ecdf63d5ad5656ec618fbb3997f971a\transformed\jetified-firebase-common-20.4.2\AndroidManifest.xml:35:13-37:85
+117                android:name="com.google.firebase.components:com.google.firebase.FirebaseCommonKtxRegistrar"
+117-->[com.google.firebase:firebase-common:20.4.2] C:\Users\coolalonge\.gradle\caches\transforms-3\4ecdf63d5ad5656ec618fbb3997f971a\transformed\jetified-firebase-common-20.4.2\AndroidManifest.xml:36:17-109
+118                android:value="com.google.firebase.components.ComponentRegistrar" />
+118-->[com.google.firebase:firebase-common:20.4.2] C:\Users\coolalonge\.gradle\caches\transforms-3\4ecdf63d5ad5656ec618fbb3997f971a\transformed\jetified-firebase-common-20.4.2\AndroidManifest.xml:37:17-82
+119            <meta-data
+119-->[com.google.firebase:firebase-datatransport:18.1.7] C:\Users\coolalonge\.gradle\caches\transforms-3\1861852b52ec7a9645c083ce0c0d5ce9\transformed\jetified-firebase-datatransport-18.1.7\AndroidManifest.xml:27:13-29:85
+120                android:name="com.google.firebase.components:com.google.firebase.datatransport.TransportRegistrar"
+120-->[com.google.firebase:firebase-datatransport:18.1.7] C:\Users\coolalonge\.gradle\caches\transforms-3\1861852b52ec7a9645c083ce0c0d5ce9\transformed\jetified-firebase-datatransport-18.1.7\AndroidManifest.xml:28:17-115
+121                android:value="com.google.firebase.components.ComponentRegistrar" />
+121-->[com.google.firebase:firebase-datatransport:18.1.7] C:\Users\coolalonge\.gradle\caches\transforms-3\1861852b52ec7a9645c083ce0c0d5ce9\transformed\jetified-firebase-datatransport-18.1.7\AndroidManifest.xml:29:17-82
+122        </service>
+123
+124        <provider
+124-->[:firebase_messaging] C:\Users\coolalonge\AndroidStudioProjects\semo\build\firebase_messaging\intermediates\merged_manifest\release\AndroidManifest.xml:41:9-45:38
+125            android:name="io.flutter.plugins.firebase.messaging.FlutterFirebaseMessagingInitProvider"
+125-->[:firebase_messaging] C:\Users\coolalonge\AndroidStudioProjects\semo\build\firebase_messaging\intermediates\merged_manifest\release\AndroidManifest.xml:42:13-102
+126            android:authorities="com.semodelivery.semo.semo.flutterfirebasemessaginginitprovider"
+126-->[:firebase_messaging] C:\Users\coolalonge\AndroidStudioProjects\semo\build\firebase_messaging\intermediates\merged_manifest\release\AndroidManifest.xml:43:13-88
+127            android:exported="false"
+127-->[:firebase_messaging] C:\Users\coolalonge\AndroidStudioProjects\semo\build\firebase_messaging\intermediates\merged_manifest\release\AndroidManifest.xml:44:13-37
+128            android:initOrder="99" />
+128-->[:firebase_messaging] C:\Users\coolalonge\AndroidStudioProjects\semo\build\firebase_messaging\intermediates\merged_manifest\release\AndroidManifest.xml:45:13-35
+129
+130        <receiver
+130-->[com.google.firebase:firebase-messaging:23.3.1] C:\Users\coolalonge\.gradle\caches\transforms-3\91215b24990a8e484f27f31ee83ce67d\transformed\jetified-firebase-messaging-23.3.1\AndroidManifest.xml:29:9-40:20
+131            android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver"
+131-->[com.google.firebase:firebase-messaging:23.3.1] C:\Users\coolalonge\.gradle\caches\transforms-3\91215b24990a8e484f27f31ee83ce67d\transformed\jetified-firebase-messaging-23.3.1\AndroidManifest.xml:30:13-78
+132            android:exported="true"
+132-->[com.google.firebase:firebase-messaging:23.3.1] C:\Users\coolalonge\.gradle\caches\transforms-3\91215b24990a8e484f27f31ee83ce67d\transformed\jetified-firebase-messaging-23.3.1\AndroidManifest.xml:31:13-36
+133            android:permission="com.google.android.c2dm.permission.SEND" >
+133-->[com.google.firebase:firebase-messaging:23.3.1] C:\Users\coolalonge\.gradle\caches\transforms-3\91215b24990a8e484f27f31ee83ce67d\transformed\jetified-firebase-messaging-23.3.1\AndroidManifest.xml:32:13-73
+134            <intent-filter>
+134-->[:firebase_messaging] C:\Users\coolalonge\AndroidStudioProjects\semo\build\firebase_messaging\intermediates\merged_manifest\release\AndroidManifest.xml:30:13-32:29
+135                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+135-->[:firebase_messaging] C:\Users\coolalonge\AndroidStudioProjects\semo\build\firebase_messaging\intermediates\merged_manifest\release\AndroidManifest.xml:31:17-81
+135-->[:firebase_messaging] C:\Users\coolalonge\AndroidStudioProjects\semo\build\firebase_messaging\intermediates\merged_manifest\release\AndroidManifest.xml:31:25-78
+136            </intent-filter>
+137
+138            <meta-data
+138-->[com.google.firebase:firebase-messaging:23.3.1] C:\Users\coolalonge\.gradle\caches\transforms-3\91215b24990a8e484f27f31ee83ce67d\transformed\jetified-firebase-messaging-23.3.1\AndroidManifest.xml:37:13-39:40
+139                android:name="com.google.android.gms.cloudmessaging.FINISHED_AFTER_HANDLED"
+139-->[com.google.firebase:firebase-messaging:23.3.1] C:\Users\coolalonge\.gradle\caches\transforms-3\91215b24990a8e484f27f31ee83ce67d\transformed\jetified-firebase-messaging-23.3.1\AndroidManifest.xml:38:17-92
+140                android:value="true" />
+140-->[com.google.firebase:firebase-messaging:23.3.1] C:\Users\coolalonge\.gradle\caches\transforms-3\91215b24990a8e484f27f31ee83ce67d\transformed\jetified-firebase-messaging-23.3.1\AndroidManifest.xml:39:17-37
+141        </receiver>
+142        <!--
+143             FirebaseMessagingService performs security checks at runtime,
+144             but set to not exported to explicitly avoid allowing another app to call it.
+145        -->
+146        <service
+146-->[com.google.firebase:firebase-messaging:23.3.1] C:\Users\coolalonge\.gradle\caches\transforms-3\91215b24990a8e484f27f31ee83ce67d\transformed\jetified-firebase-messaging-23.3.1\AndroidManifest.xml:46:9-53:19
+147            android:name="com.google.firebase.messaging.FirebaseMessagingService"
+147-->[com.google.firebase:firebase-messaging:23.3.1] C:\Users\coolalonge\.gradle\caches\transforms-3\91215b24990a8e484f27f31ee83ce67d\transformed\jetified-firebase-messaging-23.3.1\AndroidManifest.xml:47:13-82
+148            android:directBootAware="true"
+148-->[com.google.firebase:firebase-messaging:23.3.1] C:\Users\coolalonge\.gradle\caches\transforms-3\91215b24990a8e484f27f31ee83ce67d\transformed\jetified-firebase-messaging-23.3.1\AndroidManifest.xml:48:13-43
+149            android:exported="false" >
+149-->[com.google.firebase:firebase-messaging:23.3.1] C:\Users\coolalonge\.gradle\caches\transforms-3\91215b24990a8e484f27f31ee83ce67d\transformed\jetified-firebase-messaging-23.3.1\AndroidManifest.xml:49:13-37
+150            <intent-filter android:priority="-500" >
+150-->[:firebase_messaging] C:\Users\coolalonge\AndroidStudioProjects\semo\build\firebase_messaging\intermediates\merged_manifest\release\AndroidManifest.xml:21:13-23:29
+151                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+151-->[:firebase_messaging] C:\Users\coolalonge\AndroidStudioProjects\semo\build\firebase_messaging\intermediates\merged_manifest\release\AndroidManifest.xml:22:17-78
+151-->[:firebase_messaging] C:\Users\coolalonge\AndroidStudioProjects\semo\build\firebase_messaging\intermediates\merged_manifest\release\AndroidManifest.xml:22:25-75
+152            </intent-filter>
+153        </service>
+154
+155        <provider
+155-->[com.google.firebase:firebase-common:20.4.2] C:\Users\coolalonge\.gradle\caches\transforms-3\4ecdf63d5ad5656ec618fbb3997f971a\transformed\jetified-firebase-common-20.4.2\AndroidManifest.xml:23:9-28:39
+156            android:name="com.google.firebase.provider.FirebaseInitProvider"
+156-->[com.google.firebase:firebase-common:20.4.2] C:\Users\coolalonge\.gradle\caches\transforms-3\4ecdf63d5ad5656ec618fbb3997f971a\transformed\jetified-firebase-common-20.4.2\AndroidManifest.xml:24:13-77
+157            android:authorities="com.semodelivery.semo.semo.firebaseinitprovider"
+157-->[com.google.firebase:firebase-common:20.4.2] C:\Users\coolalonge\.gradle\caches\transforms-3\4ecdf63d5ad5656ec618fbb3997f971a\transformed\jetified-firebase-common-20.4.2\AndroidManifest.xml:25:13-72
+158            android:directBootAware="true"
+158-->[com.google.firebase:firebase-common:20.4.2] C:\Users\coolalonge\.gradle\caches\transforms-3\4ecdf63d5ad5656ec618fbb3997f971a\transformed\jetified-firebase-common-20.4.2\AndroidManifest.xml:26:13-43
+159            android:exported="false"
+159-->[com.google.firebase:firebase-common:20.4.2] C:\Users\coolalonge\.gradle\caches\transforms-3\4ecdf63d5ad5656ec618fbb3997f971a\transformed\jetified-firebase-common-20.4.2\AndroidManifest.xml:27:13-37
+160            android:initOrder="100" />
+160-->[com.google.firebase:firebase-common:20.4.2] C:\Users\coolalonge\.gradle\caches\transforms-3\4ecdf63d5ad5656ec618fbb3997f971a\transformed\jetified-firebase-common-20.4.2\AndroidManifest.xml:28:13-36
+161
+162        <activity
+162-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\coolalonge\.gradle\caches\transforms-3\5c354eff26465da94d2c995ebbc7f3dc\transformed\jetified-play-services-base-18.0.1\AndroidManifest.xml:20:9-22:45
+163            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+163-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\coolalonge\.gradle\caches\transforms-3\5c354eff26465da94d2c995ebbc7f3dc\transformed\jetified-play-services-base-18.0.1\AndroidManifest.xml:20:19-85
+164            android:exported="false"
+164-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\coolalonge\.gradle\caches\transforms-3\5c354eff26465da94d2c995ebbc7f3dc\transformed\jetified-play-services-base-18.0.1\AndroidManifest.xml:22:19-43
+165            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+165-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\coolalonge\.gradle\caches\transforms-3\5c354eff26465da94d2c995ebbc7f3dc\transformed\jetified-play-services-base-18.0.1\AndroidManifest.xml:21:19-78
+166
+167        <uses-library
+167-->[androidx.window:window:1.2.0] C:\Users\coolalonge\.gradle\caches\transforms-3\d231944945e1b0e04c67346c100c28b6\transformed\jetified-window-1.2.0\AndroidManifest.xml:23:9-25:40
+168            android:name="androidx.window.extensions"
+168-->[androidx.window:window:1.2.0] C:\Users\coolalonge\.gradle\caches\transforms-3\d231944945e1b0e04c67346c100c28b6\transformed\jetified-window-1.2.0\AndroidManifest.xml:24:13-54
+169            android:required="false" />
+169-->[androidx.window:window:1.2.0] C:\Users\coolalonge\.gradle\caches\transforms-3\d231944945e1b0e04c67346c100c28b6\transformed\jetified-window-1.2.0\AndroidManifest.xml:25:13-37
+170        <uses-library
+170-->[androidx.window:window:1.2.0] C:\Users\coolalonge\.gradle\caches\transforms-3\d231944945e1b0e04c67346c100c28b6\transformed\jetified-window-1.2.0\AndroidManifest.xml:26:9-28:40
+171            android:name="androidx.window.sidecar"
+171-->[androidx.window:window:1.2.0] C:\Users\coolalonge\.gradle\caches\transforms-3\d231944945e1b0e04c67346c100c28b6\transformed\jetified-window-1.2.0\AndroidManifest.xml:27:13-51
+172            android:required="false" />
+172-->[androidx.window:window:1.2.0] C:\Users\coolalonge\.gradle\caches\transforms-3\d231944945e1b0e04c67346c100c28b6\transformed\jetified-window-1.2.0\AndroidManifest.xml:28:13-37
+173
+174        <meta-data
+174-->[com.google.android.gms:play-services-basement:18.1.0] C:\Users\coolalonge\.gradle\caches\transforms-3\0f38a5f6aa8810df97a0efdf7592b28d\transformed\jetified-play-services-basement-18.1.0\AndroidManifest.xml:21:9-23:69
+175            android:name="com.google.android.gms.version"
+175-->[com.google.android.gms:play-services-basement:18.1.0] C:\Users\coolalonge\.gradle\caches\transforms-3\0f38a5f6aa8810df97a0efdf7592b28d\transformed\jetified-play-services-basement-18.1.0\AndroidManifest.xml:22:13-58
+176            android:value="@integer/google_play_services_version" />
+176-->[com.google.android.gms:play-services-basement:18.1.0] C:\Users\coolalonge\.gradle\caches\transforms-3\0f38a5f6aa8810df97a0efdf7592b28d\transformed\jetified-play-services-basement-18.1.0\AndroidManifest.xml:23:13-66
+177
+178        <provider
+178-->[androidx.lifecycle:lifecycle-process:2.7.0] C:\Users\coolalonge\.gradle\caches\transforms-3\e4c7bdc214a25f2cd6f36302b1dfcebb\transformed\jetified-lifecycle-process-2.7.0\AndroidManifest.xml:24:9-32:20
+179            android:name="androidx.startup.InitializationProvider"
+179-->[androidx.lifecycle:lifecycle-process:2.7.0] C:\Users\coolalonge\.gradle\caches\transforms-3\e4c7bdc214a25f2cd6f36302b1dfcebb\transformed\jetified-lifecycle-process-2.7.0\AndroidManifest.xml:25:13-67
+180            android:authorities="com.semodelivery.semo.semo.androidx-startup"
+180-->[androidx.lifecycle:lifecycle-process:2.7.0] C:\Users\coolalonge\.gradle\caches\transforms-3\e4c7bdc214a25f2cd6f36302b1dfcebb\transformed\jetified-lifecycle-process-2.7.0\AndroidManifest.xml:26:13-68
+181            android:exported="false" >
+181-->[androidx.lifecycle:lifecycle-process:2.7.0] C:\Users\coolalonge\.gradle\caches\transforms-3\e4c7bdc214a25f2cd6f36302b1dfcebb\transformed\jetified-lifecycle-process-2.7.0\AndroidManifest.xml:27:13-37
+182            <meta-data
+182-->[androidx.lifecycle:lifecycle-process:2.7.0] C:\Users\coolalonge\.gradle\caches\transforms-3\e4c7bdc214a25f2cd6f36302b1dfcebb\transformed\jetified-lifecycle-process-2.7.0\AndroidManifest.xml:29:13-31:52
+183                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+183-->[androidx.lifecycle:lifecycle-process:2.7.0] C:\Users\coolalonge\.gradle\caches\transforms-3\e4c7bdc214a25f2cd6f36302b1dfcebb\transformed\jetified-lifecycle-process-2.7.0\AndroidManifest.xml:30:17-78
+184                android:value="androidx.startup" />
+184-->[androidx.lifecycle:lifecycle-process:2.7.0] C:\Users\coolalonge\.gradle\caches\transforms-3\e4c7bdc214a25f2cd6f36302b1dfcebb\transformed\jetified-lifecycle-process-2.7.0\AndroidManifest.xml:31:17-49
+185            <meta-data
+185-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\coolalonge\.gradle\caches\transforms-3\08e88112e74acd64cc3eccbfb451b04e\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:29:13-31:52
+186                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+186-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\coolalonge\.gradle\caches\transforms-3\08e88112e74acd64cc3eccbfb451b04e\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:30:17-85
+187                android:value="androidx.startup" />
+187-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\coolalonge\.gradle\caches\transforms-3\08e88112e74acd64cc3eccbfb451b04e\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:31:17-49
+188        </provider>
+189
+190        <receiver
+190-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\coolalonge\.gradle\caches\transforms-3\08e88112e74acd64cc3eccbfb451b04e\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:34:9-52:20
+191            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+191-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\coolalonge\.gradle\caches\transforms-3\08e88112e74acd64cc3eccbfb451b04e\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:35:13-76
+192            android:directBootAware="false"
+192-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\coolalonge\.gradle\caches\transforms-3\08e88112e74acd64cc3eccbfb451b04e\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:36:13-44
+193            android:enabled="true"
+193-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\coolalonge\.gradle\caches\transforms-3\08e88112e74acd64cc3eccbfb451b04e\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:37:13-35
+194            android:exported="true"
+194-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\coolalonge\.gradle\caches\transforms-3\08e88112e74acd64cc3eccbfb451b04e\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:38:13-36
+195            android:permission="android.permission.DUMP" >
+195-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\coolalonge\.gradle\caches\transforms-3\08e88112e74acd64cc3eccbfb451b04e\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:39:13-57
+196            <intent-filter>
+196-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\coolalonge\.gradle\caches\transforms-3\08e88112e74acd64cc3eccbfb451b04e\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:40:13-42:29
+197                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+197-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\coolalonge\.gradle\caches\transforms-3\08e88112e74acd64cc3eccbfb451b04e\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:41:17-91
+197-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\coolalonge\.gradle\caches\transforms-3\08e88112e74acd64cc3eccbfb451b04e\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:41:25-88
+198            </intent-filter>
+199            <intent-filter>
+199-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\coolalonge\.gradle\caches\transforms-3\08e88112e74acd64cc3eccbfb451b04e\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:43:13-45:29
+200                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+200-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\coolalonge\.gradle\caches\transforms-3\08e88112e74acd64cc3eccbfb451b04e\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:44:17-85
+200-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\coolalonge\.gradle\caches\transforms-3\08e88112e74acd64cc3eccbfb451b04e\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:44:25-82
+201            </intent-filter>
+202            <intent-filter>
+202-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\coolalonge\.gradle\caches\transforms-3\08e88112e74acd64cc3eccbfb451b04e\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:46:13-48:29
+203                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+203-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\coolalonge\.gradle\caches\transforms-3\08e88112e74acd64cc3eccbfb451b04e\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:47:17-88
+203-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\coolalonge\.gradle\caches\transforms-3\08e88112e74acd64cc3eccbfb451b04e\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:47:25-85
+204            </intent-filter>
+205            <intent-filter>
+205-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\coolalonge\.gradle\caches\transforms-3\08e88112e74acd64cc3eccbfb451b04e\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:49:13-51:29
+206                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+206-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\coolalonge\.gradle\caches\transforms-3\08e88112e74acd64cc3eccbfb451b04e\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:50:17-95
+206-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\coolalonge\.gradle\caches\transforms-3\08e88112e74acd64cc3eccbfb451b04e\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:50:25-92
+207            </intent-filter>
+208        </receiver>
+209
+210        <service
+210-->[com.google.android.datatransport:transport-backend-cct:3.1.8] C:\Users\coolalonge\.gradle\caches\transforms-3\09b2e73fb4149c61f14115cc4736104f\transformed\jetified-transport-backend-cct-3.1.8\AndroidManifest.xml:28:9-34:19
+211            android:name="com.google.android.datatransport.runtime.backends.TransportBackendDiscovery"
+211-->[com.google.android.datatransport:transport-backend-cct:3.1.8] C:\Users\coolalonge\.gradle\caches\transforms-3\09b2e73fb4149c61f14115cc4736104f\transformed\jetified-transport-backend-cct-3.1.8\AndroidManifest.xml:29:13-103
+212            android:exported="false" >
+212-->[com.google.android.datatransport:transport-backend-cct:3.1.8] C:\Users\coolalonge\.gradle\caches\transforms-3\09b2e73fb4149c61f14115cc4736104f\transformed\jetified-transport-backend-cct-3.1.8\AndroidManifest.xml:30:13-37
+213            <meta-data
+213-->[com.google.android.datatransport:transport-backend-cct:3.1.8] C:\Users\coolalonge\.gradle\caches\transforms-3\09b2e73fb4149c61f14115cc4736104f\transformed\jetified-transport-backend-cct-3.1.8\AndroidManifest.xml:31:13-33:39
+214                android:name="backend:com.google.android.datatransport.cct.CctBackendFactory"
+214-->[com.google.android.datatransport:transport-backend-cct:3.1.8] C:\Users\coolalonge\.gradle\caches\transforms-3\09b2e73fb4149c61f14115cc4736104f\transformed\jetified-transport-backend-cct-3.1.8\AndroidManifest.xml:32:17-94
+215                android:value="cct" />
+215-->[com.google.android.datatransport:transport-backend-cct:3.1.8] C:\Users\coolalonge\.gradle\caches\transforms-3\09b2e73fb4149c61f14115cc4736104f\transformed\jetified-transport-backend-cct-3.1.8\AndroidManifest.xml:33:17-36
+216        </service>
+217        <service
+217-->[com.google.android.datatransport:transport-runtime:3.1.8] C:\Users\coolalonge\.gradle\caches\transforms-3\a9db4763d305ffb3cc74997fd655658b\transformed\jetified-transport-runtime-3.1.8\AndroidManifest.xml:26:9-30:19
+218            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.JobInfoSchedulerService"
+218-->[com.google.android.datatransport:transport-runtime:3.1.8] C:\Users\coolalonge\.gradle\caches\transforms-3\a9db4763d305ffb3cc74997fd655658b\transformed\jetified-transport-runtime-3.1.8\AndroidManifest.xml:27:13-117
+219            android:exported="false"
+219-->[com.google.android.datatransport:transport-runtime:3.1.8] C:\Users\coolalonge\.gradle\caches\transforms-3\a9db4763d305ffb3cc74997fd655658b\transformed\jetified-transport-runtime-3.1.8\AndroidManifest.xml:28:13-37
+220            android:permission="android.permission.BIND_JOB_SERVICE" >
+220-->[com.google.android.datatransport:transport-runtime:3.1.8] C:\Users\coolalonge\.gradle\caches\transforms-3\a9db4763d305ffb3cc74997fd655658b\transformed\jetified-transport-runtime-3.1.8\AndroidManifest.xml:29:13-69
+221        </service>
+222
+223        <receiver
+223-->[com.google.android.datatransport:transport-runtime:3.1.8] C:\Users\coolalonge\.gradle\caches\transforms-3\a9db4763d305ffb3cc74997fd655658b\transformed\jetified-transport-runtime-3.1.8\AndroidManifest.xml:32:9-34:40
+224            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.AlarmManagerSchedulerBroadcastReceiver"
+224-->[com.google.android.datatransport:transport-runtime:3.1.8] C:\Users\coolalonge\.gradle\caches\transforms-3\a9db4763d305ffb3cc74997fd655658b\transformed\jetified-transport-runtime-3.1.8\AndroidManifest.xml:33:13-132
+225            android:exported="false" />
+225-->[com.google.android.datatransport:transport-runtime:3.1.8] C:\Users\coolalonge\.gradle\caches\transforms-3\a9db4763d305ffb3cc74997fd655658b\transformed\jetified-transport-runtime-3.1.8\AndroidManifest.xml:34:13-37
+226    </application>
+227
+228</manifest>

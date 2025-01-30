@@ -35,7 +35,8 @@ com.semodelivery.semo.semo.app-packageDebugResources-33 C:\Users\coolalonge\Andr
 com.semodelivery.semo.semo.app-merged_res-34 C:\Users\coolalonge\AndroidStudioProjects\semo\build\app\intermediates\merged_res\debug
 com.semodelivery.semo.semo.app-packaged_res-35 C:\Users\coolalonge\AndroidStudioProjects\semo\build\firebase_core\intermediates\packaged_res\debug
 com.semodelivery.semo.semo.app-packaged_res-36 C:\Users\coolalonge\AndroidStudioProjects\semo\build\firebase_messaging\intermediates\packaged_res\debug
-com.semodelivery.semo.semo.app-packaged_res-37 C:\Users\coolalonge\AndroidStudioProjects\semo\build\path_provider_android\intermediates\packaged_res\debug
-com.semodelivery.semo.semo.app-packaged_res-38 C:\Users\coolalonge\AndroidStudioProjects\semo\build\permission_handler_android\intermediates\packaged_res\debug
-com.semodelivery.semo.semo.app-packaged_res-39 C:\Users\coolalonge\AndroidStudioProjects\semo\build\shared_preferences_android\intermediates\packaged_res\debug
-com.semodelivery.semo.semo.app-packaged_res-40 C:\Users\coolalonge\AndroidStudioProjects\semo\build\sqflite\intermediates\packaged_res\debug
+com.semodelivery.semo.semo.app-packaged_res-37 C:\Users\coolalonge\AndroidStudioProjects\semo\build\package_info_plus\intermediates\packaged_res\debug
+com.semodelivery.semo.semo.app-packaged_res-38 C:\Users\coolalonge\AndroidStudioProjects\semo\build\path_provider_android\intermediates\packaged_res\debug
+com.semodelivery.semo.semo.app-packaged_res-39 C:\Users\coolalonge\AndroidStudioProjects\semo\build\permission_handler_android\intermediates\packaged_res\debug
+com.semodelivery.semo.semo.app-packaged_res-40 C:\Users\coolalonge\AndroidStudioProjects\semo\build\shared_preferences_android\intermediates\packaged_res\debug
+com.semodelivery.semo.semo.app-packaged_res-41 C:\Users\coolalonge\AndroidStudioProjects\semo\build\sqflite\intermediates\packaged_res\debug

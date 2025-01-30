@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:semo/core/constant/routes.dart';
+import '../core/functions/version.dart';
 import '../utils/helper.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -13,21 +14,34 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  // ignore: unused_field
   late Timer _timer;
+  String appVersion = "Loading...";
 
   @override
   void initState() {
+    super.initState();
+    
+    _loadAppVersion();
+
     _timer = Timer(const Duration(milliseconds: 6000), () {
       Get.offAllNamed(AppRoutes.navbar);
-      // Navigator.of(context).pushReplacementNamed(LandingScreen.routeName);
     });
-    super.initState();
+  }
+
+  Future<void> _loadAppVersion() async {
+    String version = await Info().getAppVersion();
+    setState(() {
+      appVersion = version;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Text('الإصدار: $appVersion'),
+      ),
       body: SizedBox(
         width: Helper.getScreenWidth(context),
         height: Helper.getScreenHeight(context),

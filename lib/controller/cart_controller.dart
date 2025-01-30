@@ -181,25 +181,28 @@ class CartController extends GetxController {
 
 ////////////////////////Coupon End///////////////////////////////////
   Future<void> checkoutWallet(String? couponCode) async {
-    if (selectedPaymentMethod == null) {
+   if (selectedPaymentMethod == null) {
       Get.snackbar("ملاحظة", "يرجى اختيار طريقة الدفع");
     }
-    // ignore: unused_local_variable
+
     int discount = await validateCoupon(couponCode ?? '');
     try {
       var response = await http.post(Uri.parse(AppLink.eWallet), body: {
-        "usersid": myServices.sharedPreferences.getString("id"),
-        "addressid": addressModelPrice.addressId.toString(),
+        "usersid": myServices.sharedPreferences.getInt("id").toString(),
+        "addressid": addressid.toString(),
         "pricedelivery": addressModelPrice.addresspricePrice.toString(),
         "ordersprice": totalPrice.toString(),
-        "paymentmethod": '2',
-        "couponid": couponCode, // Include coupon code in request
+        "paymentmethod": "2",
+        "couponid": couponid.toString(), // Include coupon code in request
+        "coupondiscount": discount.toString(), // Include coupon code in request
+        "notes": notes.toString(), // Include coupon code in request
       });
       if (response.statusCode == 200) {
-        Get.snackbar("تم", "تم الدفع بنجاح");
-        print('wallet');
+        Get.snackbar("تم", "تم الطلب بنجاح");
+        noti.sendFCMMessage("Admin", "طلب جديد", "");
+        Get.offAllNamed(AppRoutes.navbar);
       } else {
-        Get.snackbar("هناك خطأ", "حاول مرة أخرى");
+        Get.snackbar("خطأ", "حاول مرة أخرى");
       }
     } catch (e) {
       Get.snackbar("خطأ", "حدث خطأ في عملية الدفع");
@@ -225,15 +228,15 @@ class CartController extends GetxController {
         if (data['error'] == null) {
           return double.tryParse(data['price'].toString()) ?? 0.0;
         } else {
-          Get.snackbar("Error", data['error']);
+          Get.snackbar("هناك خطأ", data['error']);
           return 0.0;
         }
       } else {
-        Get.snackbar("Error", "Failed to fetch delivery price");
+        Get.snackbar("الرجاء التواصل مع الادارة", "هناك خطا في سعر التوصيل");
         return 0.0;
       }
     } catch (e) {
-      Get.snackbar("Error", "An error occurred: $e");
+      Get.snackbar("هناك خطأ", "حدث خطأ : $e");
       return 0.0;
     }
   }

@@ -45,7 +45,7 @@
 29-->[androidx.core:core:1.13.1] C:\Users\coolalonge\.gradle\caches\transforms-3\3e4fa42964ec6369b3a52ce840a46646\transformed\core-1.13.1\AndroidManifest.xml:28:18-86
 30        android:debuggable="true"
 31        android:extractNativeLibs="true"
-32        android:icon="@mipmap/ic_launcher"
+32        android:icon="@mipmap/launcher_icon"
 33        android:label="semo" >
 34        <activity
 35            android:name="com.semodelivery.semo.semo.MainActivity"
