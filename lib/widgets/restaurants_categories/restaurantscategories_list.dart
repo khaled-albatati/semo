@@ -91,7 +91,8 @@ class RestaurantsCategoriesListView extends GetView<RestaurantCategoriesControll
                             restaurantModel.restaurantsLocation,
                           );
                         }
-                      : () => Get.snackbar('المطعم مغلق', ''), // Disable tap if closed
+                      : ()=> Get.snackbar('المطعم مغلق',
+              'لا يمكنك الدخول للمطعم المغلق'), // Disable tap if closed
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [

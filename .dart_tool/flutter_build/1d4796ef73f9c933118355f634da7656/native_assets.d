@@ -1,0 +1,1 @@
+ C:\\Users\\coolalonge\\AndroidStudioProjects\\semo\\.dart_tool\\flutter_build\\1d4796ef73f9c933118355f634da7656\\native_assets.yaml: 

@@ -61,6 +61,9 @@ class TrackWslController extends GetxController {
       return "غير معروف";
     }
   }
+  void clearData() {
+    data.clear(); // Clear the old data
+  }
 
   Future getOrders() async {
     data.clear();

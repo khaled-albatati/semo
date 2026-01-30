@@ -228,7 +228,7 @@ class CartController extends GetxController {
         if (data['error'] == null) {
           return double.tryParse(data['price'].toString()) ?? 0.0;
         } else {
-          Get.snackbar("هناك خطأ", data['error']);
+          Get.snackbar("هناك خطأ", 'تواصل مع الادارة لاضافة موقعك');
           return 0.0;
         }
       } else {

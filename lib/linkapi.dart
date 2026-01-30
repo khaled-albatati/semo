@@ -122,6 +122,7 @@ class AppLink {
 
 static const String wallet = "$server/wallet/wallet.php";
 static const String eWallet = "$server/wallet/eWallet.php";
+static const String updateProfile = "$server/auth/editProfile.php";
 
   //================== Rating ==================\\
   static const String rating = "$server/rating.php";

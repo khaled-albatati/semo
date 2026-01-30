@@ -14,8 +14,9 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  // ignore: unused_field
   late Timer _timer;
-  String appVersion = "Loading...";
+  String appVersion = "جاري التحميل ...";
 
   @override
   void initState() {

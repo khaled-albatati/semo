@@ -58,7 +58,8 @@ class MostPopularCardView extends GetView<AllController> {
                       foodRestaurantsModel.restaurantsName,
                       foodRestaurantsModel,
                       foodRestaurantsModel.restaurantsLocation)
-                  :()=>Get.snackbar('المطعم مغلق','') , // Disable tap if closed
+                  :()=> Get.snackbar('المطعم مغلق',
+              'لا يمكنك الدخول للمطعم المغلق'), // Disable tap if closed
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(30),
                 child: SizedBox(

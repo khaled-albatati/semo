@@ -54,8 +54,7 @@ class FoodMenuController extends GetxController {
 
   return totalPrice;
 }
-
-  void showOrderSummary(BuildContext context) {
+void showOrderSummary(BuildContext context) {
   TextEditingController notesController = TextEditingController();
 
   List<Widget> orderItems = itemDetails.entries
@@ -105,51 +104,270 @@ class FoodMenuController extends GetxController {
             },
             child: const Text('اغلاق'),
           ),
-            TextButton(
-              onPressed: () {
-                // Handle order confirmation logic here
-                 notes = notesController.text;
-                if (kDebugMode) {
-                  print('طباعة الطلب: $notes');
-                }
+          TextButton(
+            onPressed: () async {
+              notes = notesController.text;
+              if (kDebugMode) {
+                print('طباعة الطلب: $notes');
+              }
 
+              // Show loading indicator
+              showDialog(
+                context: context,
+                barrierDismissible: false,
+                builder: (context) => const Center(child: CircularProgressIndicator()),
+              );
+
+              try {
                 // Print the selected food items and their quantities
-                double totalPrice =
-                    calculateTotalPrice(); // Recalculate total price for confirmation
+                double totalPrice = calculateTotalPrice(); // Recalculate total price for confirmation
+                List<Future<void>> futures = []; // List to hold futures for async operations
+
                 itemDetails.forEach((foodId, details) {
                   int quantity = details['quantity'];
                   if (quantity > 0) {
                     if (kDebugMode) {
-                    send(foodId, quantity);
-                      print(
-                        'Food ID: $foodId, Food Name: ${details['name']}, Quantity: $quantity');
+                      futures.add(send(foodId, quantity)); // Add send operation to futures
+                      print('Food ID: $foodId, Food Name: ${details['name']}, Quantity: $quantity');
                     }
-                    print('==============================: first: $foodId =================: second: $quantity');
                   }
                 });
 
-                  Get.toNamed(
-                    AppRoutes.payment,
-                    arguments: {'total_price': totalPrice,'restaurants_location':restaurants_location,'notes':notesController.text}, // Use a map to pass the arguments
-                  );
-                // Print total price
-                if (kDebugMode) {
-                  print(
-                    'الإجمالي: ريال${totalPrice.toStringAsFixed(2)}');
-                } // Print total price in Arabic
+                // Wait for all async operations to complete
+                await Future.wait(
 
-                Navigator.of(context)
-                    .pop(); // Close the dialog after confirmation
-              },
+                // Navigate to the payment screen with arguments
+                await Get.toNamed(
+                  AppRoutes.payment,
+                  arguments: {
+                    'total_price': totalPrice,
+                    'restaurants_location': restaurants_location,
+                    'notes': notes,
+                  },
+                ));
+              } catch (e) {
+                if (kDebugMode) {
+                  print('Error during order processing: $e');
+                }
+              } finally {
+                // Close loading dialog
+                Navigator.of(context).pop(); // Close loading dialog
+                Navigator.of(context).pop(); // Close the order summary dialog
+              }
+            },
+            child: const Text('تاكيد الطلب'), // "Confirm Order" in Arabic
+          ),
+        ],
+      );
+    },
+  );
+}
+//   void showOrderSummary(BuildContext context) {
+//   TextEditingController notesController = TextEditingController();
+
+//   List<Widget> orderItems = itemDetails.entries
+//       .where((entry) => entry.value['quantity'] > 0)
+//       .map((entry) {
+//     return Text('الوجبة: ${entry.value['name']}, الكمية: ${entry.value['quantity']}');
+//   }).toList();
+
+//   double totalPrice = calculateTotalPrice(); // This will now return the correct total
+
+//   showDialog(
+//     context: context,
+//     builder: (context) {
+//       return AlertDialog(
+//         title: const Text('مراجعة الطلب'),
+//         content: SingleChildScrollView(
+//           child: Column(
+//             mainAxisSize: MainAxisSize.min,
+//             children: [
+//               ...orderItems,
+//               const SizedBox(height: 16),
+//               Text('إجمالي السعر: ${totalPrice.toStringAsFixed(2)} ريال'),
+//               const SizedBox(height: 16),
+//               Container(
+//                 padding: const EdgeInsets.all(8.0),
+//                 decoration: BoxDecoration(
+//                   border: Border.all(color: Colors.grey),
+//                   borderRadius: BorderRadius.circular(8),
+//                 ),
+//                 child: TextField(
+//                   controller: notesController,
+//                   decoration: const InputDecoration(
+//                     labelText: 'ملاحظات الطلب',
+//                     border: InputBorder.none,
+//                   ),
+//                   maxLines: 3,
+//                   keyboardType: TextInputType.multiline,
+//                 ),
+//               ),
+//             ],
+//           ),
+//         ),
+//         actions: [
+//           TextButton(
+//             onPressed: () {
+//               Navigator.of(context).pop(); // Close the dialog
+//             },
+//             child: const Text('اغلاق'),
+//           ),
+//           TextButton(
+//             onPressed: () async {
+//               notes = notesController.text;
+//               if (kDebugMode) {
+//                 print('طباعة الطلب: $notes');
+//               }
+
+//               // Set loading state to true
+//               showDialog(
+//                 context: context,
+//                 barrierDismissible: false, // Prevent closing while loading
+//                 builder: (context) => Center(child: CircularProgressIndicator()),
+//               );
+
+//               // Print the selected food items and their quantities
+//               double totalPrice = calculateTotalPrice(); // Recalculate total price for confirmation
+//               List<Future<void>> futures = []; // List to hold futures for async operations
+
+//               itemDetails.forEach((foodId, details) {
+//                 int quantity = details['quantity'];
+//                 if (quantity > 0) {
+//                   if (kDebugMode) {
+//                     futures.add(send(foodId, quantity)); // Add send operation to futures
+//                     print('Food ID: $foodId, Food Name: ${details['name']}, Quantity: $quantity');
+//                   }
+//                   print('==============================: first: $foodId =================: second: $quantity');
+//                 }
+//               });
+
+//               // Wait for all async operations to complete
+//               await Future.wait(futures);
+
+//               // Navigate to the payment screen with arguments
+//               Get.toNamed(
+//                 AppRoutes.payment,
+//                 arguments: {
+//                   'total_price': totalPrice,
+//                   'restaurants_location': restaurants_location,
+//                   'notes': notes,
+//                 },
+//               );
+
+//               // Print total price
+//               if (kDebugMode) {
+//                 print('الإجمالي: ريال${totalPrice.toStringAsFixed(2)}');
+//               }
+
+//               // Close the loading dialog
+//               Navigator.of(context).pop(); // Close loading dialog
+//               Navigator.of(context).pop(); // Close the order summary dialog
+//             },
+//             child: const Text('تاكيد الطلب'), // "Confirm Order" in Arabic
+//           ),
+//         ],
+//       );
+//     },
+//   );
+// }
+
+
+//old
+  // void showOrderSummary(BuildContext context) {
+  // TextEditingController notesController = TextEditingController();
+
+  // List<Widget> orderItems = itemDetails.entries
+  //     .where((entry) => entry.value['quantity'] > 0)
+  //     .map((entry) {
+  //   return Text('الوجبة: ${entry.value['name']}, الكمية: ${entry.value['quantity']}');
+  // }).toList();
+
+  // double totalPrice = calculateTotalPrice(); // This will now return the correct total
+
+  // showDialog(
+  //   context: context,
+  //   builder: (context) {
+  //     return AlertDialog(
+  //       title: const Text('مراجعة الطلب'),
+  //       content: SingleChildScrollView(
+  //         child: Column(
+  //           mainAxisSize: MainAxisSize.min,
+  //           children: [
+  //             ...orderItems,
+  //             const SizedBox(height: 16),
+  //             Text('إجمالي السعر: ${totalPrice.toStringAsFixed(2)} ريال'),
+  //             const SizedBox(height: 16),
+  //             Container(
+  //               padding: const EdgeInsets.all(8.0),
+  //               decoration: BoxDecoration(
+  //                 border: Border.all(color: Colors.grey),
+  //                 borderRadius: BorderRadius.circular(8),
+  //               ),
+  //               child: TextField(
+  //                 controller: notesController,
+  //                 decoration: const InputDecoration(
+  //                   labelText: 'ملاحظات الطلب',
+  //                   border: InputBorder.none,
+  //                 ),
+  //                 maxLines: 3,
+  //                 keyboardType: TextInputType.multiline,
+  //               ),
+  //             ),
+  //           ],
+  //         ),
+  //       ),
+  //       actions: [
+  //         TextButton(
+  //           onPressed: () {
+  //             Navigator.of(context).pop(); // Close the dialog
+  //           },
+  //           child: const Text('اغلاق'),
+  //         ),
+  //           TextButton(
+  //             onPressed: () {
+  //               // Handle order confirmation logic here
+  //                notes = notesController.text;
+  //               if (kDebugMode) {
+  //                 print('طباعة الطلب: $notes');
+  //               }
+
+  //               // Print the selected food items and their quantities
+  //               double totalPrice =
+  //                   calculateTotalPrice(); // Recalculate total price for confirmation
+  //               itemDetails.forEach((foodId, details) {
+  //                 int quantity = details['quantity'];
+  //                 if (quantity > 0) {
+  //                   if (kDebugMode) {
+  //                   send(foodId, quantity);
+  //                     print(
+  //                       'Food ID: $foodId, Food Name: ${details['name']}, Quantity: $quantity');
+  //                   }
+  //                   print('==============================: first: $foodId =================: second: $quantity');
+  //                 }
+  //               });
+
+  //                 Get.toNamed(
+  //                   AppRoutes.payment,
+  //                   arguments: {'total_price': totalPrice,'restaurants_location':restaurants_location,'notes':notesController.text}, // Use a map to pass the arguments
+  //                 );
+  //               // Print total price
+  //               if (kDebugMode) {
+  //                 print(
+  //                   'الإجمالي: ريال${totalPrice.toStringAsFixed(2)}');
+  //               } // Print total price in Arabic
+
+  //               Navigator.of(context)
+  //                   .pop(); // Close the dialog after confirmation
+  //             },
               
-                child: const Text('تاكيد الطلب'), // "Confirm Order" in Arabic
-              ),
+  //               child: const Text('تاكيد الطلب'), // "Confirm Order" in Arabic
+  //             ),
             
-          ],
-        );
-      },
-    );
-  }
+  //         ],
+  //       );
+  //     },
+  //   );
+  // }
 
   Future<void> send(String foodid, int quantity) async {
   statusRequiest = StatusRequiest.loading;

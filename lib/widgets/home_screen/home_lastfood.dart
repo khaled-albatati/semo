@@ -57,7 +57,8 @@ class RecentItemCardView extends GetView<AllController> {
                 foodRestaurantsModel.restaurantsLocation,
               );
             }
-          : () => Get.snackbar('المطعم مغلق', ''), // Disable tap if closed
+          : ()=> Get.snackbar('المطعم مغلق',
+              'لا يمكنك الدخول للمطعم المغلق'), // Disable tap if closed
       child: Padding(
         padding: const EdgeInsets.fromLTRB(0, 0, 5, 16),
         child: Row(

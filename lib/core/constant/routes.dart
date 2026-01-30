@@ -3,6 +3,7 @@ class AppRoutes {
   static const String login = "/Login";
   static const String deleteAccountPage = "/delete_account";
   static const String signUp = "/signUp";
+  static const String editProfile = "/editProfile";
   static const String forgetPassword = "/forget_password";
   static const String verfiyCode = "/verfiy_code";
   static const String resetPassword = "/reset_Password";

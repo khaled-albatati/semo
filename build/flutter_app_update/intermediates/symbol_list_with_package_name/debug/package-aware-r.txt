@@ -1,1 +1,0 @@
-com.azhon.flutter_app_update

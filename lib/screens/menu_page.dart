@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:semo/controller/foodmenu_controller.dart';
 import '../data/model/foodrestaurants_model.dart';
+import '../utils/helper.dart';
 import '../widgets/menu_page/menu.dart';
 
 //page for display menu after choose restaurant
@@ -87,73 +88,81 @@ class _MenuPageState extends State<MenuPage>
               )
             : null,
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: controller.foodMenuMap.isNotEmpty
-                ? TabBarView(
-                    controller: controller.tabController,
-                    children: controller.foodMenuMap.entries.map((entry) {
-                      return ListView.builder(
-                        itemCount: entry.value.length,
-                        itemBuilder: (context, index) {
-                          var item = entry.value[index];
-                          String foodId = item['food_id']
-                              .toString(); // Ensure food_id is a string
-                          int initialQuantity = controller.itemDetails[foodId]
-                                  ?['quantity'] ??
-                              0; // Get initial quantity
+      body: Container(
+                  decoration: BoxDecoration(
+                      image: DecorationImage(fit: BoxFit.cover,
+                          image: AssetImage(
+                    Helper.getAssetName("splashIcon.png", "virtual"),
+                  ))),
 
-                          return FoodMenu(
-                            foodRestaurantsModel:
-                                FoodRestaurantsModel.fromJson(item),
-                            mealType: entry.key,
-                            onUpdate: (count) {
-                              updateTotalItems(foodId, count);
-                            },
-                            onQuantityChange: (quantity) {
-                              controller.itemDetails[foodId] = {
-                                'name': item['food_name'],
-                                'quantity': quantity,
-                                'price': (item['food_price'] is int)
-                                    ? (item['food_price'] as int).toDouble()
-                                    : item[
-                                        'food_price'], // Ensure price is double
-                              };
-                            },
-                            initialQuantity: initialQuantity,
-                          );
-                        },
-                      );
-                    }).toList(),
-                  )
-                : const Center(child: CircularProgressIndicator()), // Loader
-          ),
-          Padding(
-            padding: const EdgeInsets.all(5.0),
-            child: ElevatedButton(
-              onPressed: controller.totalItems > 0
-                  ? () {
-                      controller.showOrderSummary(context);
-                      // Print the selected food items and their quantities
-                      controller.itemDetails.forEach((foodId, details) {
-                        int quantity = details['quantity'];
-
-                        if (quantity > 0) {
-                          // controller.send(foodId,quantity);
-                          if (kDebugMode) {
-                            print(
-                              'الاي دي: $foodId,  اسم الوجبة: ${details['name']}, الكمية: $quantity');
-                          }
-                        }
-                      });
-
-                    }
-                  : null,
-              child: Text('تاكيد (${controller.totalItems})'),
+        child: Column(
+          children: [
+            Expanded(
+              child: controller.foodMenuMap.isNotEmpty
+                  ? TabBarView(
+                      controller: controller.tabController,
+                      children: controller.foodMenuMap.entries.map((entry) {
+                        return ListView.builder(
+                          itemCount: entry.value.length,
+                          itemBuilder: (context, index) {
+                            var item = entry.value[index];
+                            String foodId = item['food_id']
+                                .toString(); // Ensure food_id is a string
+                            int initialQuantity = controller.itemDetails[foodId]
+                                    ?['quantity'] ??
+                                0; // Get initial quantity
+        
+                            return FoodMenu(
+                              foodRestaurantsModel:
+                                  FoodRestaurantsModel.fromJson(item),
+                              mealType: entry.key,
+                              onUpdate: (count) {
+                                updateTotalItems(foodId, count);
+                              },
+                              onQuantityChange: (quantity) {
+                                controller.itemDetails[foodId] = {
+                                  'name': item['food_name'],
+                                  'quantity': quantity,
+                                  'price': (item['food_price'] is int)
+                                      ? (item['food_price'] as int).toDouble()
+                                      : item[
+                                          'food_price'], // Ensure price is double
+                                };
+                              },
+                              initialQuantity: initialQuantity,
+                            );
+                          },
+                        );
+                      }).toList(),
+                    )
+                  : const Center(child: CircularProgressIndicator()), // Loader
             ),
-          ),
-        ],
+            Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: ElevatedButton(
+                onPressed: controller.totalItems > 0
+                    ? () {
+                        controller.showOrderSummary(context);
+                        // Print the selected food items and their quantities
+                        controller.itemDetails.forEach((foodId, details) {
+                          int quantity = details['quantity'];
+        
+                          if (quantity > 0) {
+                            // controller.send(foodId,quantity);
+                            if (kDebugMode) {
+                              print(
+                                'الاي دي: $foodId,  اسم الوجبة: ${details['name']}, الكمية: $quantity');
+                            }
+                          }
+                        });
+        
+                      }
+                    : null,
+                child: Text('تاكيد (${controller.totalItems})'),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -15,6 +15,7 @@ class AppColor {
   static const Color cyan = Color.fromARGB(255, 0, 150, 170);
   static const Color transpate = Color.fromARGB(0, 0, 0, 0);
   static const Color notification = Color.fromARGB(255, 252, 255, 63);
+   static const orange = Color(0xFFFC6011);
   static final s = List<Color>.from([Colors.accents, Colors.amber]);
 
   //mixed color :

@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:semo/core/constant/routes.dart';
+import 'package:semo/screens/edit_page.dart';
 import 'package:semo/screens/home_screen.dart';
 import 'package:semo/screens/login_screen.dart';
 import 'package:semo/screens/menu_page.dart';
@@ -24,7 +25,7 @@ import 'widgets/address/view.dart';
 import 'widgets/change_screen/whats.dart';
 
 List<GetPage<dynamic>>? routes = [
-  GetPage(name: "/", page: () =>  const SplashScreen()),
+  GetPage(name: "/", page: () =>  const NavBar()),
 // GetPage(name:"/", page:()=> const  SplashScreen(),middlewares: [
 //   MyMiddleWare(),
 // ]),
@@ -42,6 +43,10 @@ List<GetPage<dynamic>>? routes = [
   GetPage(
     name: AppRoutes.deleteAccountPage,
     page: () => const DeleteAccount(),
+  ),
+  GetPage(
+    name: AppRoutes.editProfile,
+    page: () => const EditPage(),
   ),
   GetPage(
       name: AppRoutes.restaurantCategories,

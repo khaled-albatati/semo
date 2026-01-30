@@ -9,8 +9,11 @@ import 'package:semo/linkapi.dart';
 
 import '../../core/functions/handlingdata_controller.dart';
 import '../../core/services/services.dart';
+import '../../noti.dart';
 
 class AddressToAddressController extends GetxController {
+  NotificationService noti = NotificationService();
+
   // List categories = [] ;  //متغير لتخزين البيانات بعد جلبها من ال backend .
   List<AddressToAddress> address =
       []; //متغير لتخزين البيانات بعد جلبها من ال backend .
@@ -83,6 +86,9 @@ class AddressToAddressController extends GetxController {
     });
     statusRequiest = handlingData(response);
     if (response.statusCode == 200) {
+       Get.snackbar("تم", "تم الطلب بنجاح");
+        noti.sendFCMMessage("Admin", "طلب جديد", "مرسال");
+        // noti.sendFCMMessage("Captain", "طلب جديد", "مرسال");
       Get.offAllNamed(AppRoutes.navbar);
       statusRequiest = StatusRequiest.success;
     } else {

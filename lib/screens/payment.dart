@@ -4,6 +4,7 @@ import '../const/colors.dart';
 import '../controller/address/view_controller.dart';
 import '../controller/cart_controller.dart';
 import '../data/model/addressmodel.dart';
+import '../utils/helper.dart';
 import '../widgets/checkout/address.dart';
 import '../widgets/checkout/button.dart';
 import '../widgets/checkout/payment.dart';
@@ -20,7 +21,7 @@ class _PaymentState extends State<Payment> {
   final TextEditingController couponController = TextEditingController();
   int discountAmount = 0;
   double deliveryPrice = 0.0; // To hold the calculated delivery price
-  String? restaurantsLocation=''; // To hold the restaurant's location
+  String? restaurantsLocation = ''; // To hold the restaurant's location
 
   CartController controller = Get.put(CartController());
   AddressViewController address = Get.put(AddressViewController());
@@ -60,11 +61,11 @@ class _PaymentState extends State<Payment> {
   @override
   Widget build(BuildContext context) {
     final colors = address.data;
-     // ignore: unused_element
-     Future<bool> onWillPop() async {
-    print('back');
-    return true; // This will allow the back navigation to proceed
-  }
+    // ignore: unused_element
+    Future<bool> onWillPop() async {
+      print('back');
+      return true; // This will allow the back navigation to proceed
+    }
 
     return WillPopScope(
       onWillPop: controller.resetCart,
@@ -73,153 +74,185 @@ class _PaymentState extends State<Payment> {
           title: const Text('اكمال الطلب'),
           centerTitle: true,
         ),
-        body: GetBuilder<CartController>(
-          builder: (controller) => controller.isLoading
-              ? const Center(child: CircularProgressIndicator())
-              : SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(height: 10),
-                      GetBuilder<AddressViewController>(
-                        builder: (controllerx) => CheckoutAdress(
-                          location: 'مواقعك',
-                          widget: DropdownButton<AddressModel>(
-                            hint: const Text('اختر موقع'),
-                            value: selectedAddress,
-                            items: colors.map<DropdownMenuItem<AddressModel>>(
-                              (AddressModel address) {
-                                return DropdownMenuItem<AddressModel>(
-                                  value: address,
-                                  child: Text(address.addressLong!),
-                                );
-                              },
-                            ).toList(),
-                            onChanged: (AddressModel? newValue) {
-                              setState(() {
-                                selectedAddress = newValue;
+        body: Container(
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: AssetImage(
+                    Helper.getAssetName("splashIcon.png", "virtual"),
+                  ))),
+          child: GetBuilder<CartController>(
+            builder: (controller) => controller.isLoading
+                ? const Center(child: CircularProgressIndicator())
+                : SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const SizedBox(height: 10),
+                        GetBuilder<AddressViewController>(
+                          builder: (controllerx) => SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Row(
+                              children: [
+                                CheckoutAdress(
+                                  location: 'مواقعك',
+                                  widget: DropdownButton<AddressModel>(
+                                    hint: const Text('اختر موقع'),
+                                    value: selectedAddress,
+                                    items: colors
+                                        .map<DropdownMenuItem<AddressModel>>(
+                                      (AddressModel address) {
+                                        return DropdownMenuItem<AddressModel>(
+                                          value: address,
+                                          child: Text(address.addressLong!),
+                                        );
+                                      },
+                                    ).toList(),
+                                    onChanged: (AddressModel? newValue) {
+                                      setState(() {
+                                        selectedAddress = newValue;
 
-                                if (newValue != null) {
-                                  // Call the function to fetch delivery price
-                                  fetchDeliveryPrice(selectedAddress!);
-                                }
-                              });
-                            },
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 10),
-                      Container(
-                        height: 10,
-                        width: double.infinity,
-                        color: AppColor.placeholderBg,
-                      ),
-                      const SizedBox(height: 20),
-                      const CheckOutPayment(),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: <Widget>[
-                          ListTile(
-                            title: const Text('الدفع عند الاستلام'),
-                            leading: Radio<int>(
-                              value: 1,
-                              groupValue: selectedOption,
-                              onChanged: (int? value) {
-                                setState(() {
-                                  selectedOption = value;
-                                  controller.selectedPaymentMethod =
-                                      selectedOption.toString();
-                                });
-                              },
+                                        if (newValue != null) {
+                                          // Call the function to fetch delivery price
+                                          fetchDeliveryPrice(selectedAddress!);
+                                        }
+                                      });
+                                    },
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                          ListTile(
-                            title: const Text('عبر المحفظة'),
-                            leading: Radio<int>(
-                              value: 2,
-                              groupValue: selectedOption,
-                              onChanged: (int? value) {
-                                setState(() {
-                                  selectedOption = value;
-                                  controller.selectedPaymentMethod =
-                                      selectedOption.toString();
-                                });
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 20),
-                      Container(
-                        height: 10,
-                        width: double.infinity,
-                        color: AppColor.placeholderBg,
-                      ),
-                      const SizedBox(height: 20),
-                      TextField(
-                        controller: couponController,
-                        decoration: const InputDecoration(
-                          labelText: 'ادخل كود الخصم',
-                          border: OutlineInputBorder(),
                         ),
-                      ),
-                      const SizedBox(height: 5,),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          ElevatedButton(
-                            onPressed: () {
-                              validateCoupon(couponController.text);
-                            },
-                            child: const Text('تأكيد الكود'),
+                        const SizedBox(height: 10),
+                        Container(
+                          height: 10,
+                          width: double.infinity,
+                          color: AppColor.placeholderBg,
+                        ),
+                        const SizedBox(height: 20),
+                        const CheckOutPayment(),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: <Widget>[
+                            ListTile(
+                              title: const Text('الدفع عند الاستلام'),
+                              leading: Radio<int>(
+                                value: 1,
+                                groupValue: selectedOption,
+                                onChanged: (int? value) {
+                                  setState(() {
+                                    selectedOption = value;
+                                    controller.selectedPaymentMethod =
+                                        selectedOption.toString();
+                                  });
+                                },
+                              ),
+                            ),
+                            // ListTile(
+                            //   title: const Text('عبر المحفظة'),
+                            //   leading: Radio<int>(
+                            //     value: 2,
+                            //     groupValue: selectedOption,
+                            //     onChanged: (int? value) {
+                            //       setState(() {
+                            //         selectedOption = value;
+                            //         controller.selectedPaymentMethod =
+                            //             selectedOption.toString();
+                            //       });
+                            //     },
+                            //   ),
+                            // ),
+                          ],
+                        ),
+                        const SizedBox(height: 20),
+                        Container(
+                          height: 10,
+                          width: double.infinity,
+                          color: AppColor.placeholderBg,
+                        ),
+                        const SizedBox(height: 20),
+                        TextField(
+                          controller: couponController,
+                          decoration: const InputDecoration(
+                            labelText: 'ادخل كود الخصم',
+                            border: OutlineInputBorder(),
                           ),
-                        ],
-                      ),
-                      const SizedBox(height: 5,),
-                      const Divider(),
-                      // const SizedBox(height: 10),
-                      // Text(
-                      //   'الخصم: ${discountAmount.toStringAsFixed(2)}',
-                      //   style: const TextStyle(color: Colors.green, fontSize: 16),
-                      // ),
-                      // const SizedBox(height: 20),
-                      // // Displaying the calculated delivery price
-                      // Text(
-                      //   'سعر التوصيل: ${deliveryPrice.toStringAsFixed(2)}',
-                      //   style: const TextStyle(fontSize: 16, color: Colors.black),
-                      // ),
-                      PriceCheckOut(
-                        deliveryCost: deliveryPrice.toInt(),
-                        discount: discountAmount.toDouble(),
-                        subtotal: controller.totalPrice,
-                        total: controller
-                            .getTotalPrice(discountAmount.toDouble())
-                            .toString(),
-                      ),
-                      Container(
-                        height: 10,
-                        width: double.infinity,
-                        color: AppColor.placeholderBg,
-                      ),
-                      const SizedBox(height: 20),
-                      ButtonCheckOut(
-                        text: 'اتمام الطلب',
-                        onPressed: () {
-                          if (controller.selectedPaymentMethod == '1') {
-                            controller.checkout(couponController.text);
-                          } 
-                          // else if(controller.selectedPaymentMethod == '2') {
-                          //   controller.checkoutWallet(couponController.text);
-                          // }
-                          else {
-                             Get.snackbar('هنالك خطأ', "يرجى اختيار طريقة دفع");
-                          }
-                        },
-                      ),
-                    ],
+                        ),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            ElevatedButton(
+                              onPressed: () {
+                                validateCoupon(couponController.text);
+                              },
+                              child: const Text('تأكيد الكود'),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        const Divider(),
+                        // const SizedBox(height: 10),
+                        // Text(
+                        //   'الخصم: ${discountAmount.toStringAsFixed(2)}',
+                        //   style: const TextStyle(color: Colors.green, fontSize: 16),
+                        // ),
+                        // const SizedBox(height: 20),
+                        // // Displaying the calculated delivery price
+                        // Text(
+                        //   'سعر التوصيل: ${deliveryPrice.toStringAsFixed(2)}',
+                        //   style: const TextStyle(fontSize: 16, color: Colors.black),
+                        // ),
+                        PriceCheckOut(
+                          deliveryCost: deliveryPrice.toInt(),
+                          discount: discountAmount.toDouble(),
+                          subtotal: controller.totalPrice,
+                          total: controller
+                              .getTotalPrice(discountAmount.toDouble())
+                              .toString(),
+                        ),
+                        Container(
+                          height: 10,
+                          width: double.infinity,
+                          color: AppColor.placeholderBg,
+                        ),
+                        const SizedBox(height: 20),
+                        ButtonCheckOut(
+                          text: 'اتمام الطلب',
+                          onPressed: () {
+                            if (selectedAddress == null) {
+                              Get.snackbar('تنبيه',
+                                  'اختار موقع'); // Snackbar message for location
+                              return; // Exit the method if no location is selected
+                            }
+
+                            if (deliveryPrice <= 0) {
+                              Get.snackbar('تنبيه',
+                                  'تواصل مع الادارة'); // Snackbar message for delivery price
+                              return; // Exit the method if delivery price is not valid
+                            }
+                            if (controller.selectedPaymentMethod == '1') {
+                              controller.checkout(couponController.text);
+                            }
+                            // else if(controller.selectedPaymentMethod == '2') {
+                            //   controller.checkoutWallet(couponController.text);
+                            // }
+                            else {
+                              Get.snackbar(
+                                  'هنالك خطأ', "يرجى اختيار طريقة دفع");
+                            }
+                          },
+                        ),
+                      ],
+                    ),
                   ),
-                ),
+          ),
         ),
       ),
     );

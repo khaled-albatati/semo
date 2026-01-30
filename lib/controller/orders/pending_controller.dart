@@ -85,6 +85,9 @@ class OrdersPendingController extends GetxController {
   //   }
   //   update();
   // }
+  void clearData() {
+    data.clear(); // Clear the old data
+  }
   Future getOrders() async {
     data.clear();
     statusRequest = StatusRequiest.loading;

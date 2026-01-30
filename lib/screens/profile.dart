@@ -36,17 +36,18 @@ class Profile extends GetView<ProfileControllerImp> {
         ),
       ),
       body: Container(
-                  decoration: BoxDecoration(
-                      image: DecorationImage(fit: BoxFit.cover,
-                          image: AssetImage(
-                    Helper.getAssetName("splashIcon.png", "virtual"),
-                  ))),
+        decoration: BoxDecoration(
+            image: DecorationImage(
+                fit: BoxFit.cover,
+                image: AssetImage(
+                  Helper.getAssetName("splashIcon.png", "virtual"),
+                ))),
         child: Stack(
           children: [
             SafeArea(
               child: SizedBox(
                 // height: Helper.getScreenHeight(context),
-        
+
                 width: Helper.getScreenWidth(context),
                 child: SingleChildScrollView(
                   child: Padding(
@@ -103,7 +104,7 @@ class Profile extends GetView<ProfileControllerImp> {
                         const SizedBox(
                           height: 10,
                         ),
-        
+
                         const SizedBox(
                           height: 10,
                         ),
@@ -127,43 +128,51 @@ class Profile extends GetView<ProfileControllerImp> {
                         const SizedBox(
                           height: 5,
                         ),
-        
+
                         WidgetRowProfile(
-                          text: "الاسم",
+                          text: "المعلومات الشخصية",
                           icon: Icons.person_outline,
                           moveicon: Icons.arrow_forward,
                           color: Colors.pink,
-                          onPressed: () => Get.toNamed(AppRoutes.changeUserName),
+                          onPressed: () => Get.toNamed(AppRoutes.editProfile),
                         ),
-        
+                        // WidgetRowProfile(
+                        //   text: "الاسم",
+                        //   icon: Icons.person_outline,
+                        //   moveicon: Icons.arrow_forward,
+                        //   color: Colors.pink,
+                        //   onPressed: () => Get.toNamed(AppRoutes.changeUserName),
+                        // ),
+
                         WidgetRowProfile(
                           text: "كلمة المرور",
                           icon: Icons.password,
                           moveicon: Icons.arrow_forward,
                           color: Colors.green,
-                          onPressed: () => Get.toNamed(AppRoutes.changePassword),
+                          onPressed: () =>
+                              Get.toNamed(AppRoutes.changePassword),
                         ),
-                        WidgetRowProfile(
-                          text: "البريد الالكتروني",
-                          icon: Icons.email,
-                          moveicon: Icons.arrow_forward,
-                          color: const Color.fromARGB(255, 239, 83, 80),
-                          onPressed: () => Get.toNamed(AppRoutes.changeEmail),
-                        ),
-                        WidgetRowProfile(
-                          text: "رقم الجوال",
-                          icon: Icons.phone,
-                          moveicon: Icons.arrow_forward,
-                          color: Colors.blue,
-                          onPressed: () => Get.toNamed(AppRoutes.changePhone),
-                        ),
-                        WidgetRowProfile(
-                          text: "رقم الواتس",
-                          icon: Icons.phone,
-                          moveicon: Icons.arrow_forward,
-                          color: Colors.green,
-                          onPressed: () => Get.toNamed(AppRoutes.changeWhats),
-                        ),
+                        // WidgetRowProfile(
+                        //   text: "البريد الالكتروني",
+                        //   icon: Icons.email,
+                        //   moveicon: Icons.arrow_forward,
+                        //   color: const Color.fromARGB(255, 239, 83, 80),
+                        //   onPressed: () => Get.toNamed(AppRoutes.changeEmail),
+                        // ),
+                        // WidgetRowProfile(
+                        //   text: "رقم الجوال",
+                        //   icon: Icons.phone,
+                        //   moveicon: Icons.arrow_forward,
+                        //   color: Colors.blue,
+                        //   onPressed: () => Get.toNamed(AppRoutes.changePhone),
+                        // ),
+                        // WidgetRowProfile(
+                        //   text: "رقم الواتس",
+                        //   icon: Icons.phone,
+                        //   moveicon: Icons.arrow_forward,
+                        //   color: Colors.green,
+                        //   onPressed: () => Get.toNamed(AppRoutes.changeWhats),
+                        // ),
                         WidgetRowProfile(
                           text: "العناوين",
                           icon: Icons.location_on_outlined,
@@ -204,7 +213,7 @@ class Profile extends GetView<ProfileControllerImp> {
                         const SizedBox(
                           height: 20,
                         ),
-        
+
                         const SizedBox(
                           height: 10,
                         ),

@@ -75,7 +75,7 @@ class OrdersDetailsUsersViewModel {
   String? captainCreate;
   String? captainFcmtoken;
   int? captainVacation;
-  String? captainStatus;
+  int? captainStatus;
 
   OrdersDetailsUsersViewModel(
       {this.foodprice,
